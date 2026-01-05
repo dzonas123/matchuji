@@ -1,1 +1,1 @@
-[{"id":"cs_test_123","date":"2025-12-30T12:00:00Z","amount":1250,"status":"paid","shipping":{"firstName":"Jan","lastName":"Novak","email":"jan.novak@example.com","address":"Testova 1","city":"Testov","postalCode":"12345","phone":"123456789"},"carrier":"PPL","items":[{"id":"matcha-50g","quantity":2}]}]
+[]

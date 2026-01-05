@@ -34,7 +34,7 @@ export async function POST(req: Request) {
         if (metadata && metadata.order_details) {
             const orderData = JSON.parse(metadata.order_details);
 
-            // 1. Save to system (JSON file)
+            // 1. Save to system (JSON file) - NOTE: This will only work locally, not on Vercel production
             const newOrder = {
                 id: session.id,
                 date: new Date().toISOString(),
@@ -49,15 +49,15 @@ export async function POST(req: Request) {
                 let orders = [];
                 if (fs.existsSync(dbPath)) {
                     const fileContent = fs.readFileSync(dbPath, "utf-8");
-                    orders = JSON.parse(fileContent);
+                    orders = JSON.parse(fileContent || "[]");
                 }
-                orders.unshift(newOrder); // Add new order to the top
+                orders.unshift(newOrder);
+                // Only try to write if not in a serverless env that definitely fails, 
+                // though catching the error is safer.
                 fs.writeFileSync(dbPath, JSON.stringify(orders, null, 2));
             } catch (fsError) {
-                console.error("Failed to save order to file:", fsError);
+                console.error("Failed to save order to file (expected on Vercel):", fsError);
             }
-
-            console.log("Saving order to system:", orderData);
 
             // 2. Send emails
             try {
