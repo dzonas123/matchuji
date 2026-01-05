@@ -4,13 +4,19 @@ import { Resend } from "resend";
 import fs from "fs";
 import path from "path";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+// Initialize lazily to prevent build-time crashes
+const getStripe = () => new Stripe(process.env.STRIPE_SECRET_KEY || "", {
     apiVersion: "2025-01-27.acacia" as any,
 });
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const getResend = () => new Resend(process.env.RESEND_API_KEY || "re_fallback");
 
 export async function POST(req: Request) {
+    if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_WEBHOOK_SECRET) {
+        return NextResponse.json({ error: "Messaging or Stripe not configured" }, { status: 500 });
+    }
+    const stripe = getStripe();
+    const resend = getResend();
     const body = await req.text();
     const sig = req.headers.get("stripe-signature") as string;
 
