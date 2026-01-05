@@ -58,7 +58,7 @@ export default function ProductCard({ product }: { product: ProductProps }) {
         <motion.div
             className={styles.card}
             whileHover={{ y: -5 }}
-            transition={{ type: "tween", duration: 0.2 }}
+            transition={{ type: "tween" as const, duration: 0.2 }}
         >
             {product.tag && <span className={styles.tag}>{product.tag}</span>}
             {discount > 0 && <span className={styles.discountBadge}>-{discount}%</span>}
