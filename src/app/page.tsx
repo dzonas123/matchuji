@@ -9,6 +9,7 @@ import CafeB2B from "@/components/CafeB2B";
 export default function Home() {
   return (
     <main>
+      <h1 style={{ position: 'fixed', top: 0, left: 0, background: 'red', color: 'white', zIndex: 9999 }}>DEBUG: ESHOP VERSION</h1>
       <LifestyleHero />
       <MarketingFeatures />
       <ProductsSection />
