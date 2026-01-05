@@ -15,7 +15,7 @@ import { CartProvider } from "@/context/CartContext";
 import CartDrawer from "@/components/CartDrawer";
 
 export const metadata: Metadata = {
-  title: "Matchuji | Premium Ceremonial 7A Matcha",
+  title: "Matchuji | Premium Ceremonial 7A Matcha ",
   description: "Experience the finest organic 7A Ceremonial Grade Matcha from Uji, Japan. Sustained energy, laser-sharp focus, and 100% organic purity.",
   openGraph: {
     title: "Matchuji | Premium Ceremonial 7A Matcha",
