@@ -1,0 +1,303 @@
+.section {
+    padding: 6rem 0;
+    background: white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.benefitsHeader {
+    text-align: center;
+    margin-bottom: 5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.benefitsHeader h2 {
+    font-size: 2.5rem;
+    color: var(--matcha-dark);
+    margin-bottom: 1rem;
+}
+
+.benefitsHeader p {
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+.benefitsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 8rem;
+}
+
+.benefitCard {
+    background: #ffffff;
+    padding: 2.5rem 2rem;
+    border-radius: 2rem;
+    text-align: left;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.benefitCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(204, 255, 0, 0.1), transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.benefitCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    border-color: rgba(204, 255, 0, 0.6);
+}
+
+.benefitCard:hover::before {
+    opacity: 1;
+}
+
+.iconWrapper {
+    width: 64px;
+    height: 64px;
+    background: #ccff00;
+    border-radius: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0d2112;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 20px rgba(204, 255, 0, 0.4);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    z-index: 1;
+}
+
+.benefitCard:hover .iconWrapper {
+    transform: scale(1.1) rotate(5deg);
+    background: #d4ff33;
+}
+
+.iconWrapper svg {
+    width: 32px;
+    height: 32px;
+    stroke-width: 2.5px;
+}
+
+.benefitCard h3 {
+    color: var(--matcha-dark);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.benefitCard p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Deep Dive Section */
+/* Deep Dive Section */
+.deepDive {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 8rem;
+    background: #f7fee7;
+    /* very light lime */
+    border-radius: 3rem;
+    padding: 1rem;
+    /* Padding handled by inner grid/wrapper */
+    overflow: hidden;
+}
+
+.deepDiveContent {
+    padding: 3rem;
+}
+
+.deepDiveContent h3 {
+    font-size: 2.5rem;
+    color: var(--matcha-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.highlight {
+    color: #4d7a16;
+    position: relative;
+    display: inline-block;
+}
+
+.highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: rgba(204, 255, 0, 0.3);
+    z-index: -1;
+    border-radius: 4px;
+}
+
+.deepDiveIntro {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.featureList {
+    list-style: none;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.featureList li {
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+.featureDot {
+    width: 10px;
+    height: 10px;
+    background: #ccff00;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(204, 255, 0, 0.2);
+}
+
+.deepDiveImageWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.lifestyleImage {
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.lifestyleImage:hover {
+    transform: scale(1.05);
+}
+
+/* Preparation */
+/* Preparation */
+.preparation {
+    text-align: center;
+}
+
+.preparation h2 {
+    font-size: 2.5rem;
+    color: var(--matcha-dark);
+    margin-bottom: 4rem;
+}
+
+.steps {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.stepCard {
+    flex: 1;
+    min-width: 250px;
+    max-width: 350px;
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 2rem;
+    text-align: left;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s;
+}
+
+.stepCard:hover {
+    transform: translateY(-5px);
+    border-color: #ccff00;
+}
+
+.stepHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.stepIcon {
+    width: 48px;
+    height: 48px;
+    background: #f4fce3;
+    color: #0d2112;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stepNumber {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #e2e8f0;
+    line-height: 1;
+}
+
+.stepCard h4 {
+    font-size: 1.4rem;
+    color: #0d2112;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.stepCard p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+    .deepDive {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header h2 {
+        font-size: 2rem;
+    }
+
+    .steps {
+        gap: 3rem;
+    }
+}
