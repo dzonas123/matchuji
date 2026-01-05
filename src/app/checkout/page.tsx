@@ -19,8 +19,9 @@ const carriers = [
 ];
 
 // Payments are handled by Stripe
+import { Suspense } from "react";
 
-export default function Checkout() {
+function CheckoutContent() {
     const { items, total, clearCart } = useCart();
     const [step, setStep] = useState<Step>("shipping");
     const [loading, setLoading] = useState(false);
@@ -267,5 +268,13 @@ export default function Checkout() {
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function Checkout() {
+    return (
+        <Suspense fallback={<div className={styles.loading}>Načítání pokladny...</div>}>
+            <CheckoutContent />
+        </Suspense>
     );
 }
