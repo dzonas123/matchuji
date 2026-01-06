@@ -74,9 +74,9 @@ function CheckoutContent() {
                 } else {
                     throw new Error(data.error || "Failed to create checkout session");
                 }
-            } catch (err) {
+            } catch (err: any) {
                 console.error("Checkout error:", err);
-                alert("Něco se nepodařilo. Zkuste to prosím znovu.");
+                alert(`Chyba: ${err.message || "Něco se nepodařilo"}`);
                 setLoading(false);
             }
         }
