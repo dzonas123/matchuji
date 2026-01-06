@@ -13,7 +13,13 @@ interface Order {
         firstName: string;
         lastName: string;
         email: string;
+        phone?: string;
+        city?: string;
+        address?: string;
+        postalCode?: string;
     };
+    carrier?: string;
+    items?: any[];
 }
 
 interface OrderListProps {
@@ -63,7 +69,8 @@ export default function OrderList({ orders }: OrderListProps) {
                             <th>Order ID</th>
                             <th>Datum</th>
                             <th>Zákazník</th>
-                            <th>Email</th>
+                            <th>Telefon</th>
+                            <th>Lokalita</th>
                             <th>Částka</th>
                             <th>Stav</th>
                         </tr>
@@ -71,21 +78,25 @@ export default function OrderList({ orders }: OrderListProps) {
                     <tbody>
                         {filteredOrders.length === 0 ? (
                             <tr>
-                                <td colSpan={6} style={{ textAlign: "center", padding: "3rem", color: "#666" }}>
+                                <td colSpan={7} style={{ textAlign: "center", padding: "3rem", color: "#666" }}>
                                     Zatím žádné objednávky 📭
                                 </td>
                             </tr>
                         ) : (
-                            filteredOrders.map((order) => (
+                            filteredOrders.map((order: Order) => (
                                 <tr key={order.id} onClick={() => setSelectedOrder(order)} style={{ cursor: 'pointer' }}>
                                     <td style={{ fontFamily: 'monospace', fontSize: '0.85rem' }}>
                                         #{order.id.slice(-6).toUpperCase()}
                                     </td>
                                     <td>{new Date(order.date).toLocaleDateString('cs-CZ')}</td>
                                     <td>
-                                        <strong>{order.shipping?.firstName} {order.shipping?.lastName}</strong>
+                                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                            <strong>{order.shipping?.firstName} {order.shipping?.lastName}</strong>
+                                            <span style={{ fontSize: '0.8rem', color: '#666' }}>{order.shipping?.email}</span>
+                                        </div>
                                     </td>
-                                    <td>{order.shipping?.email}</td>
+                                    <td>{order.shipping?.phone || "-"}</td>
+                                    <td>{order.shipping?.city}</td>
                                     <td><strong>{order.amount.toLocaleString()} Kč</strong></td>
                                     <td>
                                         <span className={`${styles.status} ${order.status === 'paid' ? styles.paid : styles.pending}`}>
