@@ -47,7 +47,6 @@ export default function Header() {
                             {link.label}
                         </Link>
                     ))}
-                    <Link href="#education" className={styles.link}>O Matchy</Link>
                 </nav>
 
                 <div className={styles.actions}>
