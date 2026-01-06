@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Product {
+  id        String   @id
+  name      String
+  price     Float
+  stock     Int
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id        String   @id
+  date      DateTime
+  amount    Float
+  status    String
+  carrier   String?
+  shipping  Json     // JSON structure for shipping details
+  items     Json     // JSON structure for ordered items
+  createdAt DateTime @default(now())
+}

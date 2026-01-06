@@ -1,17 +1,20 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import { supabase } from "@/lib/supabase";
+import { prisma } from "@/lib/prisma";
 
 const dbPath = path.join(process.cwd(), "src/data/products.json");
 
 export async function GET() {
     try {
-        // Try Supabase first
-        if (supabase) {
-            const { data, error } = await supabase.from('products').select('*');
-            if (!error && data) return NextResponse.json(data);
-            console.warn("Supabase products fetch failed, using local JSON fallback:", error);
+        // Try Prisma first
+        try {
+            const products = await prisma.product.findMany({
+                orderBy: { createdAt: 'desc' }
+            });
+            if (products.length > 0) return NextResponse.json(products);
+        } catch (dbError) {
+            console.warn("Prisma products fetch failed, using local JSON fallback:", dbError);
         }
 
         // Fallback or local dev
@@ -28,18 +31,33 @@ export async function POST(req: Request) {
     try {
         const updatedProduct = await req.json();
 
-        // Try Supabase first
-        if (supabase) {
-            const { error } = await supabase
-                .from('products')
-                .upsert(updatedProduct);
-
-            if (!error) return NextResponse.json({ success: true, product: updatedProduct });
-            console.error("Supabase upsert error:", error);
-            return NextResponse.json({ error: error.message }, { status: 500 });
+        // Try Prisma first
+        try {
+            const product = await prisma.product.upsert({
+                where: { id: updatedProduct.id },
+                update: {
+                    name: updatedProduct.name,
+                    price: updatedProduct.price,
+                    stock: updatedProduct.stock,
+                    image: updatedProduct.image,
+                },
+                create: {
+                    id: updatedProduct.id,
+                    name: updatedProduct.name,
+                    price: updatedProduct.price,
+                    stock: updatedProduct.stock,
+                    image: updatedProduct.image,
+                },
+            });
+            return NextResponse.json({ success: true, product });
+        } catch (dbError) {
+            console.error("Prisma upsert error:", dbError);
+            if (process.env.NODE_ENV === 'production') {
+                return NextResponse.json({ error: "Chyba při ukládání do databáze." }, { status: 500 });
+            }
         }
 
-        // Fallback for local dev (will error on Vercel)
+        // Fallback for local dev
         let products = [];
         if (fs.existsSync(dbPath)) {
             const fileContent = fs.readFileSync(dbPath, "utf-8");
@@ -57,7 +75,7 @@ export async function POST(req: Request) {
             fs.writeFileSync(dbPath, JSON.stringify(products, null, 2));
         } catch (writeError) {
             return NextResponse.json({
-                error: "Vercel nepodporuje přímé ukládání do souborů. Pro uložení konfigurujte Supabase (NEXT_PUBLIC_SUPABASE_URL a NEXT_PUBLIC_SUPABASE_ANON_KEY).",
+                error: "Vercel nepodporuje přímé ukládání do souborů. Pro uložení konfigurujte Prisma Postgres.",
                 details: writeError instanceof Error ? writeError.message : String(writeError)
             }, { status: 500 });
         }

@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import { Resend } from "resend";
 import fs from "fs";
 import path from "path";
-import { supabase } from "@/lib/supabase";
+import { prisma } from "@/lib/prisma";
 
 // Initialize lazily to prevent build-time crashes
 const getStripe = () => new Stripe(process.env.STRIPE_SECRET_KEY || "", {
@@ -41,28 +41,27 @@ export async function POST(req: Request) {
         if (metadata && metadata.order_details) {
             const orderData = JSON.parse(metadata.order_details);
 
-            // 1. Save to Database (Supabase)
+            // 1. Save to Database (Prisma)
             const newOrder = {
                 id: session.id,
-                date: new Date().toISOString(),
+                date: new Date(),
                 amount: session.amount_total ? session.amount_total / 100 : 0,
                 status: 'paid',
-                ...orderData
+                carrier: orderData.carrier || 'Neznámo',
+                shipping: orderData.shipping,
+                items: orderData.items,
             };
 
-            if (supabase) {
-                const { error: dbError } = await supabase
-                    .from('orders')
-                    .insert(newOrder);
-
-                if (dbError) {
-                    console.error("Failed to save order to Supabase:", dbError);
-                } else {
-                    console.log("Order successfully saved to Supabase:", session.id);
-                }
+            try {
+                await prisma.order.create({
+                    data: newOrder
+                });
+                console.log("Order successfully saved to Prisma:", session.id);
+            } catch (dbError) {
+                console.error("Failed to save order to Prisma:", dbError);
             }
 
-            // Keep local fallback for dev, but it will silent fail on Vercel (intentional)
+            // Local fallback for dev
             const dbPath = path.join(process.cwd(), "src/data/orders.json");
             try {
                 let orders = [];
@@ -70,7 +69,7 @@ export async function POST(req: Request) {
                     const fileContent = fs.readFileSync(dbPath, "utf-8");
                     orders = JSON.parse(fileContent || "[]");
                 }
-                orders.unshift(newOrder);
+                orders.unshift({ ...newOrder, date: newOrder.date.toISOString() });
                 fs.writeFileSync(dbPath, JSON.stringify(orders, null, 2));
             } catch (fsError) {
                 // Silently skip if FS is read-only
@@ -99,7 +98,7 @@ export async function POST(req: Request) {
                 // To Admin
                 await resend.emails.send({
                     from: "Matchuji System <system@matchuji.cz>",
-                    to: "admin@matchuji.cz", // User should replace this
+                    to: "admin@matchuji.cz",
                     subject: "Nová objednávka Matchuji!",
                     html: `
             <h1>Nová objednávka od ${orderData.shipping.firstName} ${orderData.shipping.lastName}</h1>

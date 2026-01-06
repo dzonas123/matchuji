@@ -1,21 +1,20 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import { supabase } from "@/lib/supabase";
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
     const dbPath = path.join(process.cwd(), "src/data/orders.json");
 
     try {
-        // Try Supabase first
-        if (supabase) {
-            const { data, error } = await supabase
-                .from('orders')
-                .select('*')
-                .order('date', { ascending: false });
-
-            if (!error && data) return NextResponse.json(data);
-            console.warn("Supabase orders fetch failed, using local JSON fallback:", error);
+        // Try Prisma first
+        try {
+            const orders = await prisma.order.findMany({
+                orderBy: { date: 'desc' }
+            });
+            if (orders.length > 0) return NextResponse.json(orders);
+        } catch (dbError) {
+            console.warn("Prisma orders fetch failed, using local JSON fallback:", dbError);
         }
 
         // Fallback or local dev
