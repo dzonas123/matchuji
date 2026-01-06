@@ -35,10 +35,19 @@ export async function POST(req: Request) {
             products.push(updatedProduct);
         }
 
-        fs.writeFileSync(dbPath, JSON.stringify(products, null, 2));
+        try {
+            fs.writeFileSync(dbPath, JSON.stringify(products, null, 2));
+        } catch (writeError) {
+            console.error("Write error:", writeError);
+            return NextResponse.json({
+                error: "Nelze uložit změny. Na Vercelu je souborový systém pouze pro čtení. Pro trvalé úpravy doporučuji připojit databázi (např. Vercel Postgres).",
+                details: writeError instanceof Error ? writeError.message : String(writeError)
+            }, { status: 500 });
+        }
+
         return NextResponse.json({ success: true, product: updatedProduct });
     } catch (error) {
         console.error("API Error (POST Products):", error);
-        return NextResponse.json({ error: "Failed to update product" }, { status: 500 });
+        return NextResponse.json({ error: "Chyba při zpracování požadavku" }, { status: 500 });
     }
 }

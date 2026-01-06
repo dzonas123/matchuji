@@ -16,6 +16,7 @@ export default function ProductList() {
     const [products, setProducts] = useState<Product[]>([]);
     const [editingProduct, setEditingProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
+    const [isSaving, setIsSaving] = useState(false);
 
     useEffect(() => {
         fetchProducts();
@@ -35,7 +36,10 @@ export default function ProductList() {
 
     const handleUpdate = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!editingProduct) return;
+        if (!editingProduct || isSaving) return;
+
+        console.log("Saving product:", editingProduct);
+        setIsSaving(true);
 
         try {
             const res = await fetch("/api/products", {
@@ -44,14 +48,21 @@ export default function ProductList() {
                 body: JSON.stringify(editingProduct),
             });
 
+            const result = await res.json();
+            console.log("Update result:", result);
+
             if (res.ok) {
                 setProducts(products.map(p => p.id === editingProduct.id ? editingProduct : p));
                 setEditingProduct(null);
                 alert("Produkt byl úspěšně upraven!");
+            } else {
+                alert(`Chyba při ukládání: ${result.error || 'Neznámá chyba serveru'}`);
             }
         } catch (err) {
-            console.error("Failed to update product:", err);
-            alert("Nepodařilo se uložit změny.");
+            console.error("Network error during update:", err);
+            alert("Nepodařilo se spojit se serverem. Zkontrolujte připojení.");
+        } finally {
+            setIsSaving(false);
         }
     };
 
@@ -139,7 +150,14 @@ export default function ProductList() {
                                         required
                                     />
                                 </div>
-                                <button type="submit" className={styles.button}>Uložit změny</button>
+                                <button
+                                    type="submit"
+                                    className={styles.button}
+                                    disabled={isSaving}
+                                    style={{ opacity: isSaving ? 0.7 : 1, cursor: isSaving ? 'not-allowed' : 'pointer' }}
+                                >
+                                    {isSaving ? 'Ukládám...' : 'Uložit změny'}
+                                </button>
                             </form>
                         </div>
                     </div>
