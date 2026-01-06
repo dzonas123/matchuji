@@ -99,20 +99,6 @@
     box-shadow: 0 0 10px rgba(239, 68, 68, 0.8);
 }
 
-@media (max-width: 768px) {
-    .container {
-        padding: 0 1.5rem;
-    }
-
-    .nav {
-        display: none;
-    }
-
-    .menuButton {
-        display: flex;
-    }
-}
-
 /* Hamburger Styles */
 .menuButton {
     display: none;
@@ -245,4 +231,22 @@
     height: 4px;
     background: #ccff00;
     border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .menuButton {
+        display: flex !important;
+    }
+
+    .actions {
+        gap: 0.5rem;
+    }
 }

@@ -1,5 +1,5 @@
 "use client";
-// Triggering new build for mobile menu visibility
+// Final trigger for mobile menu visibility fix
 
 import Link from "next/link";
 import Image from "next/image";
