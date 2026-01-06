@@ -2,6 +2,9 @@
   "name": "matchuji",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "seed": "node scripts/migrate-to-prisma.mjs"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

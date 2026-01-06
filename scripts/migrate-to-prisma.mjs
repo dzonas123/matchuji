@@ -1,12 +1,17 @@
-import { PrismaClient } from '@prisma/client';
+import pkg from '@prisma/client';
+const { PrismaClient } = pkg;
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 
 dotenv.config({ path: '.env.local' });
+dotenv.config({ path: '.env.development.local' });
+dotenv.config();
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+    accelerateUrl: process.env.PRISMA_DATABASE_URL
+});
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
