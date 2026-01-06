@@ -2,26 +2,61 @@
 
 import styles from "@/app/admin/Admin.module.css";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
-// Using the same products array for now, ideally this comes from a shared source/API
-const products = [
-    {
-        id: "matcha-50g",
-        name: "Ceremoniální Matcha 50g",
-        price: 297,
-        stock: 45, // Mock stock
-        image: "/images/matcha-bag-single.jpg",
-    },
-    {
-        id: "matcha-3pack",
-        name: "Matcha Bundle 3-Pack",
-        price: 769,
-        stock: 12, // Mock stock
-        image: "/images/matcha-bundle-3pack.jpg",
-    }
-];
+interface Product {
+    id: string;
+    name: string;
+    price: number;
+    stock: number;
+    image: string;
+}
 
 export default function ProductList() {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
+    const fetchProducts = async () => {
+        try {
+            const res = await fetch("/api/products");
+            const data = await res.json();
+            setProducts(data);
+        } catch (err) {
+            console.error("Failed to fetch products:", err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleUpdate = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!editingProduct) return;
+
+        try {
+            const res = await fetch("/api/products", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(editingProduct),
+            });
+
+            if (res.ok) {
+                setProducts(products.map(p => p.id === editingProduct.id ? editingProduct : p));
+                setEditingProduct(null);
+                alert("Produkt byl úspěšně upraven!");
+            }
+        } catch (err) {
+            console.error("Failed to update product:", err);
+            alert("Nepodařilo se uložit změny.");
+        }
+    };
+
+    if (loading) return <div>Načítání produktů...</div>;
+
     return (
         <div className={styles.tableWrapper}>
             <div className={styles.tableContainer}>
@@ -51,13 +86,65 @@ export default function ProductList() {
                                     </span>
                                 </td>
                                 <td>
-                                    <button style={{ padding: '0.25rem 0.5rem', fontSize: '0.8rem', marginRight: '0.5rem' }}>Upravit</button>
+                                    <button
+                                        onClick={() => setEditingProduct(product)}
+                                        className={styles.button}
+                                        style={{ padding: '0.25rem 0.5rem', fontSize: '0.8rem', marginRight: '0.5rem' }}
+                                    >
+                                        Upravit
+                                    </button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
+
+            {editingProduct && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modalContent} style={{ maxWidth: '400px' }}>
+                        <div className={styles.modalHeader}>
+                            <h2>Upravit produkt</h2>
+                            <button className={styles.closeBtn} onClick={() => setEditingProduct(null)}>&times;</button>
+                        </div>
+                        <div className={styles.modalBody}>
+                            <form onSubmit={handleUpdate} className={styles.form}>
+                                <div style={{ marginBottom: '1rem' }}>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: '#666' }}>Název produktu</label>
+                                    <input
+                                        className={styles.input}
+                                        type="text"
+                                        value={editingProduct.name}
+                                        onChange={e => setEditingProduct({ ...editingProduct, name: e.target.value })}
+                                        required
+                                    />
+                                </div>
+                                <div style={{ marginBottom: '1rem' }}>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: '#666' }}>Cena (Kč)</label>
+                                    <input
+                                        className={styles.input}
+                                        type="number"
+                                        value={editingProduct.price}
+                                        onChange={e => setEditingProduct({ ...editingProduct, price: Number(e.target.value) })}
+                                        required
+                                    />
+                                </div>
+                                <div style={{ marginBottom: '2rem' }}>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: '#666' }}>Sklad (ks)</label>
+                                    <input
+                                        className={styles.input}
+                                        type="number"
+                                        value={editingProduct.stock}
+                                        onChange={e => setEditingProduct({ ...editingProduct, stock: Number(e.target.value) })}
+                                        required
+                                    />
+                                </div>
+                                <button type="submit" className={styles.button}>Uložit změny</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

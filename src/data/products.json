@@ -1,0 +1,16 @@
+[
+    {
+        "id": "matcha-50g",
+        "name": "Ceremoniální Matcha 50g",
+        "price": 297,
+        "stock": 45,
+        "image": "/images/matcha-bag-single.jpg"
+    },
+    {
+        "id": "matcha-3pack",
+        "name": "Matcha Bundle 3-Pack",
+        "price": 769,
+        "stock": 12,
+        "image": "/images/matcha-bundle-3pack.jpg"
+    }
+]
