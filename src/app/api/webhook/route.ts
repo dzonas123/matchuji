@@ -3,6 +3,7 @@ import Stripe from "stripe";
 import { Resend } from "resend";
 import fs from "fs";
 import path from "path";
+import { supabase } from "@/lib/supabase";
 
 // Initialize lazily to prevent build-time crashes
 const getStripe = () => new Stripe(process.env.STRIPE_SECRET_KEY || "", {
@@ -40,7 +41,7 @@ export async function POST(req: Request) {
         if (metadata && metadata.order_details) {
             const orderData = JSON.parse(metadata.order_details);
 
-            // 1. Save to system (JSON file) - NOTE: This will only work locally, not on Vercel production
+            // 1. Save to Database (Supabase)
             const newOrder = {
                 id: session.id,
                 date: new Date().toISOString(),
@@ -49,8 +50,20 @@ export async function POST(req: Request) {
                 ...orderData
             };
 
-            const dbPath = path.join(process.cwd(), "src/data/orders.json");
+            if (supabase) {
+                const { error: dbError } = await supabase
+                    .from('orders')
+                    .insert(newOrder);
 
+                if (dbError) {
+                    console.error("Failed to save order to Supabase:", dbError);
+                } else {
+                    console.log("Order successfully saved to Supabase:", session.id);
+                }
+            }
+
+            // Keep local fallback for dev, but it will silent fail on Vercel (intentional)
+            const dbPath = path.join(process.cwd(), "src/data/orders.json");
             try {
                 let orders = [];
                 if (fs.existsSync(dbPath)) {
@@ -58,11 +71,9 @@ export async function POST(req: Request) {
                     orders = JSON.parse(fileContent || "[]");
                 }
                 orders.unshift(newOrder);
-                // Only try to write if not in a serverless env that definitely fails, 
-                // though catching the error is safer.
                 fs.writeFileSync(dbPath, JSON.stringify(orders, null, 2));
             } catch (fsError) {
-                console.error("Failed to save order to file (expected on Vercel):", fsError);
+                // Silently skip if FS is read-only
             }
 
             // 2. Send emails
