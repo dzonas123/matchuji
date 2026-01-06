@@ -13,18 +13,25 @@ export async function POST(req: Request) {
     }
     try {
         const { items, shipping, carrier } = await req.json();
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://matchuji.vercel.app";
 
-        const line_items = items.map((item: any) => ({
-            price_data: {
-                currency: "czk",
-                product_data: {
-                    name: item.name,
-                    images: [item.image.startsWith('http') ? item.image : `${process.env.NEXT_PUBLIC_BASE_URL}${item.image}`],
+        const line_items = items.map((item: any) => {
+            const imageUrl = item.image.startsWith('http')
+                ? item.image
+                : `${baseUrl.replace(/\/$/, '')}/${item.image.replace(/^\//, '')}`;
+
+            return {
+                price_data: {
+                    currency: "czk",
+                    product_data: {
+                        name: item.name,
+                        images: [imageUrl],
+                    },
+                    unit_amount: Math.round(item.price * 100),
                 },
-                unit_amount: Math.round(item.price * 100),
-            },
-            quantity: item.quantity,
-        }));
+                quantity: item.quantity,
+            };
+        });
 
         // Add shipping cost if applicable
         const total = items.reduce((sum: number, item: any) => sum + item.price * item.quantity, 0);
@@ -47,8 +54,8 @@ export async function POST(req: Request) {
             payment_method_types: ["card"],
             line_items,
             mode: "payment",
-            success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/checkout?step=success&session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/checkout`,
+            success_url: `${baseUrl.replace(/\/$/, '')}/checkout?step=success&session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${baseUrl.replace(/\/$/, '')}/checkout`,
             customer_email: shipping.email,
             metadata: {
                 order_details: JSON.stringify({
