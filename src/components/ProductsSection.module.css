@@ -150,6 +150,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    line-clamp: 2;
     overflow: hidden;
     flex-grow: 1;
 }
@@ -229,8 +230,23 @@
     border-color: #d1d5db;
 }
 
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+}
+
 @media (max-width: 640px) {
+    .section {
+        padding: 4rem 0;
+    }
+
     .grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .title {
+        font-size: 2rem;
     }
 }

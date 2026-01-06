@@ -195,9 +195,16 @@
 }
 
 @media (max-width: 900px) {
+    .section {
+        padding: 6rem 0 4rem;
+        min-height: auto;
+    }
+
     .container {
         grid-template-columns: 1fr;
         text-align: center;
+        padding: 0 1.5rem;
+        gap: 2rem;
     }
 
     .content {
@@ -206,6 +213,7 @@
 
     .title {
         font-size: 3.5rem;
+        line-height: 1;
     }
 
     .ctaGroup {
@@ -219,18 +227,40 @@
     .btnSecondary {
         width: 100%;
         max-width: 300px;
+        padding: 1rem 2rem;
     }
 
     .visual {
-        margin-top: 4rem;
+        margin-top: 2rem;
     }
 
     .badge {
         justify-content: center;
+        margin-bottom: 1.5rem;
     }
 
     .productCardWrapper {
-        max-width: 380px;
-        transform: none;
+        max-width: 320px;
+        transform: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2.8rem;
+    }
+
+    .description {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+    }
+
+    .leafIcon {
+        width: 40px;
+        height: 40px;
     }
 }

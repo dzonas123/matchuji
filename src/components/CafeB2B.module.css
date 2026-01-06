@@ -189,17 +189,55 @@
 }
 
 @media (max-width: 1000px) {
+    .section {
+        padding: 6rem 0 4rem 0;
+    }
+
     .container {
         grid-template-columns: 1fr;
+        padding: 0 1.5rem;
+        gap: 2rem;
     }
 
     .textSide {
-        padding: 4rem 2rem;
+        text-align: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .description {
+        margin: 0 auto 2rem auto;
+    }
+
+    .list {
+        align-items: center;
     }
 
     .formSide {
-        padding: 4rem 2rem;
-        min-height: 500px;
+        padding: 1rem;
+        min-height: auto;
+    }
+
+    .form {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .listItem {
+        font-size: 1rem;
     }
 }
 

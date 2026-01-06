@@ -100,7 +100,149 @@
 }
 
 @media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+
     .nav {
         display: none;
     }
+
+    .menuButton {
+        display: flex;
+    }
+}
+
+/* Hamburger Styles */
+.menuButton {
+    display: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+    transition: all 0.2s ease;
+}
+
+.menuButtonActive {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.hamburger {
+    width: 20px;
+    height: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menuButtonActive .hamburger span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.menuButtonActive .hamburger span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(10px);
+}
+
+.menuButtonActive .hamburger span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Mobile Menu Overlay */
+.mobileMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #0d2112;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-100%);
+    transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.mobileMenuVisible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.mobileNav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+    width: 100%;
+    padding: 0 2rem;
+}
+
+.mobileLink {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: 800;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: -0.04em;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.mobileMenuVisible .mobileLink {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger animation for links */
+.mobileMenuVisible .mobileLink:nth-child(1) {
+    transition-delay: 0.2s;
+}
+
+.mobileMenuVisible .mobileLink:nth-child(2) {
+    transition-delay: 0.3s;
+}
+
+.mobileMenuVisible .mobileLink:nth-child(3) {
+    transition-delay: 0.4s;
+}
+
+.mobileLink:hover,
+.mobileActive {
+    color: #ccff00;
+}
+
+.mobileActive {
+    position: relative;
+    display: inline-block;
+}
+
+.mobileActive::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 20%;
+    right: 20%;
+    height: 4px;
+    background: #ccff00;
+    border-radius: 2px;
 }

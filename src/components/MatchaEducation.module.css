@@ -132,18 +132,50 @@
 }
 
 @media (max-width: 1024px) {
+    .section {
+        padding: 4rem 1.5rem;
+    }
+
     .row {
         grid-template-columns: 1fr;
         gap: 3rem;
         direction: ltr !important;
-        /* Reset on mobile */
+        margin-bottom: 5rem;
+    }
+
+    .imageWrapper {
+        height: 350px;
+    }
+
+    .title {
+        font-size: 2.25rem;
     }
 
     .grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
+    .benefitsTitle {
+        font-size: 2rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .card {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
     .title {
-        font-size: 2.5rem;
+        font-size: 1.8rem;
+    }
+
+    .imageWrapper {
+        height: 280px;
+    }
+
+    .paragraph {
+        font-size: 1rem;
     }
 }

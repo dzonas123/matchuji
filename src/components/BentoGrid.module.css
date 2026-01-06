@@ -116,13 +116,35 @@
 }
 
 @media (max-width: 1024px) {
+    .section {
+        padding: 4rem 0;
+    }
+
+    .container {
+        padding: 0 1.5rem;
+    }
+
     .grid {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: 1.5rem;
     }
 
     .card {
-        height: 400px;
+        height: 350px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        height: 300px;
+    }
+
+    .cardContent {
+        padding: 1.5rem;
     }
 }
