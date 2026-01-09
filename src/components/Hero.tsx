@@ -15,16 +15,18 @@ export default function Hero() {
 
     // Dynamic images based on SKU selection
     const singleImages = [
-        "/images/matcha-bag-single.jpg",
-        "/images/matcha-lifestyle.jpg",
-        "/images/matcha-spoon.png"
+        "/images/matcha-50g-1.jpg",
+        "/images/matcha-50g-2.jpg",
+        "/images/matcha-50g-3.jpg",
+        "/images/matcha-50g-4.jpg"
     ];
 
     const bundleImages = [
         "/images/matcha-bundle-3pack.jpg",
-        "/images/matcha-bag-single.jpg",
-        "/images/matcha-lifestyle.jpg"
+        "/images/matcha-50g-1.jpg",
+        "/images/matcha-50g-2.jpg"
     ];
+
 
     const currentGallery = sku === "single" ? singleImages : bundleImages;
 
@@ -41,8 +43,9 @@ export default function Hero() {
                 name: "Ceremoniální Matcha (50g)",
                 price: 297.00,
                 originalPrice: 399.00,
-                image: "/images/matcha-bag-single.jpg"
+                image: "/images/matcha-50g-1.jpg"
             }
+
             : {
                 id: "matcha-50g-pack3",
                 name: "Matcha Výhodné Balení 3ks (150g)",
