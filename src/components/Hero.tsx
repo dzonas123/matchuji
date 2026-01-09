@@ -84,10 +84,7 @@ export default function Hero() {
                     transition={{ duration: 0.6 }}
                 >
                     <div className={styles.mainImageWrapper}>
-                        <div className={styles.ratingBadge}>
-                            <span className={styles.ratingScore}>A</span>
-                            <span className={styles.ratingLabel}>NutraSkóre</span>
-                        </div>
+
                         <Image
                             src={currentGallery[activeImage]}
                             alt="Prémiová Matcha"
