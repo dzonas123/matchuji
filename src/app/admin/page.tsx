@@ -118,8 +118,9 @@ export default function Admin() {
                             </div>
                             <div>
                                 <p style={{ margin: 0, fontSize: '0.85rem', color: '#666' }}>Fakturační status:</p>
-                                <p style={{ margin: '0.25rem 0 0 0', fontWeight: 700, fontSize: '1.2rem', color: '#c2410c' }}>NEPLÁTCE DPH</p>
+                                <p style={{ margin: '0.25rem 0 0 0', fontWeight: 600, fontSize: '0.9rem', color: '#666' }}>Neplátce DPH</p>
                             </div>
+
                             <div>
                                 <p style={{ margin: 0, fontSize: '0.85rem', color: '#666' }}>API pro skladový systém:</p>
                                 <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.25rem' }}>
