@@ -18,7 +18,10 @@ export default function OrderDetailModal({ order, onClose }: OrderDetailModalPro
                 <div className={styles.modalHeader}>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <span style={{ fontSize: '0.75rem', color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Detail objednávky</span>
-                        <h2 style={{ fontSize: '1.4rem' }}>#{order.id.slice(-6).toUpperCase()}</h2>
+                        <h2 style={{ fontSize: '1.4rem' }}>
+                            {order.variableSymbol ? order.variableSymbol : `#${order.id.slice(-6).toUpperCase()}`}
+                            {order.variableSymbol && <span style={{ fontSize: '0.9rem', color: '#999', marginLeft: '0.5rem', fontWeight: 'normal' }}>(ID: #{order.id.slice(-6).toUpperCase()})</span>}
+                        </h2>
                     </div>
                     <button className={styles.closeBtn} onClick={onClose}>×</button>
                 </div>
@@ -65,6 +68,12 @@ export default function OrderDetailModal({ order, onClose }: OrderDetailModalPro
                         <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px dashed #eee' }}>
                             <label style={{ fontSize: '0.8rem', color: '#999' }}>Způsob dopravy</label>
                             <p style={{ fontWeight: 600, color: '#0d2112' }}>🚚 {order.carrier || "Standardní doručení"}</p>
+                            {order.zasilkovna_branch_id && (
+                                <div style={{ marginTop: '0.5rem', padding: '0.5rem', background: '#f0fdf4', borderRadius: '4px', border: '1px solid #dcfce7' }}>
+                                    <label style={{ fontSize: '0.7rem', color: '#166534', textTransform: 'uppercase', fontWeight: 600 }}>ID pobočky Zásilkovny</label>
+                                    <p style={{ margin: 0, fontWeight: 700, fontSize: '1rem', color: '#166534' }}>{order.zasilkovna_branch_id}</p>
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -77,7 +86,10 @@ export default function OrderDetailModal({ order, onClose }: OrderDetailModalPro
                                         <div style={{ background: '#eee', borderRadius: '4px', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifySelf: 'center', fontSize: '10px', color: '#999' }}>IMG</div>
                                         <div>
                                             <p style={{ fontWeight: 600, margin: 0 }}>{item.name || item.id}</p>
-                                            <p style={{ fontSize: '0.8rem', color: '#666', margin: 0 }}>ID: {item.id}</p>
+                                            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.25rem' }}>
+                                                {item.sku && <span style={{ fontSize: '0.7rem', color: '#666', background: '#f4f4f5', padding: '0.1rem 0.3rem', borderRadius: '2px' }}>SKU: {item.sku}</span>}
+                                                {item.ean && <span style={{ fontSize: '0.7rem', color: '#666', background: '#f4f4f5', padding: '0.1rem 0.3rem', borderRadius: '2px' }}>EAN: {item.ean}</span>}
+                                            </div>
                                         </div>
                                     </div>
                                     <div style={{ textAlign: 'right' }}>

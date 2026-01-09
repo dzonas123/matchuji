@@ -108,6 +108,21 @@ export default function Admin() {
 
                     <h2 style={{ marginBottom: '1.5rem', fontSize: '1.2rem', color: '#0d2112' }}>Poslední objednávky</h2>
                     <OrderList orders={orders.slice(0, 5)} />
+
+                    <div className={styles.senderInfoCard} style={{ marginTop: '3rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                        <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem', color: '#0d2112' }}>📦 Odesílatel a Fakturace (Fulfillment)</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                            <div>
+                                <p style={{ margin: 0, fontSize: '0.85rem', color: '#666' }}>Odesílatel ID:</p>
+                                <p style={{ margin: '0.25rem 0 0 0', fontWeight: 700, fontSize: '1.1rem' }}>540317</p>
+                            </div>
+                            <div>
+                                <p style={{ margin: 0, fontSize: '0.85rem', color: '#666' }}>Fakturační údaje:</p>
+                                <p style={{ margin: '0.25rem 0 0 0', fontWeight: 600 }}>Jan Španěl, IČO 19692340</p>
+                                <p style={{ margin: '0.1rem 0 0 0', fontSize: '0.8rem', color: '#999' }}>Neplátce DPH</p>
+                            </div>
+                        </div>
+                    </div>
                 </>
             )}
 
