@@ -8,6 +8,14 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { loadStripe } from "@stripe/stripe-js";
+import Script from "next/script";
+
+declare global {
+    interface Window {
+        Packeta: any;
+    }
+}
+
 
 type Step = "shipping" | "delivery" | "payment" | "success";
 
@@ -46,13 +54,36 @@ function CheckoutContent() {
         postalCode: "",
         country: "Česká republika",
         phone: "",
-        zasilkovna_id: "" // For Zásilkovna widget integration
+        zasilkovna_id: "",
+        zasilkovna_name: ""
     });
+
 
 
     const [selectedCarrier, setSelectedCarrier] = useState(carriers[0]);
 
+    const openZasilkovnaWidget = () => {
+        if (typeof window !== "undefined" && window.Packeta) {
+            window.Packeta.Widget.pick("de1146aa1641a90e", (point: any) => {
+                if (point) {
+                    setShipping(prev => ({
+                        ...prev,
+                        zasilkovna_id: point.id,
+                        zasilkovna_name: point.name,
+                        address: point.name, // Fallback display
+                        city: point.city,
+                        postalCode: point.zip
+                    }));
+                }
+            }, {
+                language: 'cs',
+                country: 'cz'
+            });
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
+
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -209,6 +240,34 @@ function CheckoutContent() {
                                     </span>
                                 </div>
                             ))}
+
+                            {selectedCarrier.id === "zasilkovna" && (
+                                <div className={styles.zasilkovnaSection} style={{ marginTop: '1rem', padding: '1rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                                    {shipping.zasilkovna_id ? (
+                                        <div>
+                                            <p style={{ margin: 0, fontWeight: 600, color: '#0d2112' }}>Vybrané výdejní místo:</p>
+                                            <p style={{ margin: '0.25rem 0', color: '#666' }}>{shipping.zasilkovna_name}</p>
+                                            <button
+                                                type="button"
+                                                onClick={openZasilkovnaWidget}
+                                                style={{ background: 'none', border: 'none', color: '#166534', cursor: 'pointer', padding: 0, fontSize: '0.9rem', textDecoration: 'underline' }}
+                                            >
+                                                Změnit výdejní místo
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <button
+                                            type="button"
+                                            onClick={openZasilkovnaWidget}
+                                            className={styles.secondaryButton}
+                                            style={{ width: '100%' }}
+                                        >
+                                            Vybrat výdejní místo (Zásilkovna)
+                                        </button>
+                                    )}
+                                </div>
+                            )}
+
                         </>
                     )}
 
@@ -276,7 +335,9 @@ function CheckoutContent() {
 export default function Checkout() {
     return (
         <Suspense fallback={<div className={styles.loading}>Načítání pokladny...</div>}>
+            <Script src="https://widget.packeta.com/v6/www/js/library.js" strategy="lazyOnload" />
             <CheckoutContent />
         </Suspense>
     );
+
 }

@@ -59,11 +59,12 @@ export async function POST(req: Request) {
             customer_email: shipping.email,
             metadata: {
                 order_details: JSON.stringify({
-                    shipping,
+                    shipping: { ...shipping },
                     items: items.map((i: any) => ({ id: i.id, quantity: i.quantity })),
                     carrier: carrier.name,
                 }),
             },
+
         });
 
         return NextResponse.json({ id: session.id, url: session.url });

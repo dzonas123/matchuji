@@ -42,16 +42,18 @@ export async function POST(req: Request) {
             const orderData = JSON.parse(metadata.order_details);
 
             // Generate Variable Symbol (VS)
-            const yearPrefix = new Date().getFullYear().toString();
+            // Current series starts from 202500003
+            const startVS = 202500003;
             const lastOrder = await prisma.order.findFirst({
-                where: { variableSymbol: { startsWith: yearPrefix } },
                 orderBy: { variableSymbol: 'desc' }
             });
 
-            let nextVS = `${yearPrefix}001`;
+            let nextVS = startVS.toString();
             if (lastOrder && lastOrder.variableSymbol) {
-                const lastNum = parseInt(lastOrder.variableSymbol.slice(4));
-                nextVS = `${yearPrefix}${(lastNum + 1).toString().padStart(3, '0')}`;
+                const lastVSNum = parseInt(lastOrder.variableSymbol);
+                if (lastVSNum >= startVS) {
+                    nextVS = (lastVSNum + 1).toString();
+                }
             }
 
             // 1. Save to Database (Prisma)
@@ -66,6 +68,7 @@ export async function POST(req: Request) {
                 shipping: orderData.shipping,
                 items: orderData.items,
             };
+
 
             try {
                 await prisma.order.create({
