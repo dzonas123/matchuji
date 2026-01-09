@@ -29,6 +29,7 @@ model Order {
   variableSymbol      String?  @unique
   date                DateTime
   amount              Float
+  discount            Float?   @default(0)
   status              String
   carrier             String?
   zasilkovna_branch_id String?
@@ -36,4 +37,18 @@ model Order {
   items               Json     // JSON structure for ordered items
   createdAt           DateTime @default(now())
 }
+
+model DiscountCode {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  type        String   // 'percentage' or 'fixed'
+  value       Float
+  minAmount   Float?   @default(0)
+  isActive    Boolean  @default(true)
+  usageCount  Int      @default(0)
+  maxUsages   Int?
+  expiryDate  DateTime?
+  createdAt   DateTime @default(now())
+}
+
 

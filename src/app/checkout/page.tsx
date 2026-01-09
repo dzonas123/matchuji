@@ -16,21 +16,22 @@ declare global {
     }
 }
 
-
 type Step = "shipping" | "delivery" | "payment" | "success";
 
 const carriers = [
     { id: "zasilkovna", name: "Zásilkovna - Výdejní místa", price: 79, time: "1-2 dny" }
 ];
 
-
-// Payments are handled by Stripe
 import { Suspense } from "react";
 
 function CheckoutContent() {
     const { items, total, clearCart } = useCart();
     const [step, setStep] = useState<Step>("shipping");
     const [loading, setLoading] = useState(false);
+    const [couponCode, setCouponCode] = useState("");
+    const [appliedDiscount, setAppliedDiscount] = useState<any>(null);
+    const [discountError, setDiscountError] = useState("");
+    const [isApplying, setIsApplying] = useState(false);
     const searchParams = useSearchParams();
 
     useEffect(() => {
@@ -56,8 +57,6 @@ function CheckoutContent() {
         zasilkovna_name: ""
     });
 
-
-
     const [selectedCarrier, setSelectedCarrier] = useState(carriers[0]);
 
     const openZasilkovnaWidget = () => {
@@ -68,7 +67,7 @@ function CheckoutContent() {
                         ...prev,
                         zasilkovna_id: point.id,
                         zasilkovna_name: point.name,
-                        address: point.name, // Fallback display
+                        address: point.name,
                         city: point.city,
                         postalCode: point.zip
                     }));
@@ -80,8 +79,31 @@ function CheckoutContent() {
         }
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const applyDiscount = async () => {
+        if (!couponCode) return;
+        setIsApplying(true);
+        setDiscountError("");
+        try {
+            const res = await fetch("/api/v1/discounts/validate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ code: couponCode, cartAmount: total }),
+            });
+            const data = await res.json();
+            if (data.success) {
+                setAppliedDiscount(data);
+                setCouponCode("");
+            } else {
+                setDiscountError(data.error);
+            }
+        } catch (err) {
+            setDiscountError("Chyba při uplatnění kódu");
+        } finally {
+            setIsApplying(false);
+        }
+    };
 
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -96,6 +118,7 @@ function CheckoutContent() {
                         items,
                         shipping,
                         carrier: selectedCarrier,
+                        discount: appliedDiscount,
                     }),
                 });
 
@@ -140,7 +163,8 @@ function CheckoutContent() {
     }
 
     const shippingCost = total > 800 ? 0 : selectedCarrier.price;
-    const finalTotal = total + shippingCost;
+    const discountValue = appliedDiscount?.amount || 0;
+    const finalTotal = total + shippingCost - discountValue;
 
     return (
         <div className={styles.container}>
@@ -308,6 +332,46 @@ function CheckoutContent() {
                             </div>
                         ))}
                     </div>
+
+                    <div className={styles.discountSection} style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid #eee' }}>
+                        {appliedDiscount ? (
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#f0fdf4', padding: '0.75rem', borderRadius: '6px' }}>
+                                <div>
+                                    <span style={{ display: 'block', fontSize: '0.8rem', color: '#166534', fontWeight: 600 }}>Uplatněná sleva:</span>
+                                    <span style={{ fontWeight: 700 }}>{appliedDiscount.code}</span>
+                                </div>
+                                <button
+                                    onClick={() => setAppliedDiscount(null)}
+                                    style={{ background: 'none', border: 'none', color: '#991b1b', cursor: 'pointer', fontSize: '0.8rem', textDecoration: 'underline' }}
+                                >
+                                    Odstranit
+                                </button>
+                            </div>
+                        ) : (
+                            <div>
+                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                    <input
+                                        type="text"
+                                        placeholder="Slevový kód"
+                                        value={couponCode}
+                                        onChange={e => setCouponCode(e.target.value.toUpperCase())}
+                                        style={{ flex: 1, padding: '0.6rem', border: '1px solid #cbd5e1', borderRadius: '6px', fontSize: '0.9rem' }}
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={applyDiscount}
+                                        disabled={isApplying || !couponCode}
+                                        className={styles.button}
+                                        style={{ padding: '0.6rem 1rem', fontSize: '0.85rem', background: '#0d2112', color: '#fff', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
+                                    >
+                                        Použít
+                                    </button>
+                                </div>
+                                {discountError && <p style={{ color: '#dc2626', fontSize: '0.75rem', marginTop: '0.4rem', margin: '0.4rem 0 0 0' }}>{discountError}</p>}
+                            </div>
+                        )}
+                    </div>
+
                     <div className={styles.totals}>
                         <div className={styles.totalRow}>
                             <span>Mezisoučet</span>
@@ -319,9 +383,15 @@ function CheckoutContent() {
                                 {shippingCost === 0 ? "ZDARMA" : `${shippingCost} Kč`}
                             </span>
                         </div>
+                        {appliedDiscount && (
+                            <div className={styles.totalRow} style={{ color: '#166534', fontWeight: 600 }}>
+                                <span>Sleva ({appliedDiscount.code})</span>
+                                <span>-{appliedDiscount.amount} Kč</span>
+                            </div>
+                        )}
                         <div className={styles.finalTotal}>
                             <span className={styles.finalTotalLabel}>Celkem k úhradě</span>
-                            <span>{finalTotal.toFixed(0)} Kč</span>
+                            <span>{finalTotal < 0 ? 0 : finalTotal.toFixed(0)} Kč</span>
                         </div>
                         <div style={{ textAlign: 'right', fontSize: '0.8rem', color: '#888', marginTop: '0.5rem' }}>
                             Včetně DPH 21%
@@ -340,5 +410,4 @@ export default function Checkout() {
             <CheckoutContent />
         </Suspense>
     );
-
 }

@@ -4,7 +4,8 @@ import { ReactNode } from "react";
 import styles from "@/app/admin/Admin.module.css";
 import Sidebar from "./Sidebar";
 
-type View = "dashboard" | "orders" | "products" | "customers";
+type View = "dashboard" | "orders" | "products" | "customers" | "discounts";
+
 
 interface AdminLayoutProps {
     children: ReactNode;

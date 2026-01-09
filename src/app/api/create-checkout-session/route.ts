@@ -12,7 +12,8 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Stripe API key is not configured" }, { status: 500 });
     }
     try {
-        const { items, shipping, carrier } = await req.json();
+        const { items, shipping, carrier, discount } = await req.json();
+
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://matchuji.vercel.app";
 
         const line_items = items.map((item: any) => {
@@ -50,6 +51,21 @@ export async function POST(req: Request) {
             });
         }
 
+        // Add discount if applicable
+        if (discount && discount.amount > 0) {
+            line_items.push({
+                price_data: {
+                    currency: "czk",
+                    product_data: {
+                        name: `Sleva (${discount.code})`,
+                    },
+                    unit_amount: -Math.round(discount.amount * 100),
+                },
+                quantity: 1,
+            });
+        }
+
+
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ["card"],
             line_items,
@@ -62,6 +78,7 @@ export async function POST(req: Request) {
                     shipping: { ...shipping },
                     items: items.map((i: any) => ({ id: i.id, quantity: i.quantity })),
                     carrier: carrier.name,
+                    discount: discount || null,
                 }),
             },
 

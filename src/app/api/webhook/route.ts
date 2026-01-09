@@ -62,6 +62,7 @@ export async function POST(req: Request) {
                 variableSymbol: nextVS,
                 date: new Date(),
                 amount: session.amount_total ? session.amount_total / 100 : 0,
+                discount: orderData.discount?.amount || 0,
                 status: 'paid',
                 carrier: orderData.carrier || 'Neznámo',
                 zasilkovna_branch_id: orderData.shipping?.zasilkovna_id || null,
@@ -70,13 +71,22 @@ export async function POST(req: Request) {
             };
 
 
+
             try {
                 await prisma.order.create({
                     data: newOrder
                 });
                 console.log("Order successfully saved to Prisma:", session.id, "VS:", nextVS);
+
+                // Increment discount usage if applicable
+                if (orderData.discount?.code) {
+                    await prisma.discountCode.update({
+                        where: { code: orderData.discount.code },
+                        data: { usageCount: { increment: 1 } }
+                    });
+                }
             } catch (dbError) {
-                console.error("Failed to save order to Prisma:", dbError);
+                console.error("Failed to save order to Prisma/update discount:", dbError);
             }
 
             // Local fallback for dev

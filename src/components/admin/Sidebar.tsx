@@ -4,7 +4,8 @@ import styles from "@/app/admin/Admin.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type View = "dashboard" | "orders" | "products" | "customers";
+type View = "dashboard" | "orders" | "products" | "customers" | "discounts";
+
 
 interface SidebarProps {
     currentView: View;
@@ -17,8 +18,9 @@ export default function Sidebar({ currentView, onChangeView, onLogout }: Sidebar
         { id: "dashboard", label: "Přehled", icon: "📊" },
         { id: "orders", label: "Objednávky", icon: "📦" },
         { id: "products", label: "Produkty", icon: "🍵" },
-        // { id: "customers", label: "Zákazníci", icon: "👥" }, // Future
+        { id: "discounts", label: "Slevy", icon: "🎟️" },
     ];
+
 
     return (
         <aside className={styles.sidebar}>

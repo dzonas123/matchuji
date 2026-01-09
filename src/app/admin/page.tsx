@@ -8,13 +8,16 @@ import AdminLayout from "@/components/admin/AdminLayout";
 import StatsCard from "@/components/admin/StatsCard";
 import OrderList from "@/components/admin/OrderList";
 import ProductList from "@/components/admin/ProductList";
+import DiscountManager from "@/components/admin/DiscountManager";
+
 
 export default function Admin() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [orders, setOrders] = useState<any[]>([]);
-    const [currentView, setCurrentView] = useState<"dashboard" | "orders" | "products" | "customers">("dashboard");
+    const [currentView, setCurrentView] = useState<"dashboard" | "orders" | "products" | "customers" | "discounts">("dashboard");
+
 
     useEffect(() => {
         // Simple session check
@@ -91,7 +94,9 @@ export default function Admin() {
                     {currentView === 'dashboard' && 'Přehled'}
                     {currentView === 'orders' && 'Objednávky'}
                     {currentView === 'products' && 'Produkty'}
+                    {currentView === 'discounts' && 'Slevové kódy'}
                     {currentView === 'customers' && 'Zákazníci'}
+
                 </h1>
                 <div style={{ color: '#666', fontSize: '0.9rem' }}>
                     {new Date().toLocaleDateString('cs-CZ', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
@@ -152,6 +157,11 @@ export default function Admin() {
             {currentView === 'products' && (
                 <ProductList />
             )}
+
+            {currentView === 'discounts' && (
+                <DiscountManager />
+            )}
         </AdminLayout>
+
     );
 }
