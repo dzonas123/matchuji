@@ -14,6 +14,7 @@ const getResend = () => new Resend(process.env.RESEND_API_KEY || "re_fallback");
 
 export async function POST(req: Request) {
     if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_WEBHOOK_SECRET) {
+        console.error("Webhook Error: Secret keys missing");
         return NextResponse.json({ error: "Messaging or Stripe not configured" }, { status: 500 });
     }
     const stripe = getStripe();
@@ -30,114 +31,139 @@ export async function POST(req: Request) {
             process.env.STRIPE_WEBHOOK_SECRET as string
         );
     } catch (err: any) {
+        console.error(`Webhook Signature Error: ${err.message}`);
         return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
     }
 
     if (event.type === "checkout.session.completed") {
         const session = event.data.object as Stripe.Checkout.Session;
+        console.log("Processing completed session:", session.id);
 
         // Extract order details from metadata
         const metadata = session.metadata;
         if (metadata && metadata.order_details) {
-            const orderData = JSON.parse(metadata.order_details);
-
-            // Generate Variable Symbol (VS)
-            // Current series starts from 202500003
-            const startVS = 202500003;
-            const lastOrder = await prisma.order.findFirst({
-                orderBy: { variableSymbol: 'desc' }
-            });
-
-            let nextVS = startVS.toString();
-            if (lastOrder && lastOrder.variableSymbol) {
-                const lastVSNum = parseInt(lastOrder.variableSymbol);
-                if (lastVSNum >= startVS) {
-                    nextVS = (lastVSNum + 1).toString();
-                }
-            }
-
-            // 1. Save to Database (Prisma)
-            const newOrder = {
-                id: session.id,
-                variableSymbol: nextVS,
-                date: new Date(),
-                amount: session.amount_total ? session.amount_total / 100 : 0,
-                discount: orderData.discount?.amount || 0,
-                status: 'paid',
-                carrier: orderData.carrier || 'Neznámo',
-                zasilkovna_branch_id: orderData.shipping?.zasilkovna_id || null,
-                shipping: orderData.shipping,
-                items: orderData.items,
-            };
-
-
-
             try {
-                await prisma.order.create({
-                    data: newOrder
-                });
-                console.log("Order successfully saved to Prisma:", session.id, "VS:", nextVS);
+                const orderData = JSON.parse(metadata.order_details);
 
-                // Increment discount usage if applicable
-                if (orderData.discount?.code) {
-                    await prisma.discountCode.update({
-                        where: { code: orderData.discount.code },
-                        data: { usageCount: { increment: 1 } }
+                // Generate Variable Symbol (VS)
+                const startVS = 202500003;
+                let nextVS = startVS.toString();
+
+                try {
+                    const lastOrder = await prisma.order.findFirst({
+                        where: { NOT: { variableSymbol: null } },
+                        orderBy: { variableSymbol: 'desc' }
                     });
+
+                    if (lastOrder && lastOrder.variableSymbol) {
+                        const lastVSNum = parseInt(lastOrder.variableSymbol);
+                        if (!isNaN(lastVSNum) && lastVSNum >= startVS) {
+                            nextVS = (lastVSNum + 1).toString();
+                        }
+                    }
+                } catch (vsError) {
+                    console.error("Error generating VS:", vsError);
+                    // Fallback to random if VS generation fails to ensure order is saved
+                    nextVS = (startVS + Math.floor(Math.random() * 1000)).toString();
                 }
-            } catch (dbError) {
-                console.error("Failed to save order to Prisma/update discount:", dbError);
-            }
 
-            // Local fallback for dev
-            const dbPath = path.join(process.cwd(), "src/data/orders.json");
-            try {
-                let orders = [];
-                if (fs.existsSync(dbPath)) {
-                    const fileContent = fs.readFileSync(dbPath, "utf-8");
-                    orders = JSON.parse(fileContent || "[]");
+                // 1. Save to Database (Prisma)
+                const newOrder: any = {
+                    id: session.id,
+                    variableSymbol: nextVS,
+                    date: new Date(),
+                    amount: session.amount_total ? session.amount_total / 100 : 0,
+                    discount: orderData.discount?.amount || 0,
+                    status: 'paid',
+                    carrier: orderData.carrier || 'Neznámo',
+                    zasilkovna_branch_id: orderData.shipping?.zasilkovna_id || null,
+                    shipping: orderData.shipping,
+                    items: orderData.items,
+                };
+
+                try {
+                    await prisma.order.upsert({
+                        where: { id: session.id },
+                        update: newOrder,
+                        create: newOrder
+                    });
+                    console.log("Order saved/updated in Prisma:", session.id, "VS:", nextVS);
+
+                    // Increment discount usage if applicable
+                    if (orderData.discount?.code) {
+                        try {
+                            await prisma.discountCode.update({
+                                where: { code: orderData.discount.code },
+                                data: { usageCount: { increment: 1 } }
+                            });
+                        } catch (discError) {
+                            console.error("Discount increment failed:", discError);
+                        }
+                    }
+                } catch (dbError) {
+                    console.error("CRITICAL: Failed to save order to Prisma:", dbError);
+                    // On Vercel this is the primary storage, so we should log it loudly
                 }
-                orders.unshift({ ...newOrder, date: newOrder.date.toISOString() });
-                fs.writeFileSync(dbPath, JSON.stringify(orders, null, 2));
-            } catch (fsError) {
-                // Silently skip if FS is read-only
-            }
 
-            // 2. Send emails
-            try {
-                // To Customer
-                await resend.emails.send({
-                    from: "Matchuji <objednavky@matchuji.cz>",
-                    to: orderData.shipping.email,
-                    subject: "Potvrzení vaší objednávky Matchuji",
-                    html: `
-            <h1>Děkujeme za vaši objednávku!</h1>
-            <p>Vaše objednávka byla úspěšně přijata a zaplacena.</p>
-            <p><strong>Dlabší info:</strong></p>
-            <ul>
-              <li>Jméno: ${orderData.shipping.firstName} ${orderData.shipping.lastName}</li>
-              <li>Adresa: ${orderData.shipping.address}, ${orderData.shipping.city}</li>
-              <li>Doprava: ${orderData.carrier}</li>
-            </ul>
-            <p>Jakmile balíček odešleme, dáme vám vědět.</p>
-          `,
-                });
+                // Local fallback (only works for dev or if re-deploying)
+                const dbPath = path.join(process.cwd(), "src/data/orders.json");
+                try {
+                    let orders = [];
+                    if (fs.existsSync(dbPath)) {
+                        const fileContent = fs.readFileSync(dbPath, "utf-8");
+                        orders = JSON.parse(fileContent || "[]");
+                    }
+                    // Avoid duplicates in local JSON
+                    const existingIdx = orders.findIndex((o: any) => o.id === newOrder.id);
+                    if (existingIdx !== -1) {
+                        orders[existingIdx] = { ...newOrder, date: newOrder.date.toISOString() };
+                    } else {
+                        orders.unshift({ ...newOrder, date: newOrder.date.toISOString() });
+                    }
+                    fs.writeFileSync(dbPath, JSON.stringify(orders, null, 2));
+                } catch (fsError) {
+                    // Silently fail FS on Vercel
+                }
 
-                // To Admin
-                await resend.emails.send({
-                    from: "Matchuji System <system@matchuji.cz>",
-                    to: "admin@matchuji.cz",
-                    subject: "Nová objednávka Matchuji!",
-                    html: `
-            <h1>Nová objednávka od ${orderData.shipping.firstName} ${orderData.shipping.lastName}</h1>
-            <p>Email: ${orderData.shipping.email}</p>
-            <p>Částka: ${session.amount_total ? session.amount_total / 100 : 0} CZK</p>
-            <p>Doprava: ${orderData.carrier}</p>
-            <pre>${JSON.stringify(orderData, null, 2)}</pre>
-          `,
-                });
-            } catch (emailError) {
-                console.error("Email sending failed:", emailError);
+                // 2. Send emails
+                try {
+                    // To Customer
+                    await resend.emails.send({
+                        from: "Matchuji <objednavky@matchuji.cz>",
+                        to: orderData.shipping.email,
+                        subject: "Potvrzení vaší objednávky Matchuji",
+                        html: `
+                <h1>Děkujeme za vaši objednávku!</h1>
+                <p>Vaše objednávka byla úspěšně přijata a zaplacena.</p>
+                <p><strong>Detaily doručení:</strong></p>
+                <ul>
+                  <li>Jméno: ${orderData.shipping.firstName} ${orderData.shipping.lastName}</li>
+                  <li>Adresa: ${orderData.shipping.address}, ${orderData.shipping.city}</li>
+                  <li>Doprava: ${orderData.carrier}</li>
+                </ul>
+                <p>Jakmile balíček odešleme, dáme vám vědět.</p>
+              `,
+                    });
+
+                    // To Admin
+                    await resend.emails.send({
+                        from: "Matchuji System <system@matchuji.cz>",
+                        to: "admin@matchuji.cz",
+                        subject: `Nová objednávka Matchuji! (#${nextVS})`,
+                        html: `
+                <h1>Nová objednávka od ${orderData.shipping.firstName} ${orderData.shipping.lastName}</h1>
+                <p>Email: ${orderData.shipping.email}</p>
+                <p>Částka: ${newOrder.amount} CZK</p>
+                <p>Doprava: ${orderData.carrier}</p>
+                <p><strong>VS: ${nextVS}</strong></p>
+                <pre>${JSON.stringify(orderData, null, 2)}</pre>
+              `,
+                    });
+                } catch (emailError) {
+                    console.error("Email notification failed:", emailError);
+                }
+            } catch (jsonError) {
+                console.error("Metadata parse error:", jsonError);
             }
         }
     }

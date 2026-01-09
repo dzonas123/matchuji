@@ -7,28 +7,49 @@ export async function GET() {
     const dbPath = path.join(process.cwd(), "src/data/orders.json");
 
     try {
-        // Fetch all products to enrich items with SKU/EAN
-        const products = await prisma.product.findMany();
-        const productMap = new Map();
-        products.forEach(p => productMap.set(p.id, p));
+        // Fetch all products safely
+        let productMap = new Map();
+        try {
+            const products = await prisma.product.findMany();
+            products.forEach(p => productMap.set(p.id, p));
+        } catch (pError) {
+            console.warn("Could not fetch products for enrichment:", pError);
+        }
 
         // Try Prisma first
         let orders = [];
+        let prismaSuccess = false;
         try {
             orders = await prisma.order.findMany({
                 orderBy: { date: 'desc' }
             });
+            prismaSuccess = true;
         } catch (dbError) {
             console.warn("Prisma orders fetch failed, using local JSON fallback:", dbError);
-            if (fs.existsSync(dbPath)) {
-                const fileContent = fs.readFileSync(dbPath, "utf-8");
-                orders = JSON.parse(fileContent || "[]");
+        }
+
+        // Fallback or Merge with local JSON (for dev environments)
+        if (!prismaSuccess || fs.existsSync(dbPath)) {
+            try {
+                if (fs.existsSync(dbPath)) {
+                    const fileContent = fs.readFileSync(dbPath, "utf-8");
+                    const localOrders = JSON.parse(fileContent || "[]");
+
+                    if (!prismaSuccess) {
+                        orders = localOrders;
+                    } else {
+                        // Optional: merge and deduplicate if needed
+                        // For now we trust Prisma if it succeeded
+                    }
+                }
+            } catch (fsError) {
+                console.error("Local JSON fallback failed:", fsError);
             }
         }
 
         // Enrich orders with item details (SKU, EAN)
         const enrichedOrders = orders.map((order: any) => {
-            const items = (order.items || []).map((item: any) => {
+            const items = (Array.isArray(order.items) ? order.items : []).map((item: any) => {
                 const product = productMap.get(item.id);
                 return {
                     ...item,
@@ -42,8 +63,7 @@ export async function GET() {
 
         return NextResponse.json(enrichedOrders);
     } catch (error) {
-        console.error("API Error (GET Orders):", error);
+        console.error("CRITICAL API Error (GET Orders):", error);
         return NextResponse.json([], { status: 200 });
     }
 }
-

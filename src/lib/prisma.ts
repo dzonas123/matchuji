@@ -2,12 +2,14 @@ import { PrismaClient } from '@prisma/client';
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
+const url = process.env.PRISMA_DATABASE_URL || process.env.DATABASE_URL || "";
+const isAccelerate = url.startsWith('prisma://') || url.startsWith('prisma+postgres://');
+
 export const prisma =
     globalForPrisma.prisma ||
-    new PrismaClient({
-        accelerateUrl: process.env.PRISMA_DATABASE_URL || process.env.DATABASE_URL,
-        log: ['query'],
-    });
+    (isAccelerate
+        ? new PrismaClient({ accelerateUrl: url })
+        : new PrismaClient());
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 
