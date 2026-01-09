@@ -20,11 +20,9 @@ declare global {
 type Step = "shipping" | "delivery" | "payment" | "success";
 
 const carriers = [
-    { id: "zasilkovna", name: "Zásilkovna - Výdejní místa", price: 79, time: "1-2 dny" },
-    { id: "ppl", name: "PPL Kurýr", price: 99, time: "Doručení domů" },
-    { id: "dpd", name: "DPD Pickup", price: 89, time: "Výdejní místa" },
-    { id: "pickup", name: "Osobní odběr (Praha)", price: 0, time: "Ihned k dispozici" }
+    { id: "zasilkovna", name: "Zásilkovna - Výdejní místa", price: 79, time: "1-2 dny" }
 ];
+
 
 // Payments are handled by Stripe
 import { Suspense } from "react";
@@ -229,52 +227,42 @@ function CheckoutContent() {
                                     key={carrier.id}
                                     className={`${styles.option} ${selectedCarrier.id === carrier.id ? styles.selected : ""}`}
                                     onClick={() => setSelectedCarrier(carrier)}
+                                    style={{ cursor: 'pointer', marginBottom: '1.5rem', padding: '1.5rem' }}
                                 >
                                     <div className={styles.radioCircle}></div>
-                                    <div className={styles.optionInfo}>
-                                        <span className={styles.optionName}>{carrier.name}</span>
-                                        <span className={styles.meta}>{carrier.time}</span>
+                                    <div className={styles.optionInfo} style={{ flex: 1 }}>
+                                        <span className={styles.optionName} style={{ fontSize: '1.1rem', fontWeight: 700 }}>{carrier.name}</span>
+                                        <span className={styles.meta} style={{ display: 'block', marginTop: '0.2rem' }}>{carrier.time}</span>
+
+                                        {shipping.zasilkovna_id ? (
+                                            <div style={{ marginTop: '1rem', padding: '0.75rem', background: '#f0fdf4', borderRadius: '6px', border: '1px solid #dcfce7' }}>
+                                                <p style={{ margin: 0, fontSize: '0.8rem', color: '#166534', fontWeight: 600, textTransform: 'uppercase' }}>Vybrané místo:</p>
+                                                <p style={{ margin: '0.1rem 0', fontWeight: 600 }}>{shipping.zasilkovna_name}</p>
+                                                <button
+                                                    type="button"
+                                                    onClick={(e) => { e.stopPropagation(); openZasilkovnaWidget(); }}
+                                                    style={{ background: 'none', border: 'none', color: '#166534', cursor: 'pointer', padding: 0, fontSize: '0.8rem', textDecoration: 'underline', marginTop: '0.3rem' }}
+                                                >
+                                                    Změnit výdejní místo
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <button
+                                                type="button"
+                                                onClick={(e) => { e.stopPropagation(); openZasilkovnaWidget(); }}
+                                                className={styles.secondaryButton}
+                                                style={{ width: '100%', marginTop: '1rem', background: '#fff', border: '2px solid #bef264', color: '#2d4a22' }}
+                                            >
+                                                📍 Vybrat výdejní místo
+                                            </button>
+                                        )}
                                     </div>
-                                    <span className={styles.price}>
-                                        {total > 800 ? "Zdarma" : (carrier.price === 0 ? "Zdarma" : `${carrier.price} Kč`)}
+                                    <span className={styles.price} style={{ fontSize: '1.1rem', fontWeight: 700 }}>
+                                        {total > 800 ? "Zdarma" : `${carrier.price} Kč`}
                                     </span>
                                 </div>
                             ))}
-
-                            {selectedCarrier.id === "zasilkovna" && (
-                                <div className={styles.zasilkovnaSection} style={{ marginTop: '1rem', padding: '1rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                                    {shipping.zasilkovna_id ? (
-                                        <div>
-                                            <p style={{ margin: 0, fontWeight: 600, color: '#0d2112' }}>Vybrané výdejní místo:</p>
-                                            <p style={{ margin: '0.25rem 0', color: '#666' }}>{shipping.zasilkovna_name}</p>
-                                            <button
-                                                type="button"
-                                                onClick={openZasilkovnaWidget}
-                                                style={{ background: 'none', border: 'none', color: '#166534', cursor: 'pointer', padding: 0, fontSize: '0.9rem', textDecoration: 'underline' }}
-                                            >
-                                                Změnit výdejní místo
-                                            </button>
-                                        </div>
-                                    ) : (
-                                        <button
-                                            type="button"
-                                            onClick={openZasilkovnaWidget}
-                                            className={styles.secondaryButton}
-                                            style={{ width: '100%' }}
-                                        >
-                                            Vybrat výdejní místo (Zásilkovna)
-                                        </button>
-                                    )}
-                                </div>
-                            )}
-
                         </>
-                    )}
-
-                    {step === "payment" && (
-                        <div style={{ textAlign: 'center', padding: '2rem' }}>
-                            <p>Přesměrování na platební bránu...</p>
-                        </div>
                     )}
 
                     <div className={styles.actions}>
@@ -285,10 +273,23 @@ function CheckoutContent() {
                                 ← Zpět
                             </button>
                         )}
-                        <button type="submit" className={styles.primaryButton} disabled={loading}>
-                            {loading ? "Přesměrování..." : (step === "delivery" ? "Zaplatit (Stripe)" : "Pokračovat →")}
+                        <button
+                            type="submit"
+                            className={styles.primaryButton}
+                            disabled={loading || (step === "delivery" && !shipping.zasilkovna_id)}
+                            style={{
+                                opacity: (loading || (step === "delivery" && !shipping.zasilkovna_id)) ? 0.6 : 1,
+                                cursor: (step === "delivery" && !shipping.zasilkovna_id) ? 'not-allowed' : 'pointer'
+                            }}
+                        >
+                            {loading ? "Přesměrování..." : (
+                                step === "delivery"
+                                    ? (shipping.zasilkovna_id ? "Zaplatit (Stripe) →" : "Vyberte výdejní místo")
+                                    : "Pokračovat →"
+                            )}
                         </button>
                     </div>
+
                 </motion.form>
 
                 <div className={styles.summary}>
