@@ -39,6 +39,9 @@ export async function POST(req: Request) {
                     name: updatedProduct.name,
                     price: updatedProduct.price,
                     stock: updatedProduct.stock,
+                    ean: updatedProduct.ean,
+                    sku: updatedProduct.sku,
+                    weight_g: updatedProduct.weight_g,
                     image: updatedProduct.image,
                 },
                 create: {
@@ -46,8 +49,12 @@ export async function POST(req: Request) {
                     name: updatedProduct.name,
                     price: updatedProduct.price,
                     stock: updatedProduct.stock,
+                    ean: updatedProduct.ean,
+                    sku: updatedProduct.sku,
+                    weight_g: updatedProduct.weight_g,
                     image: updatedProduct.image,
                 },
+
             });
             return NextResponse.json({ success: true, product });
         } catch (dbError) {

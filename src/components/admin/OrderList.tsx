@@ -9,6 +9,7 @@ interface Order {
     date: string;
     amount: number;
     status: string;
+    variableSymbol?: string;
     shipping: {
         firstName: string;
         lastName: string;
@@ -66,7 +67,7 @@ export default function OrderList({ orders }: OrderListProps) {
                 <table className={styles.table}>
                     <thead>
                         <tr>
-                            <th>Order ID</th>
+                            <th>VS / ID</th>
                             <th>Datum</th>
                             <th>Zákazník</th>
                             <th>Telefon</th>
@@ -86,7 +87,8 @@ export default function OrderList({ orders }: OrderListProps) {
                             filteredOrders.map((order: Order) => (
                                 <tr key={order.id} onClick={() => setSelectedOrder(order)} style={{ cursor: 'pointer' }}>
                                     <td style={{ fontFamily: 'monospace', fontSize: '0.85rem' }}>
-                                        #{order.id.slice(-6).toUpperCase()}
+                                        <div style={{ fontWeight: 'bold', color: '#0d2112' }}>{order.variableSymbol || '-'}</div>
+                                        <div style={{ fontSize: '0.7rem', color: '#999' }}>#{order.id.slice(-6).toUpperCase()}</div>
                                     </td>
                                     <td>{new Date(order.date).toLocaleDateString('cs-CZ')}</td>
                                     <td>

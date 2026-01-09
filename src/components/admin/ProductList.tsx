@@ -9,6 +9,9 @@ interface Product {
     name: string;
     price: number;
     stock: number;
+    ean?: string;
+    sku?: string;
+    weight_g?: number;
     image: string;
 }
 
@@ -140,7 +143,7 @@ export default function ProductList() {
                                         required
                                     />
                                 </div>
-                                <div style={{ marginBottom: '2rem' }}>
+                                <div style={{ marginBottom: '1rem' }}>
                                     <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: '#666' }}>Sklad (ks)</label>
                                     <input
                                         className={styles.input}
@@ -148,6 +151,35 @@ export default function ProductList() {
                                         value={editingProduct.stock}
                                         onChange={e => setEditingProduct({ ...editingProduct, stock: Number(e.target.value) })}
                                         required
+                                    />
+                                </div>
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '1rem' }}>
+                                    <div>
+                                        <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: '#666' }}>SKU</label>
+                                        <input
+                                            className={styles.input}
+                                            type="text"
+                                            value={editingProduct.sku || ''}
+                                            onChange={e => setEditingProduct({ ...editingProduct, sku: e.target.value })}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: '#666' }}>EAN</label>
+                                        <input
+                                            className={styles.input}
+                                            type="text"
+                                            value={editingProduct.ean || ''}
+                                            onChange={e => setEditingProduct({ ...editingProduct, ean: e.target.value })}
+                                        />
+                                    </div>
+                                </div>
+                                <div style={{ marginBottom: '2rem' }}>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: '#666' }}>Hmotnost (g)</label>
+                                    <input
+                                        className={styles.input}
+                                        type="number"
+                                        value={editingProduct.weight_g || ''}
+                                        onChange={e => setEditingProduct({ ...editingProduct, weight_g: Number(e.target.value) })}
                                     />
                                 </div>
                                 <button

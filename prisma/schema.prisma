@@ -7,25 +7,33 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
+
 
 model Product {
   id        String   @id
   name      String
   price     Float
   stock     Int
+  ean       String?  @unique
+  sku       String?  @unique
+  weight_g  Int?
   image     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Order {
-  id        String   @id
-  date      DateTime
-  amount    Float
-  status    String
-  carrier   String?
-  shipping  Json     // JSON structure for shipping details
-  items     Json     // JSON structure for ordered items
-  createdAt DateTime @default(now())
+  id                  String   @id
+  variableSymbol      String?  @unique
+  date                DateTime
+  amount              Float
+  status              String
+  carrier             String?
+  zasilkovna_branch_id String?
+  shipping            Json     // JSON structure for shipping details
+  items               Json     // JSON structure for ordered items
+  createdAt           DateTime @default(now())
 }
+

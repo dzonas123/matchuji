@@ -41,13 +41,28 @@ export async function POST(req: Request) {
         if (metadata && metadata.order_details) {
             const orderData = JSON.parse(metadata.order_details);
 
+            // Generate Variable Symbol (VS)
+            const yearPrefix = new Date().getFullYear().toString();
+            const lastOrder = await prisma.order.findFirst({
+                where: { variableSymbol: { startsWith: yearPrefix } },
+                orderBy: { variableSymbol: 'desc' }
+            });
+
+            let nextVS = `${yearPrefix}001`;
+            if (lastOrder && lastOrder.variableSymbol) {
+                const lastNum = parseInt(lastOrder.variableSymbol.slice(4));
+                nextVS = `${yearPrefix}${(lastNum + 1).toString().padStart(3, '0')}`;
+            }
+
             // 1. Save to Database (Prisma)
             const newOrder = {
                 id: session.id,
+                variableSymbol: nextVS,
                 date: new Date(),
                 amount: session.amount_total ? session.amount_total / 100 : 0,
                 status: 'paid',
                 carrier: orderData.carrier || 'Neznámo',
+                zasilkovna_branch_id: orderData.shipping?.zasilkovna_id || null,
                 shipping: orderData.shipping,
                 items: orderData.items,
             };
@@ -56,7 +71,7 @@ export async function POST(req: Request) {
                 await prisma.order.create({
                     data: newOrder
                 });
-                console.log("Order successfully saved to Prisma:", session.id);
+                console.log("Order successfully saved to Prisma:", session.id, "VS:", nextVS);
             } catch (dbError) {
                 console.error("Failed to save order to Prisma:", dbError);
             }

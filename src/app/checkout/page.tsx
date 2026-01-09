@@ -45,8 +45,10 @@ function CheckoutContent() {
         city: "",
         postalCode: "",
         country: "Česká republika",
-        phone: ""
+        phone: "",
+        zasilkovna_id: "" // For Zásilkovna widget integration
     });
+
 
     const [selectedCarrier, setSelectedCarrier] = useState(carriers[0]);
 
