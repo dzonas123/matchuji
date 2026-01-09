@@ -28,7 +28,13 @@ export default function OrderDetailModal({ order, onClose }: OrderDetailModalPro
 
                 <div className={styles.modalBody}>
                     <div className={styles.section}>
-                        <h3>👤 Kontaktní údaje</h3>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                            <h3 style={{ margin: 0 }}>👤 Kontaktní údaje</h3>
+                            <div style={{ background: '#f0fdf4', padding: '0.4rem 0.8rem', borderRadius: '6px', border: '1px solid #dcfce7' }}>
+                                <label style={{ fontSize: '0.7rem', color: '#166534', textTransform: 'uppercase', fontWeight: 700, display: 'block' }}>Variabilní symbol</label>
+                                <span style={{ fontWeight: 800, color: '#166534', fontSize: '1.1rem' }}>{order.variableSymbol || "Nenastaveno"}</span>
+                            </div>
+                        </div>
                         <div className={styles.infoGrid}>
                             <div>
                                 <label>Celé jméno</label>
@@ -68,37 +74,45 @@ export default function OrderDetailModal({ order, onClose }: OrderDetailModalPro
                         <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px dashed #eee' }}>
                             <label style={{ fontSize: '0.8rem', color: '#999' }}>Způsob dopravy</label>
                             <p style={{ fontWeight: 600, color: '#0d2112' }}>🚚 {order.carrier || "Standardní doručení"}</p>
-                            {order.zasilkovna_branch_id && (
-                                <div style={{ marginTop: '0.5rem', padding: '0.5rem', background: '#f0fdf4', borderRadius: '4px', border: '1px solid #dcfce7' }}>
-                                    <label style={{ fontSize: '0.7rem', color: '#166534', textTransform: 'uppercase', fontWeight: 600 }}>ID pobočky Zásilkovny</label>
-                                    <p style={{ margin: 0, fontWeight: 700, fontSize: '1rem', color: '#166534' }}>{order.zasilkovna_branch_id}</p>
+                            {order.carrier?.toLowerCase().includes('zasilkovna') && (
+                                <div style={{ marginTop: '0.5rem', padding: '0.75rem', background: '#f0fdf4', borderRadius: '6px', border: '1px solid #dcfce7' }}>
+                                    <label style={{ fontSize: '0.7rem', color: '#166534', textTransform: 'uppercase', fontWeight: 700 }}>ID pobočky Zásilkovny / Místo</label>
+                                    <p style={{ margin: 0, fontWeight: 800, fontSize: '1.1rem', color: '#166534' }}>{order.zasilkovna_branch_id || s.zasilkovna_id || "Nenastaveno"}</p>
+                                    {s.zasilkovna_name && <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.85rem', color: '#166534', opacity: 0.8 }}>{s.zasilkovna_name}</p>}
                                 </div>
                             )}
                         </div>
                     </div>
 
                     <div className={styles.section}>
-                        <h3>🛒 Produkty</h3>
+                        <h3>🛒 Produkty (Fulfillment data)</h3>
                         <div className={styles.itemsList}>
                             {order.items && order.items.map((item: any, idx: number) => (
-                                <div key={idx} className={styles.itemRow}>
+                                <div key={idx} className={styles.itemRow} style={{ padding: '1rem', background: '#f8fafc', borderRadius: '8px', marginBottom: '0.5rem', border: '1px solid #e2e8f0' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                        <div style={{ background: '#eee', borderRadius: '4px', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifySelf: 'center', fontSize: '10px', color: '#999' }}>IMG</div>
-                                        <div>
-                                            <p style={{ fontWeight: 600, margin: 0 }}>{item.name || item.id}</p>
-                                            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.25rem' }}>
-                                                {item.sku && <span style={{ fontSize: '0.7rem', color: '#666', background: '#f4f4f5', padding: '0.1rem 0.3rem', borderRadius: '2px' }}>SKU: {item.sku}</span>}
-                                                {item.ean && <span style={{ fontSize: '0.7rem', color: '#666', background: '#f4f4f5', padding: '0.1rem 0.3rem', borderRadius: '2px' }}>EAN: {item.ean}</span>}
+                                        <div style={{ background: '#eee', borderRadius: '4px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#999' }}>IMG</div>
+                                        <div style={{ flex: 1 }}>
+                                            <p style={{ fontWeight: 700, margin: 0, fontSize: '1rem' }}>{item.name || item.id}</p>
+                                            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+                                                <div style={{ background: '#fff', border: '1px solid #cbd5e1', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>
+                                                    <label style={{ display: 'block', fontSize: '0.6rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>SKU</label>
+                                                    <span style={{ fontSize: '0.85rem', color: '#0f172a', fontWeight: 600, fontFamily: 'monospace' }}>{item.sku || 'Nenastaveno'}</span>
+                                                </div>
+                                                <div style={{ background: '#fff', border: '1px solid #cbd5e1', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>
+                                                    <label style={{ display: 'block', fontSize: '0.6rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>EAN</label>
+                                                    <span style={{ fontSize: '0.85rem', color: '#0f172a', fontWeight: 600, fontFamily: 'monospace' }}>{item.ean || 'Nenastaveno'}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div style={{ textAlign: 'right' }}>
-                                        <p style={{ fontWeight: 700, margin: 0 }}>{item.quantity} ks</p>
+                                        <div style={{ textAlign: 'right', minWidth: '60px' }}>
+                                            <p style={{ fontWeight: 800, margin: 0, fontSize: '1.2rem', color: '#166534' }}>{item.quantity} ks</p>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
+
 
                     <div className={styles.section} style={{ borderBottom: 'none', marginBottom: 0 }}>
                         <div className={styles.totalBlock}>
