@@ -152,7 +152,8 @@ function CheckoutContent() {
             <div className={styles.success}>
                 <span className={styles.successIcon}>🎉</span>
                 <h1>Objednávka přijata!</h1>
-                <p>Děkujeme za váš nákup. Číslo vaší objednávky je <strong>#MC{Math.floor(Math.random() * 10000)}</strong>.</p>
+                <p>Děkujeme za váš nákup. Číslo vaší objednávky je <strong>#MC{searchParams.get("session_id")?.slice(-6).toUpperCase() || "SUCCESS"}</strong>.</p>
+
                 <p>Potvrzení jsme zaslali na email <strong>{shipping.email || "vás email"}</strong>.</p>
                 <p>🎁 <strong>Získáváte 10% slevu</strong> na příští nákup! Kód vám dorazí v potvrzovacím emailu.</p>
                 <Link href="/">
