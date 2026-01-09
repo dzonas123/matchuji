@@ -69,7 +69,17 @@ export default function DiscountManager() {
 
     if (loading) return <div>Načítání slevových kódů...</div>;
 
+    if (!Array.isArray(discounts)) {
+        return (
+            <div style={{ padding: '2rem', textAlign: 'center' }}>
+                <p>Nepodařilo se načíst slevové kódy. Zkontrolujte připojení k databázi.</p>
+                <button onClick={fetchDiscounts} className={styles.button}>Zkusit znovu</button>
+            </div>
+        );
+    }
+
     return (
+
         <div className={styles.tableWrapper}>
             <div style={{ padding: '1rem', borderBottom: '1px solid #eee' }}>
                 <button
@@ -94,7 +104,13 @@ export default function DiscountManager() {
                         </tr>
                     </thead>
                     <tbody>
-                        {discounts.map((d) => (
+                        {discounts.length === 0 ? (
+                            <tr>
+                                <td colSpan={7} style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>
+                                    Žádné slevové kódy nebyly nalezeny.
+                                </td>
+                            </tr>
+                        ) : discounts.map((d) => (
                             <tr key={d.id}>
                                 <td><strong>{d.code}</strong></td>
                                 <td>{d.type === 'percentage' ? 'Procenta' : 'Částka'}</td>
@@ -113,6 +129,7 @@ export default function DiscountManager() {
                             </tr>
                         ))}
                     </tbody>
+
                 </table>
             </div>
 
