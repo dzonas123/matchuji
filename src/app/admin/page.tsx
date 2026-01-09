@@ -110,19 +110,37 @@ export default function Admin() {
                     <OrderList orders={orders.slice(0, 5)} />
 
                     <div className={styles.senderInfoCard} style={{ marginTop: '3rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-                        <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem', color: '#0d2112' }}>📦 Odesílatel a Fakturace (Fulfillment)</h3>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                        <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem', color: '#0d2112' }}>📦 Fulfillment & API</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
                             <div>
                                 <p style={{ margin: 0, fontSize: '0.85rem', color: '#666' }}>Odesílatel ID:</p>
-                                <p style={{ margin: '0.25rem 0 0 0', fontWeight: 700, fontSize: '1.1rem' }}>540317</p>
+                                <p style={{ margin: '0.25rem 0 0 0', fontWeight: 700, fontSize: '1.2rem', color: '#166534' }}>540317</p>
                             </div>
                             <div>
-                                <p style={{ margin: 0, fontSize: '0.85rem', color: '#666' }}>Fakturační údaje:</p>
-                                <p style={{ margin: '0.25rem 0 0 0', fontWeight: 600 }}>Jan Španěl, IČO 19692340</p>
-                                <p style={{ margin: '0.1rem 0 0 0', fontSize: '0.8rem', color: '#999' }}>Neplátce DPH</p>
+                                <p style={{ margin: 0, fontSize: '0.85rem', color: '#666' }}>Fakturační status:</p>
+                                <p style={{ margin: '0.25rem 0 0 0', fontWeight: 700, fontSize: '1.2rem', color: '#c2410c' }}>NEPLÁTCE DPH</p>
+                            </div>
+                            <div>
+                                <p style={{ margin: 0, fontSize: '0.85rem', color: '#666' }}>API pro skladový systém:</p>
+                                <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.25rem' }}>
+                                    <code style={{ background: '#fff', padding: '0.4rem', borderRadius: '4px', fontSize: '0.8rem', border: '1px solid #cbd5e1', flex: 1 }}>/api/v1/orders/new</code>
+                                    <button
+                                        onClick={() => {
+                                            const url = window.location.origin + '/api/v1/orders/new';
+                                            navigator.clipboard.writeText(url);
+                                            alert('URL zkopírována do schránky');
+                                        }}
+                                        className={styles.button}
+                                        style={{ padding: '0.25rem 0.5rem', fontSize: '0.7rem' }}
+                                    >
+                                        V6 Kopírovat
+                                    </button>
+                                </div>
+                                <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.7rem', color: '#999' }}>Vrací seznam nových objednávek (JSON)</p>
                             </div>
                         </div>
                     </div>
+
                 </>
             )}
 

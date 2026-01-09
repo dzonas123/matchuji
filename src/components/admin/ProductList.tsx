@@ -79,7 +79,8 @@ export default function ProductList() {
                         <tr>
                             <th style={{ width: '80px' }}>Obrázek</th>
                             <th>Název produktu</th>
-                            <th>SKU / EAN</th>
+                            <th>SKU</th>
+                            <th>EAN</th>
                             <th>Váha</th>
                             <th>Cena</th>
                             <th>Skladem</th>
@@ -95,12 +96,8 @@ export default function ProductList() {
                                     </div>
                                 </td>
                                 <td><strong>{product.name}</strong></td>
-                                <td>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                                        <span style={{ fontSize: '0.75rem', color: '#666', fontFamily: 'monospace' }}>SKU: {product.sku || '-'}</span>
-                                        <span style={{ fontSize: '0.75rem', color: '#666', fontFamily: 'monospace' }}>EAN: {product.ean || '-'}</span>
-                                    </div>
-                                </td>
+                                <td style={{ fontFamily: 'monospace', fontSize: '0.85rem' }}>{product.sku || '-'}</td>
+                                <td style={{ fontFamily: 'monospace', fontSize: '0.85rem' }}>{product.ean || '-'}</td>
                                 <td style={{ fontSize: '0.9rem' }}>{product.weight_g ? `${product.weight_g}g` : '-'}</td>
                                 <td>{product.price} Kč</td>
                                 <td>
