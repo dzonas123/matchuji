@@ -1,61 +1,74 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 
 export async function GET() {
+    const dbPath = path.join(process.cwd(), "src/data/orders.json");
+
     try {
-        // Fetch orders with status 'paid' as they are 'new'
-        const orders = await prisma.order.findMany({
-            where: {
-                status: "paid",
-            },
-            orderBy: { createdAt: "asc" },
-        });
+        // 1. Fetch products for enrichment
+        let productMap = new Map();
+        try {
+            const products = await prisma.product.findMany();
+            products.forEach(p => productMap.set(p.id, p));
+        } catch (pError) {
+            console.warn("Fulfillment enrichment: Could not fetch products from DB");
+        }
 
-        // We need to ensure each item has name, sku, ean, quantity
-        // Since items are stored as JSON, we might need to look up products 
-        // if the JSON doesn't contain all info.
+        // 2. Fetch orders matching "paid" status
+        let orders = [];
+        let prismaSuccess = false;
 
-        const productIds = new Set<string>();
-        orders.forEach((order: any) => {
-            const items = order.items as any[];
-            items.forEach(item => productIds.add(item.id));
-        });
+        try {
+            orders = await prisma.order.findMany({
+                where: { status: "paid" },
+                orderBy: { date: "asc" },
+            });
+            prismaSuccess = true;
+        } catch (dbError) {
+            console.warn("Fulfillment: Prisma fetch failed, checking local fallback");
+        }
 
-        const products = await prisma.product.findMany({
-            where: {
-                id: { in: Array.from(productIds) }
+        // 3. Local fallback if Prisma fails
+        if (!prismaSuccess && fs.existsSync(dbPath)) {
+            try {
+                const fileContent = fs.readFileSync(dbPath, "utf-8");
+                const localOrders = JSON.parse(fileContent || "[]");
+                orders = localOrders.filter((o: any) => o.status === "paid");
+            } catch (fsError) {
+                console.error("Fulfillment: Local fallback failed:", fsError);
             }
-        });
+        }
 
-        const productMap = new Map();
-        products.forEach(p => productMap.set(p.id, p));
-
+        // 4. Transform for fulfillment system
         const formattedOrders = orders.map((order: any) => {
-            const items = (order.items as any[]).map((item: any) => {
+            const items = (Array.isArray(order.items) ? order.items : []).map((item: any) => {
                 const product = productMap.get(item.id);
                 return {
                     name: product?.name || item.name || "Neznámý produkt",
-                    sku: product?.sku || item.sku || "",
-                    ean: product?.ean || item.ean || "",
+                    sku: product?.sku || item.sku || "NENASTAVENO",
+                    ean: product?.ean || item.ean || "NENASTAVENO",
                     quantity: item.quantity,
+                    price: product?.price || item.price || 0
                 };
             });
 
             return {
                 id: order.id,
-                variableSymbol: order.variableSymbol,
+                variableSymbol: order.variableSymbol || order.id.slice(-8).toUpperCase(),
                 date: order.date,
                 amount: order.amount,
                 shipping: order.shipping,
                 carrier: order.carrier,
-                zasilkovna_branch_id: order.zasilkovna_branch_id,
+                zasilkovna_branch_id: order.zasilkovna_branch_id || order.shipping?.zasilkovna_id || null,
                 items,
             };
         });
 
         return NextResponse.json(formattedOrders);
     } catch (error) {
-        console.error("Error fetching new orders:", error);
-        return NextResponse.json({ error: "Failed to fetch orders" }, { status: 500 });
+        console.error("CRITICAL API Error (Fulfillment):", error);
+        return NextResponse.json([], { status: 200 }); // Return empty rather than 500
     }
 }
