@@ -162,9 +162,11 @@ function CheckoutContent() {
         );
     }
 
-    const shippingCost = total > 800 ? 0 : selectedCarrier.price;
+    const isFreeShipping = total > 800 || appliedDiscount?.freeShipping;
+    const shippingCost = isFreeShipping ? 0 : selectedCarrier.price;
     const discountValue = appliedDiscount?.amount || 0;
     const finalTotal = total + shippingCost - discountValue;
+
 
     return (
         <div className={styles.container}>
@@ -282,8 +284,9 @@ function CheckoutContent() {
                                         )}
                                     </div>
                                     <span className={styles.price} style={{ fontSize: '1.1rem', fontWeight: 700 }}>
-                                        {total > 800 ? "Zdarma" : `${carrier.price} Kč`}
+                                        {isFreeShipping ? "Zdarma" : `${carrier.price} Kč`}
                                     </span>
+
                                 </div>
                             ))}
                         </>

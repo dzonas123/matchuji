@@ -42,6 +42,7 @@ export async function POST(req: Request) {
             code: data.code.toUpperCase(),
             value: parseFloat(data.value),
             minAmount: parseFloat(data.minAmount || 0),
+            freeShipping: !!data.freeShipping,
             usageCount: data.usageCount || 0,
             createdAt: data.createdAt || new Date().toISOString()
         };
@@ -55,6 +56,7 @@ export async function POST(req: Request) {
                     type: updatedDiscount.type,
                     value: updatedDiscount.value,
                     minAmount: updatedDiscount.minAmount,
+                    freeShipping: updatedDiscount.freeShipping,
                     isActive: updatedDiscount.isActive,
                     maxUsages: updatedDiscount.maxUsages ? parseInt(updatedDiscount.maxUsages) : null,
                     expiryDate: updatedDiscount.expiryDate ? new Date(updatedDiscount.expiryDate) : null,
@@ -65,6 +67,7 @@ export async function POST(req: Request) {
                     type: updatedDiscount.type,
                     value: updatedDiscount.value,
                     minAmount: updatedDiscount.minAmount,
+                    freeShipping: updatedDiscount.freeShipping,
                     isActive: updatedDiscount.isActive,
                     maxUsages: updatedDiscount.maxUsages ? parseInt(updatedDiscount.maxUsages) : null,
                     expiryDate: updatedDiscount.expiryDate ? new Date(updatedDiscount.expiryDate) : null,

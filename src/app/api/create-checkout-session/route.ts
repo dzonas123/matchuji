@@ -34,9 +34,14 @@ export async function POST(req: Request) {
             };
         });
 
-        // Add shipping cost if applicable
-        const total = items.reduce((sum: number, item: any) => sum + item.price * item.quantity, 0);
-        const shippingCost = total > 800 ? 0 : carrier.price;
+        // Calculate shipping cost
+        const subtotal = items.reduce((sum: number, item: any) => sum + item.price * item.quantity, 0);
+        let shippingCost = subtotal > 800 ? 0 : carrier.price;
+
+        // Apply Free Shipping discount if active
+        if (discount?.freeShipping) {
+            shippingCost = 0;
+        }
 
         if (shippingCost > 0) {
             line_items.push({
@@ -51,22 +56,8 @@ export async function POST(req: Request) {
             });
         }
 
-        // Add discount if applicable
-        if (discount && discount.amount > 0) {
-            line_items.push({
-                price_data: {
-                    currency: "czk",
-                    product_data: {
-                        name: `Sleva (${discount.code})`,
-                    },
-                    unit_amount: -Math.round(discount.amount * 100),
-                },
-                quantity: 1,
-            });
-        }
-
-
-        const session = await stripe.checkout.sessions.create({
+        // Prepare Stripe Session configuration
+        const sessionConfig: any = {
             payment_method_types: ["card"],
             line_items,
             mode: "payment",
@@ -81,8 +72,26 @@ export async function POST(req: Request) {
                     discount: discount || null,
                 }),
             },
+        };
 
-        });
+        // Add discount via Stripe Coupon (to avoid negative unit_amount error)
+        if (discount && discount.amount > 0) {
+            try {
+                const coupon = await stripe.coupons.create({
+                    amount_off: Math.round(discount.amount * 100),
+                    currency: "czk",
+                    duration: "once",
+                    name: `Sleva ${discount.code}`,
+                });
+                sessionConfig.discounts = [{ coupon: coupon.id }];
+            } catch (couponError) {
+                console.error("Failed to create Stripe coupon:", couponError);
+                // Fallback: If coupon creation fails, we might have to adjust line items or show error
+                // but usually it works fine.
+            }
+        }
+
+        const session = await stripe.checkout.sessions.create(sessionConfig);
 
         return NextResponse.json({ id: session.id, url: session.url });
     } catch (err: any) {

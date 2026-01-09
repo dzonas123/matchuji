@@ -74,11 +74,12 @@ export async function POST(req: Request) {
             code: discount.code,
             type: discount.type,
             value: discount.value,
-            amount: Math.round(discountAmount)
+            amount: Math.round(discountAmount),
+            freeShipping: !!discount.freeShipping
         });
 
-    } catch (error) {
-        console.error("Error validating discount code:", error);
-        return NextResponse.json({ error: "Chyba při ověřování kódu" }, { status: 500 });
+    } catch (dbError) {
+        console.error("DB Error in discount validation:", dbError);
+        return NextResponse.json({ error: "Slevové kódy jsou dočasně nedostupné." }, { status: 400 });
     }
 }

@@ -9,8 +9,10 @@ interface DiscountCode {
     type: string;
     value: number;
     minAmount: number;
+    freeShipping: boolean;
     isActive: boolean;
     usageCount: number;
+
     maxUsages: number | null;
     expiryDate: string | null;
 }
@@ -110,9 +112,11 @@ export default function DiscountManager() {
                             <th>Typ</th>
                             <th>Hodnota</th>
                             <th>Min. nákup</th>
+                            <th>Doprava</th>
                             <th>Využití</th>
                             <th>Stav</th>
                             <th>Akce</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -128,7 +132,9 @@ export default function DiscountManager() {
                                 <td>{d.type === 'percentage' ? 'Procenta' : 'Částka'}</td>
                                 <td style={{ fontWeight: 600 }}>{d.value}{d.type === 'percentage' ? '%' : ' Kč'}</td>
                                 <td>{d.minAmount || 0} Kč</td>
+                                <td>{d.freeShipping ? '✅ Zdarma' : '❌ Standard'}</td>
                                 <td>{d.usageCount || 0} {d.maxUsages ? `/ ${d.maxUsages}` : ''}</td>
+
                                 <td>
                                     <span className={`${styles.status} ${d.isActive ? styles.paid : styles.pending}`}>
                                         {d.isActive ? 'Aktivní' : 'Neaktivní'}
@@ -196,6 +202,16 @@ export default function DiscountManager() {
                                     onChange={e => setEditingDiscount({ ...editingDiscount, minAmount: Number(e.target.value) })}
                                     style={{ width: '100%' }}
                                 />
+                            </div>
+                            <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                <input
+                                    type="checkbox"
+                                    id="freeShipping"
+                                    checked={editingDiscount.freeShipping ?? false}
+                                    onChange={e => setEditingDiscount({ ...editingDiscount, freeShipping: e.target.checked })}
+                                    style={{ width: '1.2rem', height: '1.2rem' }}
+                                />
+                                <label htmlFor="freeShipping" style={{ fontSize: '0.9rem', cursor: 'pointer' }}>Doprava zdarma</label>
                             </div>
                             <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                                 <input
