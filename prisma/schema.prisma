@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,48 +6,43 @@ datasource db {
   provider = "postgresql"
 }
 
-
-
 model Product {
   id        String   @id
   name      String
   price     Float
   stock     Int
-  ean       String?  @unique
-  sku       String?  @unique
-  weight_g  Int?
   image     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  ean       String?  @unique
+  sku       String?  @unique
+  weight_g  Int?
 }
 
 model Order {
-  id                  String   @id
-  variableSymbol      String?  @unique
-  date                DateTime
-  amount              Float
-  discount            Float?   @default(0)
-  status              String
-  carrier             String?
+  id                   String   @id
+  date                 DateTime
+  amount               Float
+  status               String
+  carrier              String?
+  shipping             Json
+  items                Json
+  createdAt            DateTime @default(now())
+  discount             Float?   @default(0)
+  variableSymbol       String?  @unique
   zasilkovna_branch_id String?
-  shipping            Json     // JSON structure for shipping details
-  items               Json     // JSON structure for ordered items
-  createdAt           DateTime @default(now())
 }
 
 model DiscountCode {
-  id            String    @id @default(uuid())
-  code          String    @unique
-  type          String    // 'percentage' or 'fixed'
-  value         Float
-  minAmount     Float?    @default(0)
-  freeShipping  Boolean   @default(false)
-  isActive      Boolean   @default(true)
-  usageCount    Int       @default(0)
-  maxUsages     Int?
-  expiryDate    DateTime?
-  createdAt     DateTime  @default(now())
+  id           String    @id @default(uuid())
+  code         String    @unique
+  type         String
+  value        Float
+  minAmount    Float?    @default(0)
+  isActive     Boolean   @default(true)
+  usageCount   Int       @default(0)
+  maxUsages    Int?
+  expiryDate   DateTime?
+  createdAt    DateTime  @default(now())
+  freeShipping Boolean   @default(false)
 }
-
-
-

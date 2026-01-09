@@ -19,8 +19,9 @@ export default function OrderDetailModal({ order, onClose }: OrderDetailModalPro
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <span style={{ fontSize: '0.75rem', color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Detail objednávky</span>
                         <h2 style={{ fontSize: '1.4rem' }}>
-                            {order.variableSymbol ? order.variableSymbol : `#${order.id.slice(-6).toUpperCase()}`}
-                            {order.variableSymbol && <span style={{ fontSize: '0.9rem', color: '#999', marginLeft: '0.5rem', fontWeight: 'normal' }}>(ID: #{order.id.slice(-6).toUpperCase()})</span>}
+                            {order.variableSymbol ? `#${order.variableSymbol}` : `#${order.id.slice(-6).toUpperCase()}`}
+                            {order.variableSymbol && <span style={{ fontSize: '0.9rem', color: '#999', marginLeft: '0.5rem', fontWeight: 'normal' }}>(Stripe ID: {order.id.slice(-8)})</span>}
+
                         </h2>
                     </div>
                     <button className={styles.closeBtn} onClick={onClose}>×</button>
@@ -76,8 +77,9 @@ export default function OrderDetailModal({ order, onClose }: OrderDetailModalPro
                             <p style={{ fontWeight: 600, color: '#0d2112' }}>🚚 {order.carrier || "Standardní doručení"}</p>
                             {order.carrier?.toLowerCase().includes('zasilkovna') && (
                                 <div style={{ marginTop: '0.5rem', padding: '0.75rem', background: '#f0fdf4', borderRadius: '6px', border: '1px solid #dcfce7' }}>
-                                    <label style={{ fontSize: '0.7rem', color: '#166534', textTransform: 'uppercase', fontWeight: 700 }}>ID pobočky Zásilkovny / Místo</label>
-                                    <p style={{ margin: 0, fontWeight: 800, fontSize: '1.1rem', color: '#166534' }}>{order.zasilkovna_branch_id || s.zasilkovna_id || "Nenastaveno"}</p>
+                                    <label style={{ fontSize: '0.7rem', color: '#166534', textTransform: 'uppercase', fontWeight: 700 }}>Pobočka / Z-BOX (ID)</label>
+                                    <p style={{ margin: 0, fontWeight: 800, fontSize: '1.2rem', color: '#166534' }}>{order.zasilkovna_branch_id || s.zasilkovna_id || order.shipping?.zasilkovna_id || "Nenastaveno"}</p>
+
                                     {s.zasilkovna_name && <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.85rem', color: '#166534', opacity: 0.8 }}>{s.zasilkovna_name}</p>}
                                 </div>
                             )}

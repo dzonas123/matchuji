@@ -32,15 +32,23 @@ async function migrate() {
                     name: product.name,
                     price: product.price,
                     stock: product.stock,
+                    ean: product.ean,
+                    sku: product.sku,
+                    weight_g: product.weight_g,
                     image: product.image,
                 },
+
                 create: {
                     id: product.id,
                     name: product.name,
                     price: product.price,
                     stock: product.stock,
+                    ean: product.ean,
+                    sku: product.sku,
+                    weight_g: product.weight_g,
                     image: product.image,
                 },
+
             });
         }
         console.log('✅ Products migrated successfully.');
@@ -58,20 +66,28 @@ async function migrate() {
                 update: {
                     date: new Date(order.date),
                     amount: order.amount,
+                    variableSymbol: order.variableSymbol,
+                    discount: order.discount || 0,
                     status: order.status,
                     carrier: order.carrier,
+                    zasilkovna_branch_id: order.zasilkovna_branch_id,
                     shipping: order.shipping,
                     items: order.items,
                 },
+
                 create: {
                     id: order.id,
                     date: new Date(order.date),
                     amount: order.amount,
+                    variableSymbol: order.variableSymbol,
+                    discount: order.discount || 0,
                     status: order.status,
                     carrier: order.carrier,
+                    zasilkovna_branch_id: order.zasilkovna_branch_id,
                     shipping: order.shipping,
                     items: order.items,
                 },
+
             });
         }
         console.log('✅ Orders migrated successfully.');
