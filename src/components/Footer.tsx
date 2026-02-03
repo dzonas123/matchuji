@@ -44,9 +44,11 @@ export default function Footer() {
 
                 <div className={styles.bottom}>
                     <div>&copy; {new Date().getFullYear()} Matchuji. Všechna práva vyhrazena.</div>
-                    <div style={{ display: 'flex', gap: '1rem' }}>
-                        <Link href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Obchodní podmínky</Link>
-                        <Link href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Ochrana soukromí</Link>
+                    <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                        <Link href="/zasady-vraceni-zbozi" style={{ color: 'inherit', textDecoration: 'none' }}>Reklamace a vrácení</Link>
+                        <Link href="/obchodni-podminky" style={{ color: 'inherit', textDecoration: 'none' }}>Obchodní podmínky</Link>
+                        <Link href="/ochrana-soukromi" style={{ color: 'inherit', textDecoration: 'none' }}>Ochrana soukromí</Link>
+                        <Link href="/cookies" style={{ color: 'inherit', textDecoration: 'none' }}>Cookies</Link>
                     </div>
                 </div>
             </div>

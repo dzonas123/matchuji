@@ -1,0 +1,110 @@
+.main {
+    padding: 160px 20px 100px;
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 80vh;
+}
+
+.header {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--color-dark-green);
+    margin-bottom: 16px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-soft);
+}
+
+.content {
+    background: white;
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 30px rgba(10, 31, 19, 0.05);
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.section h2 {
+    font-size: 1.5rem;
+    color: var(--color-dark-green);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section h2::before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 24px;
+    background: var(--color-lime);
+    border-radius: var(--radius-full);
+}
+
+.section p {
+    color: var(--color-text-soft);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.section li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 12px;
+    color: var(--color-text-soft);
+    line-height: 1.6;
+}
+
+.section li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-lime);
+    font-weight: bold;
+}
+
+.contactBox {
+    background: var(--color-dark-green);
+    color: white;
+    padding: 30px;
+    border-radius: var(--radius-md);
+    margin-top: 40px;
+}
+
+.contactBox h3 {
+    color: var(--color-lime);
+    margin-bottom: 15px;
+}
+
+.contactBox p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+    .main {
+        padding: 120px 20px 60px;
+    }
+
+    .content {
+        padding: 30px 20px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+}

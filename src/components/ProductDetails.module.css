@@ -6,7 +6,7 @@
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 20px;
 }
 
 .benefitsHeader {
@@ -288,7 +288,21 @@
 @media (max-width: 900px) {
     .deepDive {
         grid-template-columns: 1fr;
-        padding: 2rem;
+        padding: 1rem;
+        border-radius: 2rem;
+    }
+
+    .deepDiveContent {
+        padding: 1.5rem 1rem;
+    }
+
+    .featureList li {
+        padding: 0.875rem 1rem;
+    }
+
+    .deepDiveContent h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
     }
 }
 

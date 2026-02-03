@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import styles from "./LifestyleHero.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,16 +27,20 @@ export default function LifestyleHero() {
         reviews: 128
     };
 
-    // Tone down: fewer leaves (20), slower, subtler opacity
-    const leaves = [...Array(20)].map((_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        rotate: Math.random() * 360,
-        scale: 0.3 + Math.random() * 0.5,
-        duration: 15 + Math.random() * 20, // Slower movement
-        delay: Math.random() * 10
-    }));
+    const [leaves, setLeaves] = useState([] as any[]);
+
+    useEffect(() => {
+        const generatedLeaves = [...Array(20)].map((_, i) => ({
+            id: i,
+            x: Math.random() * 100,
+            y: Math.random() * 100,
+            rotate: Math.random() * 360,
+            scale: 0.3 + Math.random() * 0.5,
+            duration: 15 + Math.random() * 20,
+            delay: Math.random() * 10
+        }));
+        setLeaves(generatedLeaves);
+    }, []);
 
     return (
         <section className={styles.section}>
