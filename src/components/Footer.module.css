@@ -79,7 +79,12 @@
 
 @media (max-width: 768px) {
     .footer {
-        padding: 4rem 20px 2rem;
+        padding: 4rem 0 2rem;
+    }
+
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     .grid {
