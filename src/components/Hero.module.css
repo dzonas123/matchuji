@@ -237,6 +237,7 @@
 .variantInfo {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 1rem;
     flex-wrap: wrap;
     width: 100%;
@@ -260,11 +261,12 @@
     background: #D32F2F;
     color: white;
     font-size: 0.7rem;
-    padding: 0.25rem 0.75rem;
+    padding: 0.35rem 0.75rem;
     border-bottom-left-radius: 0.5rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    z-index: 1;
 }
 
 .actions {
@@ -396,6 +398,9 @@
     .container {
         grid-template-columns: 1fr;
         gap: 2rem;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 100%;
     }
 
     .title {
