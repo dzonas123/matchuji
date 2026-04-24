@@ -129,7 +129,7 @@ export async function POST(req: Request) {
                 try {
                     // To Customer
                     await resend.emails.send({
-                        from: "Matchuji <onboarding@resend.dev>",
+                        from: "Matchuji <info@matchuji.cz>",
                         to: orderData.shipping.email,
                         subject: "Potvrzení vaší objednávky | Matchuji",
                         html: `
@@ -153,8 +153,8 @@ export async function POST(req: Request) {
 
                     // To Admin
                     await resend.emails.send({
-                        from: "Matchuji System <system@matchuji.cz>",
-                        to: "admin@matchuji.cz",
+                        from: "Matchuji System <info@matchuji.cz>",
+                        to: "info@matchuji.cz",
                         subject: `Nová objednávka Matchuji! (#${nextVS})`,
                         html: `
                 <h1>Nová objednávka od ${orderData.shipping.firstName} ${orderData.shipping.lastName}</h1>
