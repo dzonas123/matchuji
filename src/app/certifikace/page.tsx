@@ -34,7 +34,10 @@ export default function Certifications() {
                                     <h3 style={{ fontSize: '1.4rem', marginBottom: '8px', color: 'var(--color-dark-green)' }}>EU Organic certifikace</h3>
                                     <p style={{ margin: 0 }}>Záruka pěstování bez chemie a pesticidů v souladu s předpisy EU o ekologickém zemědělství.</p>
                                 </div>
-                                <a href="/certifikace/eu-organic.pdf" target="_blank" rel="noopener noreferrer" className={styles.downloadButton}>Stáhnout PDF</a>
+                                <div style={{ display: 'flex', gap: '10px' }}>
+                                    <a href="/certifikace/eu-organic.pdf" target="_blank" rel="noopener noreferrer" className={styles.secondaryButton}>Zvětšit na celou obrazovku</a>
+                                    <a href="/certifikace/eu-organic.pdf" download className={styles.downloadButton}>Stáhnout</a>
+                                </div>
                             </div>
                             <iframe src="/certifikace/eu-organic.pdf" width="100%" height="700px" style={{ border: '1px solid #ddd', borderRadius: '8px' }} title="EU Organic certifikace"></iframe>
                         </div>
@@ -45,7 +48,10 @@ export default function Certifications() {
                                     <h3 style={{ fontSize: '1.4rem', marginBottom: '8px', color: 'var(--color-dark-green)' }}>USDA Organic</h3>
                                     <p style={{ margin: 0 }}>Americký standard potvrzující 100% BIO kvalitu surovin.</p>
                                 </div>
-                                <a href="/certifikace/usda-organic.pdf" target="_blank" rel="noopener noreferrer" className={styles.downloadButton}>Stáhnout PDF</a>
+                                <div style={{ display: 'flex', gap: '10px' }}>
+                                    <a href="/certifikace/usda-organic.pdf" target="_blank" rel="noopener noreferrer" className={styles.secondaryButton}>Zvětšit na celou obrazovku</a>
+                                    <a href="/certifikace/usda-organic.pdf" download className={styles.downloadButton}>Stáhnout</a>
+                                </div>
                             </div>
                             <iframe src="/certifikace/usda-organic.pdf" width="100%" height="700px" style={{ border: '1px solid #ddd', borderRadius: '8px' }} title="USDA Organic"></iframe>
                         </div>
@@ -56,7 +62,10 @@ export default function Certifications() {
                                     <h3 style={{ fontSize: '1.4rem', marginBottom: '8px', color: 'var(--color-dark-green)' }}>CNAS Testing</h3>
                                     <p style={{ margin: 0 }}>Laboratorní testy akreditované organizací CNAS potvrzující nepřítomnost těžkých kovů a dalších škodlivin.</p>
                                 </div>
-                                <a href="/certifikace/cnas-testing.pdf" target="_blank" rel="noopener noreferrer" className={styles.downloadButton}>Stáhnout PDF</a>
+                                <div style={{ display: 'flex', gap: '10px' }}>
+                                    <a href="/certifikace/cnas-testing.pdf" target="_blank" rel="noopener noreferrer" className={styles.secondaryButton}>Zvětšit na celou obrazovku</a>
+                                    <a href="/certifikace/cnas-testing.pdf" download className={styles.downloadButton}>Stáhnout</a>
+                                </div>
                             </div>
                             <iframe src="/certifikace/cnas-testing.pdf" width="100%" height="700px" style={{ border: '1px solid #ddd', borderRadius: '8px' }} title="CNAS Testing"></iframe>
                         </div>
@@ -67,7 +76,10 @@ export default function Certifications() {
                                     <h3 style={{ fontSize: '1.4rem', marginBottom: '8px', color: 'var(--color-dark-green)' }}>EUROFINS Testing</h3>
                                     <p style={{ margin: 0 }}>Nezávislé a vysoce uznávané celosvětové testování mikrobiologické čistoty a kvality potravin.</p>
                                 </div>
-                                <a href="/certifikace/eurofins-testing.pdf" target="_blank" rel="noopener noreferrer" className={styles.downloadButton}>Stáhnout PDF</a>
+                                <div style={{ display: 'flex', gap: '10px' }}>
+                                    <a href="/certifikace/eurofins-testing.pdf" target="_blank" rel="noopener noreferrer" className={styles.secondaryButton}>Zvětšit na celou obrazovku</a>
+                                    <a href="/certifikace/eurofins-testing.pdf" download className={styles.downloadButton}>Stáhnout</a>
+                                </div>
                             </div>
                             <iframe src="/certifikace/eurofins-testing.pdf" width="100%" height="700px" style={{ border: '1px solid #ddd', borderRadius: '8px' }} title="EUROFINS Testing"></iframe>
                         </div>
