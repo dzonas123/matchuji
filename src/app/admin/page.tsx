@@ -100,8 +100,12 @@ export default function Admin() {
     const totalCost = orders.reduce((total, order) => {
         const orderItems = order.items || [];
         const orderCOG = orderItems.reduce((cogSum: number, item: any) => {
+            // Ignorujeme dopravu a jiné ne-produktové položky
+            const itemName = (item.name || item.id || "").toLowerCase();
+            if (itemName.includes('doprava') || itemName.includes('shipping')) return cogSum;
+
             // Pokud je to 3-pack, počítáme 3 jednotky
-            const units = (item.id === 'matcha-3pack' || (item.name && item.name.toLowerCase().includes('3-pack'))) ? 3 : 1;
+            const units = (item.id === 'matcha-3pack' || itemName.includes('3-pack')) ? 3 : 1;
             return cogSum + (units * COST_PER_UNIT * (item.quantity || 1));
         }, 0);
         return total + orderCOG;
