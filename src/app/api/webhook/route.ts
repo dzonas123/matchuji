@@ -154,7 +154,7 @@ export async function POST(req: Request) {
                     // To Admin
                     await resend.emails.send({
                         from: "Matchuji System <info@matchuji.cz>",
-                        to: "info@matchuji.cz",
+                        to: "janspanelwork@gmail.com",
                         subject: `Nová objednávka Matchuji! (#${nextVS})`,
                         html: `
                 <h1>Nová objednávka od ${orderData.shipping.firstName} ${orderData.shipping.lastName}</h1>
