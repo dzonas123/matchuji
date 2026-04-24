@@ -106,12 +106,13 @@ export default function Admin() {
 
             // Robustnější detekce balíčků (hledáme 3-pack, 3pack, 3 balíčky, atd.)
             let units = 1;
+            const itemIdentifier = (item.id || "").toLowerCase();
             if (
-                item.id === 'matcha-3pack' || 
-                itemName.includes('3-pack') || 
-                itemName.includes('3pack') || 
-                itemName.includes('3 bal') ||
-                itemName.includes('sada 3')
+                itemIdentifier.includes('3') || 
+                itemIdentifier.includes('bundle') ||
+                itemName.includes('3') || 
+                itemName.includes('bundle') || 
+                itemName.includes('sada')
             ) {
                 units = 3;
             }

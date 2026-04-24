@@ -107,8 +107,11 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                                                 </div>
                                             </div>
                                         </div>
-                                        <div style={{ textAlign: 'right', minWidth: '60px' }}>
+                                        <div style={{ textAlign: 'right', minWidth: '80px' }}>
                                             <p style={{ fontWeight: 800, margin: 0, fontSize: '1.2rem', color: '#166534' }}>{item.quantity} ks</p>
+                                            {(item.id?.toLowerCase().includes('3') || (item.name || "").toLowerCase().includes('3')) && (
+                                                <span style={{ fontSize: '0.7rem', color: '#666', display: 'block' }}>(Počítáno jako 3ks balení)</span>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
