@@ -148,23 +148,56 @@ export async function POST(req: Request) {
                     await resend.emails.send({
                         from: "Matchuji <info@matchuji.cz>",
                         to: orderData.shipping.email,
-                        subject: "Potvrzení vaší objednávky | Matchuji",
+                        subject: `✅ Objednávka #${nextVS} přijata | Matchuji`,
                         html: `
-                <div style="font-family: sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
-                    <h1 style="color: #0c3314;">Děkujeme za vaši objednávku!</h1>
-                    <p>Vaše platba úspěšně proběhla a objednávku (<strong>#${nextVS}</strong>) jsme v pořádku přijali.</p>
-                    <div style="background: #eaffea; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #a6e22e;">
-                        <strong>Vaši Matchu právě teď začínáme připravovat. Zásilka bude expedována nejpozději do 48 hodin.</strong>
-                    </div>
-                    <h3 style="color: #0c3314; border-bottom: 1px solid #eee; padding-bottom: 8px;">Detaily doručení</h3>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 8px;">👤 <strong>Jméno:</strong> ${orderData.shipping.firstName} ${orderData.shipping.lastName}</li>
-                        <li style="margin-bottom: 8px;">📍 <strong>Adresa:</strong> ${orderData.shipping.address}, ${orderData.shipping.city} ${orderData.shipping.zip}</li>
-                        <li style="margin-bottom: 8px;">🚚 <strong>Doprava:</strong> ${orderData.carrier}</li>
-                    </ul>
-                    <p style="margin-top: 20px;">Jakmile balíček předáme dopravci, dáme vám znovu vědět.</p>
-                    <p style="margin-top: 30px; font-size: 0.9em; color: #666; border-top: 1px solid #eee; padding-top: 15px;">S pozdravem,<br/>Tým Matchuji.cz</p>
-                </div>
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f5f5f0;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <div style="max-width:600px;margin:40px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+    
+    <!-- Header -->
+    <div style="background:#0c3314;padding:40px 40px 30px;text-align:center;">
+      <p style="margin:0 0 8px;color:#a6e22e;font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:600;">Objednávka přijata ✓</p>
+      <h1 style="margin:0;color:#fff;font-size:28px;font-weight:700;">Matchuji.cz</h1>
+    </div>
+    
+    <!-- Body -->
+    <div style="padding:40px;">
+      <h2 style="margin:0 0 16px;color:#0c3314;font-size:22px;">Ahoj ${orderData.shipping.firstName}! 👋</h2>
+      <p style="margin:0 0 16px;color:#555;font-size:16px;line-height:1.7;">
+        Mockrát ti děkujeme za tvou objednávku! Jsme moc rádi, že jsi si vybral/a naši prémiovou Matchu z japonského Uji a věříme, že si ji maximálně užiješ. 🍵
+      </p>
+      <p style="margin:0 0 24px;color:#555;font-size:16px;line-height:1.7;">
+        Platba úspěšně proběhla a tvá objednávka č. <strong style="color:#0c3314;">#${nextVS}</strong> je teď v našich rukou.
+      </p>
+
+      <!-- 48h box -->
+      <div style="background:#f0faf0;border-left:4px solid #a6e22e;border-radius:8px;padding:20px 24px;margin:0 0 32px;">
+        <p style="margin:0;color:#0c3314;font-size:15px;font-weight:700;">🚀 Expedice do 48 hodin</p>
+        <p style="margin:8px 0 0;color:#444;font-size:14px;line-height:1.6;">Vaši Matchu teď začínáme připravovat. Zásilku předáme dopravci nejpozději do 48 hodin od objednávky. Jakmile se tak stane, dáme ti vědět.</p>
+      </div>
+
+      <!-- Order summary -->
+      <h3 style="margin:0 0 16px;color:#0c3314;font-size:16px;border-bottom:2px solid #f0f0f0;padding-bottom:10px;">Detaily doručení</h3>
+      <table style="width:100%;border-collapse:collapse;margin-bottom:32px;">
+        <tr><td style="padding:8px 0;color:#888;font-size:14px;width:120px;">Jméno</td><td style="padding:8px 0;color:#333;font-size:14px;font-weight:600;">${orderData.shipping.firstName} ${orderData.shipping.lastName}</td></tr>
+        <tr style="background:#fafafa;"><td style="padding:8px 6px;color:#888;font-size:14px;">Adresa</td><td style="padding:8px 6px;color:#333;font-size:14px;font-weight:600;">${orderData.shipping.address}, ${orderData.shipping.city} ${orderData.shipping.postalCode || ''}</td></tr>
+        <tr><td style="padding:8px 0;color:#888;font-size:14px;">Doprava</td><td style="padding:8px 0;color:#333;font-size:14px;font-weight:600;">${orderData.carrier}${orderData.shipping.zasilkovna_name ? ' – ' + orderData.shipping.zasilkovna_name : ''}</td></tr>
+        <tr style="background:#fafafa;"><td style="padding:8px 6px;color:#888;font-size:14px;">Celkem</td><td style="padding:8px 6px;color:#0c3314;font-size:15px;font-weight:700;">${newOrder.amount} Kč</td></tr>
+      </table>
+
+      <p style="margin:0 0 8px;color:#555;font-size:15px;line-height:1.7;">Máš-li jakékoli dotazy, napiš nám na <a href="mailto:info@matchuji.cz" style="color:#0c3314;font-weight:600;">info@matchuji.cz</a> a my ti co nejdříve odpovíme.</p>
+      <p style="margin:24px 0 0;color:#555;font-size:15px;line-height:1.7;">S láskou k Matche,<br/><strong style="color:#0c3314;">Tým Matchuji 🍃</strong></p>
+    </div>
+
+    <!-- Footer -->
+    <div style="background:#f5f5f0;padding:24px 40px;text-align:center;border-top:1px solid #e8e8e8;">
+      <p style="margin:0;color:#aaa;font-size:12px;">© ${new Date().getFullYear()} Matchuji.cz | <a href="https://matchuji.cz" style="color:#aaa;">www.matchuji.cz</a></p>
+    </div>
+  </div>
+</body>
+</html>
               `,
                     });
 
@@ -172,14 +205,60 @@ export async function POST(req: Request) {
                     await resend.emails.send({
                         from: "Matchuji System <info@matchuji.cz>",
                         to: "janspanelwork@gmail.com",
-                        subject: `Nová objednávka Matchuji! (#${nextVS})`,
+                        subject: `🛍️ Nová objednávka #${nextVS} – ${orderData.shipping.firstName} ${orderData.shipping.lastName} (${newOrder.amount} Kč)`,
                         html: `
-                <h1>Nová objednávka od ${orderData.shipping.firstName} ${orderData.shipping.lastName}</h1>
-                <p>Email: ${orderData.shipping.email}</p>
-                <p>Částka: ${newOrder.amount} CZK</p>
-                <p>Doprava: ${orderData.carrier}</p>
-                <p><strong>VS: ${nextVS}</strong></p>
-                <pre>${JSON.stringify(orderData, null, 2)}</pre>
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background:#f5f5f0;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <div style="max-width:600px;margin:40px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+    
+    <div style="background:#0c3314;padding:30px 40px;">
+      <p style="margin:0 0 4px;color:#a6e22e;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Nová objednávka</p>
+      <h1 style="margin:0;color:#fff;font-size:24px;">Objednávka #${nextVS}</h1>
+    </div>
+
+    <div style="padding:32px 40px;">
+
+      <!-- Amount highlight -->
+      <div style="background:#f0faf0;border-radius:8px;padding:20px;text-align:center;margin-bottom:28px;">
+        <p style="margin:0;color:#888;font-size:13px;">Celková částka</p>
+        <p style="margin:8px 0 0;color:#0c3314;font-size:36px;font-weight:800;">${newOrder.amount} Kč</p>
+      </div>
+
+      <h3 style="margin:0 0 12px;color:#0c3314;font-size:15px;border-bottom:2px solid #f0f0f0;padding-bottom:8px;">👤 Zákazník</h3>
+      <table style="width:100%;border-collapse:collapse;margin-bottom:24px;font-size:14px;">
+        <tr><td style="padding:7px 0;color:#888;width:130px;">Jméno</td><td style="padding:7px 0;color:#333;font-weight:600;">${orderData.shipping.firstName} ${orderData.shipping.lastName}</td></tr>
+        <tr style="background:#fafafa;"><td style="padding:7px 6px;color:#888;">Email</td><td style="padding:7px 6px;"><a href="mailto:${orderData.shipping.email}" style="color:#0c3314;font-weight:600;">${orderData.shipping.email}</a></td></tr>
+        <tr><td style="padding:7px 0;color:#888;">Telefon</td><td style="padding:7px 0;color:#333;font-weight:600;">${orderData.shipping.phone || '–'}</td></tr>
+      </table>
+
+      <h3 style="margin:0 0 12px;color:#0c3314;font-size:15px;border-bottom:2px solid #f0f0f0;padding-bottom:8px;">📦 Doručení</h3>
+      <table style="width:100%;border-collapse:collapse;margin-bottom:24px;font-size:14px;">
+        <tr><td style="padding:7px 0;color:#888;width:130px;">Adresa</td><td style="padding:7px 0;color:#333;font-weight:600;">${orderData.shipping.address}, ${orderData.shipping.city} ${orderData.shipping.postalCode || ''}</td></tr>
+        <tr style="background:#fafafa;"><td style="padding:7px 6px;color:#888;">Dopravce</td><td style="padding:7px 6px;color:#333;font-weight:600;">${orderData.carrier}</td></tr>
+        ${orderData.shipping.zasilkovna_name ? `<tr><td style="padding:7px 0;color:#888;">Zásilkovna</td><td style="padding:7px 0;color:#333;font-weight:600;">${orderData.shipping.zasilkovna_name}</td></tr>` : ''}
+      </table>
+
+      ${orderData.discount ? `
+      <h3 style="margin:0 0 12px;color:#0c3314;font-size:15px;border-bottom:2px solid #f0f0f0;padding-bottom:8px;">🎟️ Sleva</h3>
+      <table style="width:100%;border-collapse:collapse;margin-bottom:24px;font-size:14px;">
+        <tr><td style="padding:7px 0;color:#888;width:130px;">Kód</td><td style="padding:7px 0;color:#333;font-weight:600;">${orderData.discount.code}</td></tr>
+        <tr style="background:#fafafa;"><td style="padding:7px 6px;color:#888;">Sleva</td><td style="padding:7px 6px;color:#c0392b;font-weight:700;">-${orderData.discount.amount} Kč</td></tr>
+      </table>
+      ` : ''}
+
+      <div style="background:#fff3cd;border-radius:8px;padding:16px 20px;font-size:14px;color:#856404;">
+        <strong>Variabilní symbol:</strong> ${nextVS}
+      </div>
+    </div>
+
+    <div style="background:#f5f5f0;padding:16px 40px;border-top:1px solid #e8e8e8;">
+      <p style="margin:0;color:#aaa;font-size:12px;text-align:center;">Matchuji admin systém • ${new Date().toLocaleString('cs-CZ')}</p>
+    </div>
+  </div>
+</body>
+</html>
               `,
                     });
                 } catch (emailError) {
