@@ -131,17 +131,23 @@ export async function POST(req: Request) {
                     await resend.emails.send({
                         from: "Matchuji <objednavky@matchuji.cz>",
                         to: orderData.shipping.email,
-                        subject: "Potvrzení vaší objednávky Matchuji",
+                        subject: "Potvrzení vaší objednávky | Matchuji",
                         html: `
-                <h1>Děkujeme za vaši objednávku!</h1>
-                <p>Vaše objednávka byla úspěšně přijata a zaplacena.</p>
-                <p><strong>Detaily doručení:</strong></p>
-                <ul>
-                  <li>Jméno: ${orderData.shipping.firstName} ${orderData.shipping.lastName}</li>
-                  <li>Adresa: ${orderData.shipping.address}, ${orderData.shipping.city}</li>
-                  <li>Doprava: ${orderData.carrier}</li>
-                </ul>
-                <p>Jakmile balíček odešleme, dáme vám vědět.</p>
+                <div style="font-family: sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
+                    <h1 style="color: #0c3314;">Děkujeme za vaši objednávku!</h1>
+                    <p>Vaše platba úspěšně proběhla a objednávku (<strong>#${nextVS}</strong>) jsme v pořádku přijali.</p>
+                    <div style="background: #eaffea; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #a6e22e;">
+                        <strong>Vaši Matchu právě teď začínáme připravovat. Zásilka bude expedována nejpozději do 48 hodin.</strong>
+                    </div>
+                    <h3 style="color: #0c3314; border-bottom: 1px solid #eee; padding-bottom: 8px;">Detaily doručení</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;">👤 <strong>Jméno:</strong> ${orderData.shipping.firstName} ${orderData.shipping.lastName}</li>
+                        <li style="margin-bottom: 8px;">📍 <strong>Adresa:</strong> ${orderData.shipping.address}, ${orderData.shipping.city} ${orderData.shipping.zip}</li>
+                        <li style="margin-bottom: 8px;">🚚 <strong>Doprava:</strong> ${orderData.carrier}</li>
+                    </ul>
+                    <p style="margin-top: 20px;">Jakmile balíček předáme dopravci, dáme vám znovu vědět.</p>
+                    <p style="margin-top: 30px; font-size: 0.9em; color: #666; border-top: 1px solid #eee; padding-top: 15px;">S pozdravem,<br/>Tým Matchuji.cz</p>
+                </div>
               `,
                     });
 
