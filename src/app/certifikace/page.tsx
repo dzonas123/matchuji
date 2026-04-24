@@ -26,29 +26,33 @@ export default function Certifications() {
 
                 <section className={styles.section}>
                     <h2>Dostupné certifikace</h2>
-                    <ul style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
 
-                        <li>
-                            <strong>EU Organic certifikace</strong><br/>
-                            Záruka pěstování bez chemie a pesticidů v souladu s předpisy EU o ekologickém zemědělství.<br/>
-                            <a href="/certifikace/eu-organic.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-lime)', textDecoration: 'underline' }}>Stáhnout PDF</a>
-                        </li>
-                        <li>
-                            <strong>USDA Organic</strong><br/>
-                            Americký standard potvrzující 100% BIO kvalitu surovin.<br/>
-                            <a href="/certifikace/usda-organic.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-lime)', textDecoration: 'underline' }}>Stáhnout PDF</a>
-                        </li>
-                        <li>
-                            <strong>CNAS Testing</strong><br/>
-                            Laboratorní testy akreditované organizací CNAS potvrzující nepřítomnost těžkých kovů a dalších škodlivin.<br/>
-                            <a href="/certifikace/cnas-testing.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-lime)', textDecoration: 'underline' }}>Stáhnout PDF</a>
-                        </li>
-                        <li>
-                            <strong>EUROFINS Testing</strong><br/>
-                            Nezávislé a vysoce uznávané celosvětové testování mikrobiologické čistoty a kvality potravin.<br/>
-                            <a href="/certifikace/eurofins-testing.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-lime)', textDecoration: 'underline' }}>Stáhnout PDF</a>
-                        </li>
-                    </ul>
+                        <div style={{ paddingBottom: '20px', borderBottom: '1px solid rgba(0,0,0,0.1)' }}>
+                            <h3 style={{ fontSize: '1.2rem', marginBottom: '8px', color: 'var(--color-dark-green)' }}>EU Organic certifikace</h3>
+                            <p style={{ marginBottom: '16px' }}>Záruka pěstování bez chemie a pesticidů v souladu s předpisy EU o ekologickém zemědělství. <a href="/certifikace/eu-organic.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-lime)', textDecoration: 'underline', marginLeft: '10px', fontWeight: 'bold' }}>Stáhnout PDF</a></p>
+                            <iframe src="/certifikace/eu-organic.pdf" width="100%" height="600px" style={{ border: '1px solid #eee', borderRadius: '8px' }} title="EU Organic certifikace"></iframe>
+                        </div>
+
+                        <div style={{ paddingBottom: '20px', borderBottom: '1px solid rgba(0,0,0,0.1)' }}>
+                            <h3 style={{ fontSize: '1.2rem', marginBottom: '8px', color: 'var(--color-dark-green)' }}>USDA Organic</h3>
+                            <p style={{ marginBottom: '16px' }}>Americký standard potvrzující 100% BIO kvalitu surovin. <a href="/certifikace/usda-organic.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-lime)', textDecoration: 'underline', marginLeft: '10px', fontWeight: 'bold' }}>Stáhnout PDF</a></p>
+                            <iframe src="/certifikace/usda-organic.pdf" width="100%" height="600px" style={{ border: '1px solid #eee', borderRadius: '8px' }} title="USDA Organic"></iframe>
+                        </div>
+
+                        <div style={{ paddingBottom: '20px', borderBottom: '1px solid rgba(0,0,0,0.1)' }}>
+                            <h3 style={{ fontSize: '1.2rem', marginBottom: '8px', color: 'var(--color-dark-green)' }}>CNAS Testing</h3>
+                            <p style={{ marginBottom: '16px' }}>Laboratorní testy akreditované organizací CNAS potvrzující nepřítomnost těžkých kovů a dalších škodlivin. <a href="/certifikace/cnas-testing.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-lime)', textDecoration: 'underline', marginLeft: '10px', fontWeight: 'bold' }}>Stáhnout PDF</a></p>
+                            <iframe src="/certifikace/cnas-testing.pdf" width="100%" height="600px" style={{ border: '1px solid #eee', borderRadius: '8px' }} title="CNAS Testing"></iframe>
+                        </div>
+
+                        <div>
+                            <h3 style={{ fontSize: '1.2rem', marginBottom: '8px', color: 'var(--color-dark-green)' }}>EUROFINS Testing</h3>
+                            <p style={{ marginBottom: '16px' }}>Nezávislé a vysoce uznávané celosvětové testování mikrobiologické čistoty a kvality potravin. <a href="/certifikace/eurofins-testing.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-lime)', textDecoration: 'underline', marginLeft: '10px', fontWeight: 'bold' }}>Stáhnout PDF</a></p>
+                            <iframe src="/certifikace/eurofins-testing.pdf" width="100%" height="600px" style={{ border: '1px solid #eee', borderRadius: '8px' }} title="EUROFINS Testing"></iframe>
+                        </div>
+
+                    </div>
                 </section>
 
                 <div className={styles.contactBox}>
