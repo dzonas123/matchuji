@@ -104,7 +104,7 @@ export default function OrderList({ orders, onUpdate }: OrderListProps) {
                                     <td>{order.shipping?.city}</td>
                                     <td><strong>{order.amount.toLocaleString()} Kč</strong></td>
                                     <td>
-                                        <span className={`${styles.status} ${styles[order.status] || styles.pending}`}>
+                                        <span className={`${styles.status} ${(styles as any)[order.status] || styles.pending}`}>
                                             {order.status === 'paid' && 'Zaplaceno'}
                                             {order.status === 'packed' && 'Zabaleno'}
                                             {order.status === 'shipped' && 'Odesláno'}
