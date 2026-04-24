@@ -2,6 +2,7 @@
 
 import styles from "./ProductDetails.module.css";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 const container = {
@@ -146,6 +147,26 @@ export default function ProductDetails() {
                         <p className={styles.deepDiveOutro}>
                             Ideální pro tradiční ceremoniál jen s vodou, nebo pro to nejluxusnější latte.
                         </p>
+                        <Link href="/certifikace" style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            marginTop: '20px',
+                            padding: '10px 20px',
+                            background: 'white',
+                            color: 'var(--color-dark-green)',
+                            border: '1.5px solid var(--color-dark-green)',
+                            borderRadius: '100px',
+                            textDecoration: 'none',
+                            fontSize: '0.9rem',
+                            fontWeight: '600',
+                            transition: 'all 0.2s ease',
+                        }}
+                        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--color-dark-green)'; (e.currentTarget as HTMLElement).style.color = 'white'; }}
+                        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'white'; (e.currentTarget as HTMLElement).style.color = 'var(--color-dark-green)'; }}
+                        >
+                            🏅 Zobrazit certifikace o kvalitě
+                        </Link>
                     </div>
                     <div className={styles.deepDiveImageWrapper}>
                         <Image
