@@ -66,10 +66,20 @@ export async function POST(req: Request) {
             customer_email: shipping.email,
             metadata: {
                 order_details: JSON.stringify({
-                    shipping: { ...shipping },
-                    items: items.map((i: any) => ({ id: i.id, quantity: i.quantity })),
-                    carrier: carrier.name,
-                    discount: discount || null,
+                    s: {
+                        e: shipping.email,
+                        f: shipping.firstName,
+                        l: shipping.lastName,
+                        a: shipping.address,
+                        c: shipping.city,
+                        z: shipping.postalCode,
+                        p: shipping.phone,
+                        zi: shipping.zasilkovna_id || null,
+                        zn: shipping.zasilkovna_name ? shipping.zasilkovna_name.substring(0, 30) : null,
+                    },
+                    i: items.map((i: any) => ({ id: i.id, q: i.quantity })),
+                    ca: carrier.name,
+                    d: discount ? { code: discount.code, amt: discount.amount, fs: discount.freeShipping || false } : null,
                 }),
             },
         };

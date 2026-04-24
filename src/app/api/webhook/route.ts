@@ -43,18 +43,36 @@ export async function POST(req: Request) {
         const metadata = session.metadata;
         if (metadata && metadata.order_details) {
             try {
-                const orderData = JSON.parse(metadata.order_details);
+                const rawData = JSON.parse(metadata.order_details);
+
+                // Support both old (full keys) and new (compressed keys) metadata formats
+                const isCompressed = !!rawData.s;
+                const orderData = isCompressed ? {
+                    shipping: {
+                        email: rawData.s.e,
+                        firstName: rawData.s.f,
+                        lastName: rawData.s.l,
+                        address: rawData.s.a,
+                        city: rawData.s.c,
+                        postalCode: rawData.s.z,
+                        zip: rawData.s.z,
+                        phone: rawData.s.p,
+                        zasilkovna_id: rawData.s.zi,
+                        zasilkovna_name: rawData.s.zn,
+                    },
+                    items: rawData.i.map((i: any) => ({ id: i.id, quantity: i.q })),
+                    carrier: rawData.ca,
+                    discount: rawData.d ? { code: rawData.d.code, amount: rawData.d.amt, freeShipping: rawData.d.fs } : null,
+                } : rawData;
 
                 // Generate Variable Symbol (VS)
                 const startVS = 202500003;
                 let nextVS = startVS.toString();
-
                 try {
                     const lastOrder = await prisma.order.findFirst({
                         where: { NOT: { variableSymbol: null } },
                         orderBy: { variableSymbol: 'desc' }
                     });
-
                     if (lastOrder && lastOrder.variableSymbol) {
                         const lastVSNum = parseInt(lastOrder.variableSymbol);
                         if (!isNaN(lastVSNum) && lastVSNum >= startVS) {
@@ -63,7 +81,6 @@ export async function POST(req: Request) {
                     }
                 } catch (vsError) {
                     console.error("Error generating VS:", vsError);
-                    // Fallback to random if VS generation fails to ensure order is saved
                     nextVS = (startVS + Math.floor(Math.random() * 1000)).toString();
                 }
 
