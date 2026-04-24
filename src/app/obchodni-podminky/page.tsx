@@ -75,9 +75,17 @@ export default function TermsAndConditions() {
                 </section>
 
                 <div className={styles.contactBox}>
-                    <h3>Provozovatel</h3>
-                    <p>Matchuji.cz</p>
-                    <p>E-mail: info@matchuji.cz</p>
+                    <h3>Provozovatelé</h3>
+                    <p>
+                        <strong>Jan Španěl, IČO: 19692340 - RES</strong><br />
+                        Obchodní firma Jan Španěl se sídlem Brno - Štýřice, Vinohrady 794/45, 63900 a identifikačním číslem (IČO) 19692340.
+                    </p>
+                    <p style={{ marginTop: '1rem' }}>
+                        <strong>Daniel Sysel, IČO: 17449103 - RES</strong><br />
+                        Obchodní firma Daniel Sysel se sídlem Brno - Štýřice, Vinohrady 794/45, 63900 a identifikačním číslem (IČO) 17449103.
+                    </p>
+                    <p style={{ marginTop: '1rem' }}>Společně jako 2 majitelé e-shopu Matchuji.cz</p>
+                    <p style={{ marginTop: '1rem' }}>E-mail: info@matchuji.cz</p>
                 </div>
             </div>
         </main>

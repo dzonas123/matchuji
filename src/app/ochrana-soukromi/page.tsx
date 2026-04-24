@@ -17,8 +17,12 @@ export default function PrivacyPolicy() {
                 <section className={styles.section}>
                     <h2>1. Správce osobních údajů</h2>
                     <p>
-                        Správcem osobních údajů podle čl. 4 bod 7 nařízení Evropského parlamentu a Rady (EU) 2016/679 o ochraně fyzických osob v souvislosti se zpracováním osobních údajů a o volném pohybu těchto údajů (dále jen: „GDPR”) je provozovatel e-shopu Matchuji.cz (dále jen: „správce“).
+                        Správci osobních údajů podle čl. 4 bod 7 nařízení Evropského parlamentu a Rady (EU) 2016/679 o ochraně fyzických osob v souvislosti se zpracováním osobních údajů a o volném pohybu těchto údajů (dále jen: „GDPR”) jsou provozovatelé e-shopu Matchuji.cz (dále společně jen: „správce“):
                     </p>
+                    <ul style={{ marginTop: '1rem', listStyleType: 'disc', paddingLeft: '1.5rem', lineHeight: '1.6' }}>
+                        <li><strong>Jan Španěl, IČO: 19692340 - RES</strong>, obchodní firma Jan Španěl se sídlem Brno - Štýřice, Vinohrady 794/45, 63900 a identifikačním číslem (IČO) 19692340.</li>
+                        <li><strong>Daniel Sysel, IČO: 17449103 - RES</strong>, obchodní firma Daniel Sysel se sídlem Brno - Štýřice, Vinohrady 794/45, 63900 a identifikačním číslem (IČO) 17449103.</li>
+                    </ul>
                 </section>
 
                 <section className={styles.section}>

@@ -24,6 +24,7 @@ export default function Footer() {
                             <Link href="/">Domů</Link>
                             <Link href="/product/ceremonial-matcha">Náš produkt</Link>
                             <Link href="/#education">O Matcha</Link>
+                            <Link href="/certifikace">Certifikace a kvalita</Link>
                         </div>
                     </div>
 
