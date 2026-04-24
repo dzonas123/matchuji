@@ -97,14 +97,13 @@ export default function Admin() {
 
     // Finanční výpočty
     const COST_PER_UNIT = 42;
+    let totalUnits = 0;
     const totalCost = orders.reduce((total, order) => {
         const orderItems = order.items || [];
         const orderCOG = orderItems.reduce((cogSum: number, item: any) => {
             const itemName = (item.name || item.id || "").toLowerCase();
-            // Ignorujeme dopravu a jiné ne-produktové položky
             if (itemName.includes('doprava') || itemName.includes('shipping')) return cogSum;
 
-            // Robustnější detekce balíčků (hledáme 3-pack, 3pack, 3 balíčky, atd.)
             let units = 1;
             const itemIdentifier = (item.id || "").toLowerCase();
             if (
@@ -117,13 +116,16 @@ export default function Admin() {
                 units = 3;
             }
             
-            return cogSum + (units * COST_PER_UNIT * (item.quantity || 1));
+            const itemTotalUnits = units * (item.quantity || 1);
+            totalUnits += itemTotalUnits;
+            return cogSum + (itemTotalUnits * COST_PER_UNIT);
         }, 0);
         return total + orderCOG;
     }, 0);
 
     const netProfit = totalRevenue - totalCost;
     const markup = totalCost > 0 ? (netProfit / totalCost) * 100 : 0;
+    const avgProfitPerUnit = totalUnits > 0 ? netProfit / totalUnits : 0;
 
     return (
         <AdminLayout currentView={currentView} onChangeView={setCurrentView} onLogout={handleLogout}>
@@ -147,9 +149,11 @@ export default function Admin() {
                     <div className={styles.stats}>
                         <StatsCard label="Počet objednávek" value={orders.length} />
                         <StatsCard label="Celkové tržby" value={`${totalRevenue.toLocaleString()} Kč`} />
-                        <StatsCard label="Náklady (produkty)" value={`${totalCost.toLocaleString()} Kč`} />
+                        <StatsCard label="Markup (průměr)" value={`${markup.toFixed(1)} %`} />
                         <StatsCard label="Čistý zisk" value={`${netProfit.toLocaleString()} Kč`} />
-                        <StatsCard label="Markup" value={`${markup.toFixed(1)} %`} />
+                        <StatsCard label="Prodáno jednotek" value={`${totalUnits} ks`} />
+                        <StatsCard label="Náklad / 1ks" value={`${COST_PER_UNIT} Kč`} />
+                        <StatsCard label="Zisk / 1ks (prům.)" value={`${Math.round(avgProfitPerUnit).toLocaleString()} Kč`} />
                         <StatsCard label="Průměrná objednávka" value={`${orders.length > 0 ? Math.round(totalRevenue / orders.length).toLocaleString() : 0} Kč`} />
                     </div>
 
