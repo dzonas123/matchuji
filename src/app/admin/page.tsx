@@ -95,6 +95,21 @@ export default function Admin() {
 
     const totalRevenue = orders.reduce((sum, order) => sum + order.amount, 0);
 
+    // Finanční výpočty
+    const COST_PER_UNIT = 42;
+    const totalCost = orders.reduce((total, order) => {
+        const orderItems = order.items || [];
+        const orderCOG = orderItems.reduce((cogSum: number, item: any) => {
+            // Pokud je to 3-pack, počítáme 3 jednotky
+            const units = (item.id === 'matcha-3pack' || (item.name && item.name.toLowerCase().includes('3-pack'))) ? 3 : 1;
+            return cogSum + (units * COST_PER_UNIT * (item.quantity || 1));
+        }, 0);
+        return total + orderCOG;
+    }, 0);
+
+    const netProfit = totalRevenue - totalCost;
+    const margin = totalRevenue > 0 ? (netProfit / totalRevenue) * 100 : 0;
+
     return (
         <AdminLayout currentView={currentView} onChangeView={setCurrentView} onLogout={handleLogout}>
             {/* Header for content area */}
@@ -117,7 +132,10 @@ export default function Admin() {
                     <div className={styles.stats}>
                         <StatsCard label="Počet objednávek" value={orders.length} />
                         <StatsCard label="Celkové tržby" value={`${totalRevenue.toLocaleString()} Kč`} />
-                        <StatsCard label="Průměrná hodnota" value={`${orders.length > 0 ? Math.round(totalRevenue / orders.length).toLocaleString() : 0} Kč`} />
+                        <StatsCard label="Náklady (produkty)" value={`${totalCost.toLocaleString()} Kč`} />
+                        <StatsCard label="Čistý zisk" value={`${netProfit.toLocaleString()} Kč`} />
+                        <StatsCard label="Marže" value={`${margin.toFixed(1)} %`} />
+                        <StatsCard label="Průměrná objednávka" value={`${orders.length > 0 ? Math.round(totalRevenue / orders.length).toLocaleString() : 0} Kč`} />
                     </div>
 
                     <h2 style={{ marginBottom: '1.5rem', fontSize: '1.2rem', color: '#0d2112' }}>Poslední objednávky</h2>
