@@ -38,14 +38,23 @@ export default function Admin() {
         }
     };
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (username === "admin" && password === "admin") {
-            setIsLoggedIn(true);
-            localStorage.setItem("admin_session", "true");
-            fetchOrders();
-        } else {
-            alert("Nesprávné údaje");
+        try {
+            const res = await fetch("/api/admin/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
+            });
+            if (res.ok) {
+                setIsLoggedIn(true);
+                localStorage.setItem("admin_session", "true");
+                fetchOrders();
+            } else {
+                alert("Nesprávné přihlašovací údaje");
+            }
+        } catch {
+            alert("Chyba připojení k serveru");
         }
     };
 
