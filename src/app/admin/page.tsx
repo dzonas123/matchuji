@@ -100,19 +100,29 @@ export default function Admin() {
     const totalCost = orders.reduce((total, order) => {
         const orderItems = order.items || [];
         const orderCOG = orderItems.reduce((cogSum: number, item: any) => {
-            // Ignorujeme dopravu a jiné ne-produktové položky
             const itemName = (item.name || item.id || "").toLowerCase();
+            // Ignorujeme dopravu a jiné ne-produktové položky
             if (itemName.includes('doprava') || itemName.includes('shipping')) return cogSum;
 
-            // Pokud je to 3-pack, počítáme 3 jednotky
-            const units = (item.id === 'matcha-3pack' || itemName.includes('3-pack')) ? 3 : 1;
+            // Robustnější detekce balíčků (hledáme 3-pack, 3pack, 3 balíčky, atd.)
+            let units = 1;
+            if (
+                item.id === 'matcha-3pack' || 
+                itemName.includes('3-pack') || 
+                itemName.includes('3pack') || 
+                itemName.includes('3 bal') ||
+                itemName.includes('sada 3')
+            ) {
+                units = 3;
+            }
+            
             return cogSum + (units * COST_PER_UNIT * (item.quantity || 1));
         }, 0);
         return total + orderCOG;
     }, 0);
 
     const netProfit = totalRevenue - totalCost;
-    const margin = totalRevenue > 0 ? (netProfit / totalRevenue) * 100 : 0;
+    const markup = totalCost > 0 ? (netProfit / totalCost) * 100 : 0;
 
     return (
         <AdminLayout currentView={currentView} onChangeView={setCurrentView} onLogout={handleLogout}>
@@ -138,7 +148,7 @@ export default function Admin() {
                         <StatsCard label="Celkové tržby" value={`${totalRevenue.toLocaleString()} Kč`} />
                         <StatsCard label="Náklady (produkty)" value={`${totalCost.toLocaleString()} Kč`} />
                         <StatsCard label="Čistý zisk" value={`${netProfit.toLocaleString()} Kč`} />
-                        <StatsCard label="Marže" value={`${margin.toFixed(1)} %`} />
+                        <StatsCard label="Markup" value={`${markup.toFixed(1)} %`} />
                         <StatsCard label="Průměrná objednávka" value={`${orders.length > 0 ? Math.round(totalRevenue / orders.length).toLocaleString() : 0} Kč`} />
                     </div>
 
