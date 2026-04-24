@@ -168,6 +168,45 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                             <span style={{ fontSize: '0.8rem', color: '#999' }}>Vytvořeno: {new Date(order.date).toLocaleString('cs-CZ')}</span>
                         </div>
                     </div>
+
+                    <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid #fecaca' }}>
+                        <button
+                            onClick={async () => {
+                                if (confirm('Opravdu chcete tuto objednávku smazat? Tato akce je nevratná.')) {
+                                    try {
+                                        const res = await fetch(`/api/orders/${order.id}`, {
+                                            method: 'DELETE',
+                                        });
+                                        if (res.ok) {
+                                            if (onUpdate) onUpdate();
+                                            onClose();
+                                        } else {
+                                            alert('Chyba při mazání objednávky');
+                                        }
+                                    } catch (err) {
+                                        console.error(err);
+                                        alert('Chyba při mazání objednávky');
+                                    }
+                                }
+                            }}
+                            style={{
+                                width: '100%',
+                                padding: '0.75rem',
+                                background: '#fef2f2',
+                                color: '#dc2626',
+                                border: '1px solid #fecaca',
+                                borderRadius: '8px',
+                                fontSize: '0.9rem',
+                                fontWeight: 600,
+                                cursor: 'pointer',
+                                transition: 'all 0.2s'
+                            }}
+                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#fee2e2'; }}
+                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#fef2f2'; }}
+                        >
+                            🗑️ Smazat objednávku
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

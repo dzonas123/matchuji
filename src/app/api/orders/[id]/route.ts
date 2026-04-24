@@ -24,3 +24,19 @@ export async function PATCH(
         return NextResponse.json({ error: "Failed to update order" }, { status: 500 });
     }
 }
+
+export async function DELETE(
+    req: Request,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    try {
+        const { id } = await params;
+        await prisma.order.delete({
+            where: { id },
+        });
+        return NextResponse.json({ success: true });
+    } catch (error) {
+        console.error("Failed to delete order:", error);
+        return NextResponse.json({ error: "Failed to delete order" }, { status: 500 });
+    }
+}
