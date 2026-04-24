@@ -121,7 +121,7 @@ export default function Admin() {
                     </div>
 
                     <h2 style={{ marginBottom: '1.5rem', fontSize: '1.2rem', color: '#0d2112' }}>Poslední objednávky</h2>
-                    <OrderList orders={orders.slice(0, 5)} />
+                    <OrderList orders={orders.slice(0, 5)} onUpdate={fetchOrders} />
 
                     <div className={styles.senderInfoCard} style={{ marginTop: '3rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
                         <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem', color: '#0d2112' }}>📦 Fulfillment & API</h3>
@@ -160,7 +160,7 @@ export default function Admin() {
             )}
 
             {currentView === 'orders' && (
-                <OrderList orders={orders} />
+                <OrderList orders={orders} onUpdate={fetchOrders} />
             )}
 
             {currentView === 'products' && (

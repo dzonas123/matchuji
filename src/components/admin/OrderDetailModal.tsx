@@ -5,9 +5,10 @@ import styles from "@/app/admin/Admin.module.css";
 interface OrderDetailModalProps {
     order: any;
     onClose: () => void;
+    onUpdate?: () => void;
 }
 
-export default function OrderDetailModal({ order, onClose }: OrderDetailModalProps) {
+export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDetailModalProps) {
     if (!order) return null;
 
     const s = order.shipping || {};
@@ -124,9 +125,47 @@ export default function OrderDetailModal({ order, onClose }: OrderDetailModalPro
                             </div>
                             <span className={styles.totalAmount}>{order.amount.toLocaleString()} Kč</span>
                         </div>
-                        <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.8rem', color: '#999' }}>
-                            <span>Stav: <strong style={{ color: '#166534' }}>● ZAPLACENO</strong></span>
-                            <span>Vytvořeno: {new Date(order.date).toLocaleString('cs-CZ')}</span>
+                        <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                <span style={{ fontSize: '0.85rem', color: '#666' }}>Stav objednávky:</span>
+                                <select
+                                    value={order.status}
+                                    onChange={async (e) => {
+                                        const newStatus = e.target.value;
+                                        try {
+                                            const res = await fetch(`/api/orders/${order.id}`, {
+                                                method: 'PATCH',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ status: newStatus }),
+                                            });
+                                            if (res.ok) {
+                                                if (onUpdate) onUpdate();
+                                                onClose();
+                                            } else {
+                                                alert('Chyba při aktualizaci stavu');
+                                            }
+                                        } catch (err) {
+                                            console.error(err);
+                                            alert('Chyba při aktualizaci stavu');
+                                        }
+                                    }}
+                                    className={styles.statusSelect}
+                                    style={{
+                                        padding: '0.4rem 0.8rem',
+                                        borderRadius: '6px',
+                                        border: '1px solid #ddd',
+                                        fontSize: '0.85rem',
+                                        fontWeight: 600,
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    <option value="paid">Zaplaceno</option>
+                                    <option value="packed">Zabaleno</option>
+                                    <option value="shipped">Odesláno</option>
+                                    <option value="pending">Čekající</option>
+                                </select>
+                            </div>
+                            <span style={{ fontSize: '0.8rem', color: '#999' }}>Vytvořeno: {new Date(order.date).toLocaleString('cs-CZ')}</span>
                         </div>
                     </div>
                 </div>

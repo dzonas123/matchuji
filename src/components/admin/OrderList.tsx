@@ -25,9 +25,10 @@ interface Order {
 
 interface OrderListProps {
     orders: Order[];
+    onUpdate?: () => void;
 }
 
-export default function OrderList({ orders }: OrderListProps) {
+export default function OrderList({ orders, onUpdate }: OrderListProps) {
     const [searchTerm, setSearchTerm] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
     const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
@@ -59,6 +60,8 @@ export default function OrderList({ orders }: OrderListProps) {
                 >
                     <option value="all">Všechny stavy</option>
                     <option value="paid">Zaplaceno</option>
+                    <option value="packed">Zabaleno</option>
+                    <option value="shipped">Odesláno</option>
                     <option value="pending">Čekající</option>
                 </select>
             </div>
@@ -101,8 +104,12 @@ export default function OrderList({ orders }: OrderListProps) {
                                     <td>{order.shipping?.city}</td>
                                     <td><strong>{order.amount.toLocaleString()} Kč</strong></td>
                                     <td>
-                                        <span className={`${styles.status} ${order.status === 'paid' ? styles.paid : styles.pending}`}>
-                                            {order.status === 'paid' ? 'Zaplaceno' : order.status}
+                                        <span className={`${styles.status} ${styles[order.status] || styles.pending}`}>
+                                            {order.status === 'paid' && 'Zaplaceno'}
+                                            {order.status === 'packed' && 'Zabaleno'}
+                                            {order.status === 'shipped' && 'Odesláno'}
+                                            {order.status === 'pending' && 'Čekající'}
+                                            {!['paid', 'packed', 'shipped', 'pending'].includes(order.status) && order.status}
                                         </span>
                                     </td>
                                 </tr>
@@ -112,7 +119,7 @@ export default function OrderList({ orders }: OrderListProps) {
                 </table>
             </div>
             {selectedOrder && (
-                <OrderDetailModal order={selectedOrder} onClose={() => setSelectedOrder(null)} />
+                <OrderDetailModal order={selectedOrder} onClose={() => setSelectedOrder(null)} onUpdate={onUpdate} />
             )}
         </div>
     );
