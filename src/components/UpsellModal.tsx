@@ -66,7 +66,7 @@ export default function UpsellModal() {
                             <p className={styles.eyebrow}>🍵 NEZAPOMEŇTE NA PŘÍPRAVU</p>
                             <h2 className={styles.headline}>
                                 Matcha je v košíku. <br />
-                                <em>Máte ji ale v čem připravit?</em>
+                                <em>Máte správné nástroje na přípravu?</em>
                             </h2>
                             <p className={styles.desc}>
                                 Bez tradiční bambusové metličky neuděláte tu správnou krémovou pěnu a bez sítka se nezbavíte hrudek. Přidejte si náš kompletní set a připravte si matchu jako mistr.
