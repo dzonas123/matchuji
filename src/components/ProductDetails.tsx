@@ -254,6 +254,9 @@ export default function ProductDetails({
                     </div>
                     
                     <div className={styles.prepBanner}>
+                        <div className={styles.prepBannerImage}>
+                            <Image src="/images/matcha-set-1.jpg" alt="Bambusový Matcha Set" width={120} height={120} style={{ objectFit: 'cover', borderRadius: '16px' }} />
+                        </div>
                         <div className={styles.prepBannerContent}>
                             <span className={styles.prepTip}>💡 Tip k přípravě</span>
                             <h4>Bambusový Matcha Set</h4>
