@@ -63,7 +63,7 @@ export default function ProductCard({ product }: { product: ProductProps }) {
             {product.tag && <span className={styles.tag}>{product.tag}</span>}
             {discount > 0 && <span className={styles.discountBadge}>-{discount}%</span>}
 
-            <Link href="/product/ceremonial-matcha" className={styles.imageLink}>
+            <Link href={product.id === "matcha-set-bamboo" ? "/product/matcha-set-bamboo" : "/product/ceremonial-matcha"} className={styles.imageLink}>
                 <div className={styles.imageWrapper}>
                     <Image
                         src={product.image}
@@ -84,7 +84,7 @@ export default function ProductCard({ product }: { product: ProductProps }) {
                     {reviews > 0 && <span className={styles.reviewCount}>({reviews})</span>}
                 </div>
 
-                <Link href="/product/ceremonial-matcha" className={styles.titleLink}>
+                <Link href={product.id === "matcha-set-bamboo" ? "/product/matcha-set-bamboo" : "/product/ceremonial-matcha"} className={styles.titleLink}>
                     <h3 className={styles.productName}>{product.name}</h3>
                 </Link>
 
@@ -101,7 +101,7 @@ export default function ProductCard({ product }: { product: ProductProps }) {
                 </div>
 
                 <div className={styles.actions}>
-                    <Link href="/product/ceremonial-matcha" className={styles.btnDetail}>
+                    <Link href={product.id === "matcha-set-bamboo" ? "/product/matcha-set-bamboo" : "/product/ceremonial-matcha"} className={styles.btnDetail}>
                         Detail produktu
                     </Link>
                     <button
