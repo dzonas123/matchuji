@@ -30,6 +30,8 @@ export type HeroProps = {
 };
 
 const DEFAULT_IMAGES = [
+    "/images/matcha-single-strawberry.jpg",
+    "/images/matcha-single-splash.jpg",
     "/images/matcha-50g-1.jpg",
     "/images/matcha-50g-2.jpg",
     "/images/matcha-50g-3.jpg",
@@ -43,7 +45,7 @@ const DEFAULT_VARIANTS: HeroVariant[] = [
         shortName: "Jedno balení (50g)",
         price: 297,
         originalPrice: 399,
-        image: "/images/matcha-50g-1.jpg",
+        image: "/images/matcha-single-strawberry.jpg",
     },
     {
         id: "matcha-50g-pack3",
