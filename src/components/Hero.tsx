@@ -87,6 +87,8 @@ export default function Hero({
     // If external images provided use them; otherwise use per-variant logic (legacy matcha behaviour)
     const resolvedImages = images ?? (selectedVariantIdx === 0 ? DEFAULT_IMAGES : [
         "/images/matcha-premium-3ks.jpg",
+        "/images/matcha-premium-3ks-splash.jpg",
+        "/images/matcha-premium-3ks-strawberry.jpg",
         "/images/matcha-50g-1.jpg",
         "/images/matcha-50g-2.jpg"
     ]);
