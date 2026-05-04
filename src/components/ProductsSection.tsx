@@ -21,7 +21,7 @@ const products = [
         description: "Zásoba energie na 3 měsíce. Ušetříte 15%.",
         price: 769,
         originalPrice: 1197,
-        image: "/images/matcha-bundle-3pack.jpg",
+        image: "/images/matcha-premium-3ks.jpg",
         tag: "Nejvýhodnější",
         rating: 5,
         reviews: 45

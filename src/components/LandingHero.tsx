@@ -23,7 +23,7 @@ export default function LandingHero() {
                 id: "matcha-50g-pack3",
                 name: "Matcha Výhodné Balení 3ks (150g)",
                 price: 672.00,
-                image: "/images/matcha-bundle-3pack.jpg"
+                image: "/images/matcha-premium-3ks.jpg"
             };
 
         for (let i = 0; i < quantity; i++) {
@@ -33,7 +33,7 @@ export default function LandingHero() {
 
     const currentPrice = sku === "single" ? 259 : 672;
     // const originalPrice = sku === "single" ? 399 : 1197;
-    const currentImage = sku === "single" ? "/images/matcha-bag-single.jpg" : "/images/matcha-bundle-3pack.jpg";
+    const currentImage = sku === "single" ? "/images/matcha-bag-single.jpg" : "/images/matcha-premium-3ks.jpg";
 
     return (
         <section className={styles.hero}>

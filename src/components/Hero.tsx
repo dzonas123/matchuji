@@ -51,7 +51,7 @@ const DEFAULT_VARIANTS: HeroVariant[] = [
         shortName: "Výhodné balení 3ks",
         price: 769,
         originalPrice: 1197,
-        image: "/images/matcha-bundle-3pack.jpg",
+        image: "/images/matcha-premium-3ks.jpg",
         savingsLabel: "Ušetříte 428 Kč",
         subLabel: "Ideální pro každý den",
     }
@@ -84,7 +84,7 @@ export default function Hero({
 
     // If external images provided use them; otherwise use per-variant logic (legacy matcha behaviour)
     const resolvedImages = images ?? (selectedVariantIdx === 0 ? DEFAULT_IMAGES : [
-        "/images/matcha-bundle-3pack.jpg",
+        "/images/matcha-premium-3ks.jpg",
         "/images/matcha-50g-1.jpg",
         "/images/matcha-50g-2.jpg"
     ]);

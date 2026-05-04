@@ -106,7 +106,7 @@ export default function BentoGrid() {
                         transition={{ delay: 0.5 }}
                     >
                         <Image
-                            src="/images/matcha-bundle-3pack.jpg"
+                            src="/images/matcha-premium-3ks.jpg"
                             alt="Bundle"
                             width={400}
                             height={400}
