@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
+import ProductCard from "./ProductCard";
 
 const container = {
     hidden: { opacity: 0 },
@@ -253,32 +254,24 @@ export default function ProductDetails({
                         })}
                     </div>
                     
-                    <div className={styles.prepBanner}>
-                        <div className={styles.prepBannerImage}>
-                            <Image src="/images/matcha-set-1.jpg" alt="Bambusový Matcha Set" width={120} height={120} style={{ objectFit: 'cover', borderRadius: '16px' }} />
-                        </div>
-                        <div className={styles.prepBannerContent}>
-                            <span className={styles.prepTip}>💡 Tip k přípravě</span>
-                            <h4>Bambusový Matcha Set</h4>
-                            <p>Pro dokonalou krémovou pěnu bez hrudek doporučujeme náš tradiční bambusový set.</p>
-                        </div>
-                        <button 
-                            className={styles.prepBannerBtn} 
-                            onClick={() => addItem({
+                        })}
+                    </div>
+                    
+                    <div className={styles.prepTipWrapper}>
+                        <h3 className={styles.prepTipHeading}>💡 Tip k přípravě</h3>
+                        <div className={styles.prepCardContainer}>
+                            <ProductCard product={{
                                 id: "matcha-set-bamboo",
                                 name: "Bambusový Matcha Set (4ks)",
+                                description: "Tradiční kompletní set pro přípravu matchy. Obsahuje metličku (chasen), čajovou lžičku, naběračku a sítko.",
                                 price: 349,
                                 originalPrice: 490,
                                 image: "/images/matcha-set-1.jpg",
-                            })}
-                        >
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                                <line x1="3" y1="6" x2="21" y2="6" />
-                                <path d="M16 10a4 4 0 0 1-8 0" />
-                            </svg>
-                            Přidat do košíku — 349 Kč
-                        </button>
+                                tag: "Doporučujeme",
+                                rating: 5,
+                                reviews: 12
+                            }} />
+                        </div>
                     </div>
                 </div>
             </div>
