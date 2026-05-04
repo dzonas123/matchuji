@@ -42,13 +42,16 @@
 .thumbnails {
     display: flex;
     gap: 1rem;
-    justify-content: center;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: thin;
 }
 
 .thumbnail {
     width: 80px;
+    flex-shrink: 0;
     aspect-ratio: 3 / 4;
-
     border: 1px solid var(--border-color);
     border-radius: 0.75rem;
     overflow: hidden;
