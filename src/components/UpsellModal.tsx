@@ -10,7 +10,6 @@ export default function UpsellModal() {
     const { showUpsell, setShowUpsell, addItem } = useCart();
     const overlayRef = useRef<HTMLDivElement>(null);
 
-    // Close on Escape
     useEffect(() => {
         const handler = (e: KeyboardEvent) => {
             if (e.key === "Escape") setShowUpsell(false);
@@ -51,7 +50,6 @@ export default function UpsellModal() {
                         exit={{ opacity: 0, scale: 0.9, y: 30 }}
                         transition={{ type: "spring", stiffness: 360, damping: 30 }}
                     >
-                        {/* Close button */}
                         <button
                             className={styles.closeBtn}
                             onClick={() => setShowUpsell(false)}
@@ -63,19 +61,8 @@ export default function UpsellModal() {
                             </svg>
                         </button>
 
-                        {/* Headline copy */}
-                        <p className={styles.eyebrow}>🍵 Ještě jeden krok k dokonalé matche</p>
-                        <h2 className={styles.headline}>
-                            Máte matchu —<br />
-                            <em>zbývá jen správný set na přípravu.</em>
-                        </h2>
-                        <p className={styles.subheadline}>
-                            Bez bambusové metličky nevznikne hedvábná pěna, bez sítka hrudky nezmizí.
-                            Přidejte si kompletní set a připravte si dokonalou matchu hned od první šálky.
-                        </p>
-
-                        {/* Product card */}
-                        <div className={styles.content}>
+                        {/* Main card — image + all text side by side */}
+                        <div className={styles.card}>
                             <div className={styles.imageWrapper}>
                                 <Image
                                     src="/images/matcha-set-1.jpg"
@@ -86,19 +73,25 @@ export default function UpsellModal() {
                                 <div className={styles.imageBadge}>-29%</div>
                             </div>
 
-                            <div className={styles.cardInfo}>
-                                <p className={styles.cardTitle}>Bambusový Matcha Set (4 ks)</p>
-
-                                <div className={styles.items}>
-                                    {["Metlička (chasen)", "Naběračka", "Lžička", "Sítko"].map((item) => (
-                                        <span key={item} className={styles.itemChip}>{item}</span>
-                                    ))}
-                                </div>
+                            <div className={styles.cardBody}>
+                                <p className={styles.eyebrow}>🍵 Přidejte do objednávky</p>
+                                <h2 className={styles.headline}>
+                                    Připravte si matchu správně
+                                </h2>
+                                <p className={styles.desc}>
+                                    K matche patří správný set. Metlička, sítko, naběračka a lžička – vše pro dokonalou pěnu bez hrudek.
+                                </p>
 
                                 <div className={styles.priceRow}>
                                     <span className={styles.price}>349 Kč</span>
                                     <span className={styles.originalPrice}>490 Kč</span>
                                     <span className={styles.savings}>Ušetříte 141 Kč</span>
+                                </div>
+
+                                <div className={styles.chips}>
+                                    {["Chasen", "Chashaku", "Lžička", "Sítko"].map((item) => (
+                                        <span key={item} className={styles.chip}>{item}</span>
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -111,10 +104,10 @@ export default function UpsellModal() {
                                     <line x1="3" y1="6" x2="21" y2="6" />
                                     <path d="M16 10a4 4 0 0 1-8 0" />
                                 </svg>
-                                Přidat set do košíku — 349 Kč
+                                Přidat set do košíku
                             </button>
                             <button className={styles.btnDecline} onClick={() => setShowUpsell(false)}>
-                                Díky, set nepotřebuji
+                                Díky, nepotřebuji
                             </button>
                         </div>
                     </motion.div>
