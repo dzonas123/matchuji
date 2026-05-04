@@ -61,7 +61,19 @@ export default function UpsellModal() {
                             </svg>
                         </button>
 
-                        {/* Main card — image + all text side by side */}
+                        {/* Header text */}
+                        <div className={styles.header}>
+                            <p className={styles.eyebrow}>🍵 NEZAPOMEŇTE NA PŘÍPRAVU</p>
+                            <h2 className={styles.headline}>
+                                Matcha je v košíku. <br />
+                                <em>Máte ji ale v čem připravit?</em>
+                            </h2>
+                            <p className={styles.desc}>
+                                Bez tradiční bambusové metličky neuděláte tu správnou krémovou pěnu a bez sítka se nezbavíte hrudek. Přidejte si náš kompletní set a připravte si matchu jako mistr.
+                            </p>
+                        </div>
+
+                        {/* Product card */}
                         <div className={styles.card}>
                             <div className={styles.imageWrapper}>
                                 <Image
@@ -74,24 +86,18 @@ export default function UpsellModal() {
                             </div>
 
                             <div className={styles.cardBody}>
-                                <p className={styles.eyebrow}>🍵 Přidejte do objednávky</p>
-                                <h2 className={styles.headline}>
-                                    Připravte si matchu správně
-                                </h2>
-                                <p className={styles.desc}>
-                                    K matche patří správný set. Metlička, sítko, naběračka a lžička – vše pro dokonalou pěnu bez hrudek.
-                                </p>
+                                <p className={styles.cardTitle}>Bambusový Matcha Set (4 ks)</p>
+                                
+                                <div className={styles.chips}>
+                                    {["Metlička", "Naběračka", "Lžička", "Sítko"].map((item) => (
+                                        <span key={item} className={styles.chip}>{item}</span>
+                                    ))}
+                                </div>
 
                                 <div className={styles.priceRow}>
                                     <span className={styles.price}>349 Kč</span>
                                     <span className={styles.originalPrice}>490 Kč</span>
                                     <span className={styles.savings}>Ušetříte 141 Kč</span>
-                                </div>
-
-                                <div className={styles.chips}>
-                                    {["Chasen", "Chashaku", "Lžička", "Sítko"].map((item) => (
-                                        <span key={item} className={styles.chip}>{item}</span>
-                                    ))}
                                 </div>
                             </div>
                         </div>
