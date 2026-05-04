@@ -285,6 +285,74 @@
     font-size: 0.95rem;
 }
 
+.prepBanner {
+    margin-top: 4rem;
+    padding: 2.5rem;
+    background: #fcfcfc;
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    text-align: left;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.prepBannerContent {
+    flex: 1;
+}
+
+.prepTip {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #ccff00;
+    background: #0d2112;
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+}
+
+.prepBannerContent h4 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.prepBannerContent p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.prepBannerBtn {
+    background: #ccff00;
+    color: #0d2112;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.prepBannerBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(204, 255, 0, 0.3);
+}
+
 @media (max-width: 900px) {
     .deepDive {
         grid-template-columns: 1fr;
@@ -294,6 +362,18 @@
 
     .deepDiveContent {
         padding: 1.5rem 1rem;
+    }
+
+    .prepBanner {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .prepBannerBtn {
+        width: 100%;
+        justify-content: center;
     }
 
     .featureList li {
