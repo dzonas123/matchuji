@@ -16,5 +16,14 @@
         "sku": "MATCHA-3PACK",
         "ean": "2000000000022",
         "image": "/images/matcha-bundle-3pack.jpg"
+    },
+    {
+        "id": "matcha-set-bamboo",
+        "name": "Bambusový Matcha Set (4ks)",
+        "price": 349,
+        "stock": 25,
+        "sku": "MATCHA-SET-BAMBOO",
+        "ean": "2000000000039",
+        "image": "/images/matcha-set-1.jpg"
     }
 ]

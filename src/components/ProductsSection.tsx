@@ -25,6 +25,17 @@ const products = [
         tag: "Nejvýhodnější",
         rating: 5,
         reviews: 45
+    },
+    {
+        id: "matcha-set-bamboo",
+        name: "Bambusový Matcha Set (4ks)",
+        description: "Tradiční kompletní set pro přípravu matchy. Obsahuje metličku (chasen), čajovou lžičku, naběračku a sítko.",
+        price: 349,
+        originalPrice: 490,
+        image: "/images/matcha-set-1.jpg",
+        tag: "Novinka",
+        rating: 5,
+        reviews: 12
     }
 ];
 
