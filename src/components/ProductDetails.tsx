@@ -253,10 +253,6 @@ export default function ProductDetails({
                             );
                         })}
                     </div>
-                    
-                        })}
-                    </div>
-                    
                     <div className={styles.prepTipWrapper}>
                         <h3 className={styles.prepTipHeading}>💡 Tip k přípravě</h3>
                         <div className={styles.prepCardContainer}>
