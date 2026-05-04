@@ -13,6 +13,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 import CartDrawer from "@/components/CartDrawer";
+import UpsellModal from "@/components/UpsellModal";
+
 
 export const metadata: Metadata = {
   title: "Matchuji | Premium Ceremonial 7A Matcha ",
@@ -35,6 +37,7 @@ export default function RootLayout({
         <CartProvider>
           <Header />
           <CartDrawer />
+          <UpsellModal />
           <main style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
             {children}
           </main>

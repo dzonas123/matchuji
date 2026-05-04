@@ -11,10 +11,15 @@ type CartItem = {
     image: string;
 };
 
+// IDs hlavních matcha produktů, po jejichž přidání se ukáže upsell popup
+const MATCHA_PRODUCT_IDS = ["matcha-50g", "matcha-50g-pack3", "matcha-3pack"];
+
 type CartContextType = {
     items: CartItem[];
     isOpen: boolean;
     setIsOpen: (open: boolean) => void;
+    showUpsell: boolean;
+    setShowUpsell: (show: boolean) => void;
     addItem: (item: Omit<CartItem, "quantity">) => void;
     removeItem: (id: string) => void;
     updateQuantity: (id: string, delta: number) => void;
@@ -29,6 +34,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([]);
     const [isOpen, setIsOpen] = useState(false);
+    const [showUpsell, setShowUpsell] = useState(false);
 
     // Load cart from localStorage
     useEffect(() => {
@@ -59,6 +65,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
             }
             return [...current, { ...newItem, quantity: 1 }];
         });
+
+        // Zobraz upsell popup pokud zákazník přidal matcha (ne set)
+        // a set ještě nemá v košíku
+        if (MATCHA_PRODUCT_IDS.includes(newItem.id)) {
+            setItems((current) => {
+                const hasSet = current.some((i) => i.id === "matcha-set-bamboo");
+                if (!hasSet) {
+                    setTimeout(() => setShowUpsell(true), 400);
+                }
+                return current;
+            });
+        }
+
         setIsOpen(true);
     };
 
@@ -97,6 +116,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
                 items,
                 isOpen,
                 setIsOpen,
+                showUpsell,
+                setShowUpsell,
                 addItem,
                 removeItem,
                 updateQuantity,
