@@ -2,6 +2,7 @@
     padding: 8rem 0 4rem 0;
     background: #ffffff;
     /* Explicit white background */
+    overflow-x: hidden;
 }
 
 .container {
@@ -12,6 +13,8 @@
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .imageGallery {
@@ -262,13 +265,17 @@
     right: 0;
     background: #D32F2F;
     color: white;
-    font-size: 0.7rem;
-    padding: 0.35rem 0.75rem;
+    font-size: 0.65rem;
+    padding: 0.3rem 0.6rem;
     border-bottom-left-radius: 0.5rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.03em;
     z-index: 1;
+    white-space: nowrap;
+    max-width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .actions {
@@ -397,46 +404,119 @@
 }
 
 @media (max-width: 768px) {
+    .hero {
+        padding-top: 5rem;
+        padding-bottom: 3rem;
+    }
+
     .container {
         grid-template-columns: 1fr;
-        gap: 2rem;
-        padding-left: 20px;
-        padding-right: 20px;
+        gap: 1.5rem;
+        padding-left: 16px;
+        padding-right: 16px;
         width: 100%;
-    }
-
-    .title {
-        font-size: 2rem;
-    }
-
-    .actions {
-        flex-direction: column;
-    }
-
-    .quantity {
-        height: 60px;
-        justify-content: space-between;
-        width: 100%;
-        margin-bottom: 1rem;
+        box-sizing: border-box;
     }
 
     .imageGallery {
         position: relative;
         top: 0;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .mainImageWrapper {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        aspect-ratio: 1 / 1;
+        border-radius: 0.75rem;
+    }
+
+    .thumbnails {
+        gap: 0.5rem;
+        padding-bottom: 0.25rem;
+    }
+
+    .thumbnail {
+        width: 60px;
+        flex-shrink: 0;
+    }
+
+    .title {
+        font-size: 1.75rem;
+        line-height: 1.2;
+    }
+
+    .currentPrice {
+        font-size: 2rem;
+    }
+
+    .variant {
+        padding: 1rem 0.75rem;
+        overflow: hidden;
+    }
+
+    .variantInfo {
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+    }
+
+    .variantName {
+        font-size: 0.9rem;
+    }
+
+    .saveLabel {
+        font-size: 0.6rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .actions {
+        flex-direction: row;
+        gap: 0.75rem;
+        width: 100%;
+        box-sizing: border-box;
+        align-items: stretch;
+    }
+
+    .quantity {
+        height: 56px;
+        justify-content: space-between;
+        width: auto;
+        flex-shrink: 0;
+        margin-bottom: 0;
+        box-sizing: border-box;
     }
 
     .quantity input {
-
-        width: 60px;
+        width: 40px;
+        flex: none;
     }
 
     .addToCartButton {
-        height: auto;
-        padding: 28px 0;
-        font-size: 1.25rem;
-        width: 100%;
-        border-radius: 1rem;
+        height: 56px;
+        padding: 0 1rem;
+        font-size: 1rem;
+        flex: 1;
+        min-width: 0;
+        width: auto;
+        box-sizing: border-box;
+        border-radius: 4rem;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.04em;
+        flex-shrink: 1;
+    }
+
+    .shortDescription {
+        font-size: 0.9rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .trustSignals {
+        gap: 1rem;
+    }
+
+    .signal p {
+        font-size: 0.8rem;
     }
 }

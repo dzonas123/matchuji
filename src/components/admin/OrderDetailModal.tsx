@@ -165,6 +165,7 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                                     <option value="paid">Zaplaceno</option>
                                     <option value="packed">Zabaleno</option>
                                     <option value="shipped">Odesláno</option>
+                                    <option value="delivered">Vyzvednuto</option>
                                     <option value="pending">Čekající</option>
                                 </select>
                             </div>
