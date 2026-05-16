@@ -132,7 +132,7 @@ export default function BlogPostPage({ params }: Props) {
         <div className={styles.ctaInner}>
           <p className={styles.ctaEyebrow}>🛒 Vyzkoušejte sami</p>
           <h2 className={styles.ctaTitle}>Připraveni ochutnat?</h2>
-          <p className={styles.ctaDesc}>7A Ceremonial Grade matcha z Uji, Japonsko — doručení do ČR do 2 dnů.</p>
+          <p className={styles.ctaDesc}>7A Ceremonial Grade matcha z Uji, Japonsko — objednejte online s doručením po celé ČR.</p>
           <Link href="/product/ceremonial-matcha" className={styles.ctaBtn}>
             Koupit matchu
           </Link>
