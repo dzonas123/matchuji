@@ -1,21 +1,17 @@
 .section {
-    padding: 12rem 0 8rem 0;
-    /* Increased padding */
+    padding: 10rem 0 8rem 0;
     background: #f0f7f0;
-    /* Very light matcha green */
     position: relative;
     overflow: hidden;
     margin-bottom: -1px;
 }
-
-/* Removed background image pseudo-element */
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.2fr 0.8fr;
     gap: 4rem;
     align-items: center;
     position: relative;
@@ -28,33 +24,6 @@
     flex-direction: column;
     justify-content: center;
     background: transparent;
-}
-
-.formSide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    position: relative;
-    margin: 0;
-    border-radius: 2rem;
-    overflow: hidden;
-    min-height: 600px;
-}
-
-.form {
-    position: relative;
-    z-index: 2;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 2.5rem;
-    border-radius: 1.5rem;
-    width: 100%;
-    max-width: 450px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
 }
 
 .headerLabel {
@@ -101,91 +70,99 @@
 .description {
     color: #4a5d52;
     line-height: 1.7;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
     font-size: 1.15rem;
     max-width: 500px;
 }
 
-.list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    margin-bottom: 2rem;
+/* B2B Table Styles */
+.b2bTableWrapper {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.listItem {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-weight: 700;
+.tableTitle {
+    font-size: 1.5rem;
     color: #0d2112;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+}
+
+.b2bTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.b2bTable th {
+    text-align: left;
+    padding: 1rem;
+    color: #4a5d52;
+    font-weight: 600;
+    border-bottom: 2px solid #f0f7f0;
+}
+
+.b2bTable td {
+    padding: 1.25rem 1rem;
+    color: #0d2112;
+    border-bottom: 1px solid #f0f7f0;
+    font-size: 1.1rem;
+}
+
+.b2bTable tr:last-child td {
+    border-bottom: none;
+}
+
+.b2bTable td strong {
+    color: #2d6a4f;
     font-size: 1.2rem;
 }
 
-.check {
-    color: #0d2112;
-    background: #ccff00;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    flex-shrink: 0;
+.highlightRow {
+    background: rgba(204, 255, 0, 0.1);
+    border-radius: 0.5rem;
 }
 
-.inputGroup {
+.tableNote {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 1rem;
+}
+
+/* Sample Side */
+.sampleSide {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    align-items: stretch;
+    justify-content: center;
 }
 
-.input,
-.textarea {
-    width: 100%;
-    padding: 1rem;
-    background: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 0.5rem;
-    font-family: inherit;
-    font-size: 0.95rem;
-    transition: all 0.2s;
+.sampleHeader {
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-.input:focus,
-.textarea:focus {
-    outline: none;
-    border-color: #0d2112;
-    background: white;
-}
-
-.textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-.submitButton {
-    background: #ccff00;
-    /* Lime background */
+.sampleHeader h3 {
+    font-size: 2rem;
     color: #0d2112;
-    /* Dark text */
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 0.5rem;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.2s;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
 }
 
-.submitButton:hover {
-    background: #b8e600;
-    /* Darker lime hover */
-    transform: translateY(-2px);
+.sampleHeader p {
+    color: #4a5d52;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.cardWrapper {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
 }
 
 @media (max-width: 1000px) {
@@ -196,13 +173,17 @@
     .container {
         grid-template-columns: 1fr;
         padding: 0 20px;
-        gap: 2rem;
+        gap: 3rem;
     }
 
     .textSide {
         text-align: center;
         align-items: center;
         padding: 0;
+    }
+
+    .headerLabel {
+        align-self: center;
     }
 
     .title {
@@ -213,17 +194,9 @@
         margin: 0 auto 2rem auto;
     }
 
-    .list {
-        align-items: center;
-    }
-
-    .formSide {
-        padding: 1rem;
-        min-height: auto;
-    }
-
-    .form {
-        padding: 1.5rem;
+    .b2bTableWrapper {
+        width: 100%;
+        max-width: 600px;
     }
 }
 
@@ -236,20 +209,7 @@
         font-size: 1rem;
     }
 
-    .listItem {
+    .b2bTable td {
         font-size: 1rem;
     }
-}
-
-.imageWrapper {
-    border-radius: 1rem;
-    overflow: hidden;
-    margin-top: 1rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.collageImage {
-    width: 100%;
-    height: auto;
-    display: block;
 }

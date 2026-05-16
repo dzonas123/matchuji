@@ -24,6 +24,14 @@
         "stock": 25,
         "sku": "MATCHA-SET-BAMBOO",
         "ean": "2000000000039",
-        "image": "/images/matcha-set-1.jpg"
+    },
+    {
+        "id": "b2b-samples",
+        "name": "B2B Testovací Vzorky (vč. 9A kvality)",
+        "price": 149,
+        "stock": 100,
+        "sku": "MATCHA-B2B-SAMPLES",
+        "ean": "2000000000046",
+        "image": "/images/matcha-farm-uji.jpg"
     }
 ]

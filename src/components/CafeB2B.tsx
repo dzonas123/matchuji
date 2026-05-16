@@ -3,6 +3,7 @@
 import styles from "./CafeB2B.module.css";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import ProductCard from "./ProductCard";
 
 export default function CafeB2B() {
     return (
@@ -16,38 +17,55 @@ export default function CafeB2B() {
                         bistro nebo kancelář? Spolupracujeme s více než 50 podniky v ČR.
                     </p>
 
-                    <div className={styles.list}>
-                        <div className={styles.listItem}>
-                            <span className={styles.check}>✓</span>
-                            Bezkonkurenční cena
-                        </div>
-                        <div className={styles.listItem}>
-                            <span className={styles.check}>✓</span>
-                            Prémiová kvalita
-                        </div>
-                        <div className={styles.listItem}>
-                            <span className={styles.check}>✓</span>
-                            Velkoobchodní podmínky
-                        </div>
+                    <div className={styles.b2bTableWrapper}>
+                        <h3 className={styles.tableTitle}>B2B Velkoobchodní Ceník</h3>
+                        <table className={styles.b2bTable}>
+                            <thead>
+                                <tr>
+                                    <th>Množství</th>
+                                    <th>Sleva</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Nad 500 g</td>
+                                    <td><strong>15 %</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Nad 1 kg</td>
+                                    <td><strong>20 %</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Nad 2 kg</td>
+                                    <td><strong>25 %</strong></td>
+                                </tr>
+                                <tr className={styles.highlightRow}>
+                                    <td>4 kg a více</td>
+                                    <td><strong>30 %</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p className={styles.tableNote}>Pro velkoobchodní objednávky nás prosím kontaktujte e-mailem.</p>
                     </div>
                 </div>
 
-                <div className={styles.formSide}>
-                    <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-                        <div className={styles.inputGroup}>
-                            <input type="text" placeholder="Vaše jméno" className={styles.input} />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <input type="email" placeholder="E-mail" className={styles.input} />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <input type="text" placeholder="Název podniku" className={styles.input} />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <textarea placeholder="Zpráva / Poptávka..." className={styles.textarea}></textarea>
-                        </div>
-                        <button type="submit" className={styles.submitButton}>Odeslat poptávku</button>
-                    </form>
+                <div className={styles.sampleSide}>
+                    <div className={styles.sampleHeader}>
+                        <h3>Otestujte kvalitu sami</h3>
+                        <p>Zkuste naše testovací vzorky za 149 Kč. Obsahují naši standardní matchu a 2 vyšší třídy až do kvality 9A.</p>
+                    </div>
+                    <div className={styles.cardWrapper}>
+                        <ProductCard product={{
+                            id: "b2b-samples",
+                            name: "B2B Testovací Vzorky (vč. 9A kvality)",
+                            description: "Testovací sada pro kavárny. Standardní kvalita + 2 vyšší třídy (až 9A) pro porovnání chuti a výběr ideálního produktu.",
+                            price: 149,
+                            image: "/images/matcha-farm-uji.jpg",
+                            tag: "Pro kavárny",
+                            rating: 5,
+                            reviews: 0
+                        }} />
+                    </div>
                 </div>
             </div>
         </section>
