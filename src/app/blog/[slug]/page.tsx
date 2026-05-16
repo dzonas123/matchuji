@@ -66,12 +66,30 @@ function renderContent(content: string) {
       flushList(`flush-${i}`);
     } else if (trimmed) {
       flushList(`flush-${i}`);
-      // Replace **bold** inline
-      const parts = trimmed.split(/(\*\*[^*]+\*\*)/g);
-      const rendered = parts.map((p, j) =>
-        p.startsWith("**") ? <strong key={j}>{p.slice(2, -2)}</strong> : p
-      );
-      elements.push(<p key={i} className={styles.para}>{rendered}</p>);
+      // Replace **bold** and [link](url) inline
+      const parseInline = (text: string) => {
+        const parts = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g);
+        return parts.map((p, j) => {
+          if (p.startsWith("**")) {
+            return <strong key={j}>{p.slice(2, -2)}</strong>;
+          }
+          if (p.startsWith("[")) {
+            const match = p.match(/\[([^\]]+)\]\(([^)]+)\)/);
+            if (match) {
+              const url = match[2];
+              // External links
+              if (url.startsWith("http")) {
+                return <a key={j} href={url} target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>{match[1]}</a>;
+              }
+              // Internal links
+              return <Link key={j} href={url} className={styles.inlineLink}>{match[1]}</Link>;
+            }
+          }
+          return p;
+        });
+      };
+      
+      elements.push(<p key={i} className={styles.para}>{parseInline(trimmed)}</p>);
     }
   });
 

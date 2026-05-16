@@ -131,6 +131,21 @@
   margin-bottom: 10px;
 }
 
+.inlineLink {
+  color: #2d6a4f;
+  text-decoration: underline;
+  text-decoration-color: rgba(45, 106, 79, 0.4);
+  text-underline-offset: 4px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.inlineLink:hover {
+  color: #1a3a25;
+  text-decoration-color: #1a3a25;
+  background-color: rgba(204, 255, 0, 0.2);
+}
+
 .list {
   margin: 0 0 20px 0;
   padding-left: 0;
