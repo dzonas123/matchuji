@@ -1,8 +1,8 @@
 .hero {
-    padding: 8rem 0 4rem 0;
+    padding: 6rem 0 4rem 0;
     background: #ffffff;
     /* Explicit white background */
-    overflow-x: hidden;
+    overflow-x: clip; /* clip instead of hidden to not break position: sticky */
 }
 
 .container {
@@ -19,7 +19,7 @@
 
 .imageGallery {
     position: sticky;
-    top: 8rem;
+    top: 6rem;
     align-self: flex-start;
     display: flex;
     flex-direction: column;
@@ -93,7 +93,7 @@
 }
 
 .productInfo {
-    padding-top: 1rem;
+    padding-top: 0;
 }
 
 .brand {
