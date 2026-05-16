@@ -25,6 +25,8 @@ export const blogPosts: BlogPost[] = [
     seoDescription: "Kompletní průvodce nákupem matchy v České republice. Jak poznat kvalitní ceremonální matchu, na co si dát pozor a kde ji koupit online.",
     keywords: ["koupit matchu", "matcha ČR", "kde koupit matchu", "matcha online", "kvalitní matcha", "ceremonální matcha", "japonská matcha"],
     content: `
+![Matcha latte se zpěněným mlékem](https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=2564&auto=format&fit=crop)
+
 ## Úvod: Proč ta vaše matcha chutná jako seno?
 
 Znáte to. Někde na Instagramu vidíte krásně zářivě zelené [Matcha Latte](/blog/matcha-latte-recept). Řeknete si: "To musím zkusit!" Jdete do nejbližší zdravé výživy, koupíte si sáček za pár stovek a doma si ho nadšeně zalijete horkou vodou. Jenže výsledek? Barva připomíná spíše bahno, voní to po rybách a chuť je tak neuvěřitelně hořká, že se to nedá polknout bez tří lžic cukru.
@@ -75,6 +77,8 @@ Reálná cena za poctivou ceremonální matchu se v ČR pohybuje mezi **400 až 
     seoDescription: "Co je lepší pro energii a zdraví: matcha nebo káva? Velké srovnání obou nápojů odhaluje, proč matcha nevede ke kofeinovému crashu a úzkosti. Čtěte více.",
     keywords: ["matcha vs kava", "matcha energie", "matcha kofein", "L-theanin matcha", "matcha zdraví", "alternativa kávy", "kofeinový crash"],
     content: `
+![Zelené čajové plantáže v Uji v Japonsku](https://images.unsplash.com/photo-1547516508-4c1f9c7c4ec3?q=80&w=2689&auto=format&fit=crop)
+
 ## Úvod: Konec kávové závislosti?
 
 Káva je celosvětový fenomén. Ruku na srdce, ta vůně pražených zrn po ránu je prostě skvělá. Ale buďme upřímní — stále více z nás cítí i ty stinné stránky. Nervozita, zrychlený tep, podrážděný žaludek a onen obávaný odpolední "crash", kdy byste dali cokoliv za dvacet minut spánku. 
@@ -127,6 +131,8 @@ Nemusíte kávu vylít do záchodu. Nejsme fanatici. Pokud ale odpoledne padáte
     seoDescription: "Jak si doma udělat to nejlepší Matcha Latte? Přečtěte si náš osvědčený recept na teplou i ledovou variantu s dokonalou pěnou, bez hrudek a bez drahých kávovarů.",
     keywords: ["matcha latte recept", "jak udělat matcha latte", "matcha latte doma", "ledové matcha latte", "veganský matcha latte", "příprava matchy", "matcha recept"],
     content: `
+![Smaragdově zelený prášek matchy](https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=2670&auto=format&fit=crop)
+
 ## Úvod: Můj tajný trik na dokonalé ráno
 
 Když jsem poprvé ochutnal matcha latte v jedné známé brněnské kavárně, byl jsem uchvácen. Ta kombinace zemitě-sladké matchy a napěněného mléka je prostě návyková. Když jsem pak ale zjistil, kolik peněz za něj měsíčně utratím, řekl jsem si: To přece musím zvládnout doma.
@@ -183,6 +189,8 @@ Z osobní zkušenosti doporučuji **Ovesné mléko (Oat milk)**. Oves je přiroz
     seoDescription: "Vědecky podložené účinky matchy na lidské zdraví. Zjistěte víc o antioxidantech (EGCG), účincích na stres, imunitu a jak L-theanin uklidňuje naši mysl.",
     keywords: ["matcha ucinky", "matcha zdraví", "matcha antioxidanty", "matcha výhody", "matcha benefity", "EGCG", "hubnutí matcha", "superpotravina"],
     content: `
+![Keramický set a bambusová metlička pro přípravu matchy](https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?q=80&w=2670&auto=format&fit=crop)
+
 ## Úvod: Není superpotravina jako superpotravina
 
 Všimli jste si, že každá druhá potravina na internetu je dnes zázračná? U matchy je to ale trochu jiné. Nejde totiž o žádný novodobý marketingový vynález, ale o věc, kterou pijí japonští mniši stovky let. A ti lidé se dožívají opravdu neuvěřitelného věku (přečtěte si víc v našem článku o [historii a původu matchy](/blog/historie-matcha-cajovy-obrad)).
@@ -226,6 +234,8 @@ Věda nám jasně dokazuje, že ta zelená pěna na dně vaší misky s [bambuso
     seoDescription: "Jak si udělat nejlepší krémové Matcha Smoothie? Vyzkoušejte našich 5 receptů: klasické zelené, tropické s mangem nebo proteinové s čokoládou.",
     keywords: ["matcha smoothie", "matcha smoothie recept", "zelené smoothie", "matcha snídaně", "matcha recept", "zdravé smoothie"],
     content: `
+![Zdravý matcha nápoj pro soustředěnou práci](https://images.unsplash.com/photo-1515688594390-b649af70d282?q=80&w=2606&auto=format&fit=crop)
+
 ## Úvod: Můj tajný záchranář rána
 
 Když ráno nestíhám (což je u mě bohužel docela často) a nemám čas si v klidu připravit klasickou teplou matchu v misce pomocí [bambusové metličky](/blog/jak-pripravit-matchu-tradicne), vytahuju z linky mixér. 
@@ -307,6 +317,8 @@ Pamatujte: Matcha v kombinaci se správnými surovinami dělá zázraky, ale vž
     seoDescription: "Naučte se tradiční japonskou přípravu matchy doma. Vysvětlíme si, co je chasen a chawan, proč nesmíte použít vroucí vodu a jak vyšlehat dokonalou pěnu.",
     keywords: ["jak připravit matchu", "příprava matchy", "matcha recept", "tradiční matcha", "matcha chasen", "chawan", "japonský rituál"],
     content: `
+![Tradiční příprava matchy v misce](https://images.unsplash.com/photo-1582787010486-1eb8a61ceac7?q=80&w=2574&auto=format&fit=crop)
+
 ## Úvod: Můj nejoblíbenější ranní rituál
 
 Když jsme všichni v jednom kole, je hrozně snadné ráno stisknout knoflík na kávovaru, vzít hrnek do ruky a letět do auta. Já to taky tak dělal. Dokud jsem ale neobjevil to, co Japonci nazývají "Cesta čaje" (můžete se o ní dočíst více v článku o [historii a obřadech Chadó](/blog/historie-matcha-cajovy-obrad)).
@@ -352,6 +364,8 @@ Zkuste si o víkendu vyhradit pro sebe těchto pět minut. Přivoňte k té trá
     seoDescription: "Jaký je rozdíl mezi matchou a běžným zeleným čajem (sencha)? Přečtěte si detailní srovnání v oblasti pěstování, zdravotních účinků a kofeinu.",
     keywords: ["rozdíl matcha a zelený čaj", "matcha vs zelený čaj", "druhy zeleného čaje", "sencha", "co je to matcha", "výroba matchy"],
     content: `
+![Matcha latte se zpěněným mlékem](https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=2564&auto=format&fit=crop)
+
 ## Úvod: Není zelená jako zelená
 
 "To si fakt děláš tak drahej čaj? Vždyť v supermarketu je pytlík zelenýho za pár korun." Tak přesně tohle jsem slýchával od svých přátel, když jsem poprvé začal připravovat matchu (a pokud to chcete zkusit taky, doporučuji náš článek o [tradiční přípravě](/blog/jak-pripravit-matchu-tradicne)).
@@ -393,6 +407,8 @@ Takže abych odpověděl na otázku mých přátel – ano, matcha je o něco dr
     seoDescription: "Jaký je rozdíl mezi ceremoniální a kulinářskou matchou? Vysvětlíme si, proč si culinary matchu nekupovat na pití a jakou vybrat do latte nebo na pečení.",
     keywords: ["ceremoniální matcha", "culinary matcha", "kvalita matchy", "rozdíl kvality matcha", "premium matcha", "matcha na pečení"],
     content: `
+![Zelené čajové plantáže v Uji v Japonsku](https://images.unsplash.com/photo-1547516508-4c1f9c7c4ec3?q=80&w=2689&auto=format&fit=crop)
+
 ## Úvod: Ach, ty zmatky u e-shopů
 
 "Sakra, koupila jsem si tuhle matchu v bio obchodě a chutná to úplně strašně, asi to není pro mě." Takových zpráv dostávám spoustu. A víte, co se většinou ukáže? Že si člověk v rámci šetření koupil "Culinary Grade" (kulinářskou matchu) a udělal si ji doma jen tak s horkou vodou.
@@ -433,6 +449,8 @@ Neškudlete na zdraví. Pokud chcete nakopnutí do dne bez kávového stresu (v�
     seoDescription: "Jak použít matchu na pečení? Objevte tři úžasné recepty: italské Matcha Tiramisu, měkké Matcha Cookies a osvěžující letní dezerty do skleničky.",
     keywords: ["matcha dezerty", "matcha tiramisu", "pečení s matchou", "matcha cookies", "matcha do těsta", "matcha pečení", "recepty s matchou"],
     content: `
+![Smaragdově zelený prášek matchy](https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=2670&auto=format&fit=crop)
+
 ## Úvod: Může být cukroví zdravé? (Skoro jo)
 
 Tak jo. Už si umíme udělat dokonalé studené [Matcha Latte](/blog/matcha-latte-recept) i bleskovou snídani v podobě [Matcha Smoothie](/blog/matcha-smoothie-recepty). Je na čase vstoupit do další dimenze a umazat si ruce. Matcha totiž vtrhla do pekárenských dílen těch nejlepších podniků. 
@@ -493,6 +511,8 @@ Bavte se, experimentujte a nezapomeňte, že pečením se spousta živin přiroz
     seoDescription: "Ponořte se do historie matcha čaje od čínské dynastie Song po japonské samuraje. Co znamená obřad Chadó a co je to Wabi Sabi filozofie?",
     keywords: ["historie matchy", "japonský čajový obřad", "chado", "wabi sabi", "odkud pochází matcha", "samurajové", "zen buddhismus"],
     content: `
+![Keramický set a bambusová metlička pro přípravu matchy](https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?q=80&w=2670&auto=format&fit=crop)
+
 ## Úvod: Mnohem víc než Instagramový drink
 
 Taky máte pocit, že na vás matcha vyskakuje úplně odevšad? Dnes a denně vídáme v kavárnách úchvatná [Matcha Latte](/blog/matcha-latte-recept), všichni si chválí účinky (viz náš odborný článek o tom, [proč matcha poráží kávu](/blog/matcha-vs-kava-energie-bez-kofeinu)) a dokonce jsme se s ní naučili péct nejrůznější [matcha dezerty](/blog/matcha-peceni-dezerty-recepty). 
@@ -534,6 +554,8 @@ Až si zítra uděláte svůj zelený prášek, vzpomeňte si na to, že právě
     seoDescription: "Jak zajistit, aby vaše matcha neztratila neonovou zelenou barvu a zemitou chuť? Přečtěte si tipy, jak chránit zelený čaj před světlem, vzduchem a vhkostí.",
     keywords: ["skladování matchy", "jak uchovat matchu", "zkažená matcha", "oxidace", "jak skladovat čaj", "ochrana matchy", "trvanlivost matchy"],
     content: `
+![Zdravý matcha nápoj pro soustředěnou práci](https://images.unsplash.com/photo-1515688594390-b649af70d282?q=80&w=2606&auto=format&fit=crop)
+
 ## Úvod: Nenávidím vyhazování peněz
 
 "Však je to suchej čaj, to se nemůže zkazit." Taky jste si to mysleli? Musím se přiznat, že já ano. Na začátku mé cesty s japonským čajem (viz. obřad [Chadó](/blog/historie-matcha-cajovy-obrad)) jsem si nadšeně koupil drahou dávku ceremonální matchy. Půlku jsem hned vypil. Zbytek sáčku jsem postavil hezky na poličku do kuchyně vedle oken. 
@@ -577,6 +599,8 @@ Hodně lidí se ptá na skladování v lednici. **Pokud máte matchu origináln�
     seoDescription: "Opravdu matcha pálí tuky? Zjistěte, co věda (studie na EGCG a termogenezi) říká o podpoře metabolismu a přečtěte si tipy pro zdravé hubnutí a diety.",
     keywords: ["matcha na hubnutí", "hubnutí břicha", "matcha a metabolismus", "spalování tuků s matchou", "matcha dieta", "egcg hubnutí"],
     content: `
+![Tradiční příprava matchy v misce](https://images.unsplash.com/photo-1582787010486-1eb8a61ceac7?q=80&w=2574&auto=format&fit=crop)
+
 ## Úvod: Můj boj se sliby na internetu
 
 Určitě jste na to už taky narazili. Různé influencerské reklamy, kde štíhlé fitness holky tvrdí, že díky "magickému" zelenému čaji zhubly přes noc do plavek bez diety a námahy. Vždycky jsem na to koukal docela skepticky. Nechci vám tu mazat med kolem pusy. Matcha za vás 10 kilometrů neuběhne a nespálí včerejší kalorický dortík z [matcha pečení](/blog/matcha-peceni-dezerty-recepty). 
@@ -616,6 +640,8 @@ Bude to fungovat s čajem ze sáčku za 50 Kč? Rozhodně ne. Stejně jako jsme 
     seoDescription: "Je bezpečné pít matchu v těhotenství a při kojení? Rozbor obsahu kofeinu a doporučených limitů pro nastávající matky. Tipy, jak si matcha čaj vychutnat bez obav.",
     keywords: ["matcha v těhotenství", "kofein pro těhotné", "matcha při kojení", "zelený čaj těhotenství", "matcha a děti", "matcha latte těhotenství"],
     content: `
+![Matcha latte se zpěněným mlékem](https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=2564&auto=format&fit=crop)
+
 ## Úvod: Maminčiny obavy z kofeinu
 
 Zrovna nedávno mi psala jedna zákaznice: "Jsem ve čtvrtém měsíci a doktor mi doporučil brutálně omezit mojí milovanou silnou ranní kávu. Je mi jasné, že musím ubrat kofein, ale chybí mi ten rituál a upřímně – padám únavou. Lákalo by mě to vaše zelené latte z Instagramu. Můžu ho bez výčitek pít?"
@@ -659,6 +685,8 @@ Dopřejte si svůj odpolední rituál [dokonalého Matcha Latte](/blog/matcha-la
     seoDescription: "Co znamenají japonské termíny spojené se zeleným čajem matcha? Velký vysvětlující slovník pro začátečníky: Wabi Sabi, Umami, Chasen, Gyokuro a další.",
     keywords: ["co je to umami", "chasen metlička", "tencha čaj", "slovník zeleného čaje", "japonské pojmy matcha", "co je to chawan", "matcha terminology", "wabi sabi vysvětlení"],
     content: `
+![Zelené čajové plantáže v Uji v Japonsku](https://images.unsplash.com/photo-1547516508-4c1f9c7c4ec3?q=80&w=2689&auto=format&fit=crop)
+
 ## Úvod: Ztraceni v překladu?
 
 Pamatujete si tu radost, když jste se poprvé dostali do světa [Matcha Latte](/blog/matcha-latte-recept) a chtěli o tom číst víc na blozích, ale najednou na vás začaly padat výrazy, u kterých by nepomohl ani Google překladač? (Obzvlášť, pokud jste četli naše [porovnání Ceremonial vs Culinary kvality](/blog/ceremonial-vs-culinary-matcha)). Neházejte matchu do žita. 
