@@ -5,11 +5,12 @@ import type { Metadata } from "next";
 import styles from "./page.module.css";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = getBlogPost(params.slug);
+  const { slug } = await params;
+  const post = getBlogPost(slug);
   if (!post) return {};
   return {
     title: post.seoTitle,
@@ -78,8 +79,9 @@ function renderContent(content: string) {
   return elements;
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = getBlogPost(params.slug);
+export default async function BlogPostPage({ params }: Props) {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
   if (!post) notFound();
 
   const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
