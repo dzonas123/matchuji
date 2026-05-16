@@ -818,6 +818,111 @@ Je nutné dodat naprosto zásadní bod. L-Theanin je citlivý na zacházení. Po
 
 Proto neustále apelujeme: Dělejte věci pořádně. Ať už si mixujete [Smoothie](/blog/matcha-smoothie-recepty) nebo pečete [Zelené sušenky](/blog/matcha-peceni-dezerty-recepty), vždy dbejte na to, abyste používali lístky pěstované ve stínu a za pomoci kamenných mlýnů.
     `
+  },
+  {
+    slug: "co-je-matcha-ultimatni-pruvodce",
+    title: "Co je matcha a jak vybrat tu nejlepší? (Ultimátní Průvodce)",
+    excerpt: "Ptáte se 'co je matcha' a proč po ní všichni šílí? Přečtěte si, co přesně tento zelený zázrak je, a zjistěte, jak poznat opravdu 'top matchu' mezi stovkami jiných.",
+    category: "Průvodce",
+    emoji: "🍵",
+    readTime: 10,
+    publishedAt: "2025-05-19",
+    seoTitle: "Co je matcha? Průvodce a jak vybrat top ceremonial matchu | Matchuji",
+    seoDescription: "Zjistěte, co je matcha, jak se vyrábí a proč nahrazuje kávu. Poradíme, jak vybrat matcha ceremonial kvalitu a nenaletět podvodníkům. Vaše cesta za zdravím začíná zde.",
+    keywords: ["co je matcha", "top match", "matcha ceremonial", "japonský čaj", "výroba matchy", "co to je matcha", "nejlepší matcha"],
+    content: `
+![Tradiční keramická miska plná zářivě zeleného nápoje matcha vedle bambusové lžičky](https://images.unsplash.com/photo-1515688594390-b649af70d282?q=80&w=2606&auto=format&fit=crop)
+
+## Co je matcha? Zázrak, který pili už samurajové
+
+Pokud jste za poslední rok nebyli úplně odříznutí od civilizace, určitě jste tu zelenou pěnu viděli. V kavárnách, na Instagramu, v rukou celebrit. Otázka zní jasně: **Co je matcha?**
+
+Zjednodušeně řečeno: Matcha je 100% přírodní japonský zelený čaj, který je na rozdíl od běžných luhovaných čajů rozemletý na ten nejjemnější pudr. To znamená, že když pijete matchu, **pijete celý čajový lístek**. Získáte tak 100 % všech jeho vitamínů, antioxidantů a živin, na rozdíl od běžného čaje, kde lístky po vyluhování vyhodíte do koše (čímž se zbavíte až 80 % zdraví prospěšných látek).
+
+### Proč je to aktuální "Top match"?
+
+Hledáte-li **"top match"** nebo tu absolutně nejlepší na trhu, musíte pochopit, proč se stala tak populární:
+1. **Zdraví:** Obsahuje unikátní sloučeninu EGCG, která razantně zrychluje spalování tuků a chrání tělo před volnými radikály.
+2. **Energie bez stresu:** Spojení kofeinu a zklidňující aminokyseliny L-Theaninu vás nabudí na 6 hodin, ale bez třesu a bušení srdce, které znáte z kávy (více o tom píšeme [v článku Kofein vs L-Theanin](/blog/kofein-vs-l-theanin-zeleny-caj)).
+3. **Kultura a klid:** Příprava pomocí [bambusové metličky](/product/matcha-bambusova-metlicka-chasen) vás doslova vytrhne z uspěchaného dne a donutí na 3 minuty vypnout.
+
+---
+
+## Matcha Ceremonial vs. Culinary: Nenechte se napálit
+
+Pokud chcete zažít tu pravou, jemnou, krémovou a nasládlou chuť (tzv. umami), jedinou volbou je **matcha ceremonial** (ceremoniální matcha).
+
+### 1. Matcha Ceremonial (Ceremoniální kvalita)
+Toto je král všech čajů. Používají se pouze ty nejmladší, nejzelenější lístky z úplného vrcholku keře sbírané během prvního jarního sběru. Lístky jsou před mletím zbaveny tvrdých žilek a stopek (vzniká tzv. *Tencha*). Je ideální pro pití pouze s vodou, kde plně vynikne její úžasná krémová sladkost. (Naše [Matchuji Premium 7A](/product/ceremonial-matcha) patří právě do této elitní kategorie).
+
+### 2. Culinary / Premium (Kulinářská kvalita)
+Tato kvalita se sbírá později během léta. Lístky už viděly více slunce, jsou tvrdší a mají žlutavější barvu. Tato matcha má výraznou hořkost a hrubší texturu. Není špatná! Je ale určena na vaření, pečení nebo do velmi silně slazených nápojů, kde by se chuť jemné ceremoniální matchy úplně ztratila.
+
+![Prášek ceremoniální matchy přesátý do jemných zelených kopečků](https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=2670&auto=format&fit=crop)
+
+## Jak připravit tu pravou Matchu?
+
+Odpověď na otázku "co je matcha" už znáte. Teď ji stačí jen zkusit! Zpomeňte na zalévání sáčků vroucí vodou. Matcha ceremonial si zaslouží víc:
+1. **Prosít:** Cca 2 gramy (půl lžičky) prášku prosejte přes jemné sítko do misky.
+2. **Voda:** Zalijte kapkou studené vody a promíchejte do hladké pasty. Poté dolijte 70-80°C horkou vodu (NIKDY vroucí, čaj byste spálili a zhořkl by).
+3. **Šlehání:** Rychlým pohybem bambusové metličky ve tvaru písmene "M" šlehejte 15 vteřin, dokud nevznikne hustá smaragdová pěna.
+
+A hotovo! Užijte si 6 hodin čisté, zdravé energie.
+    `
+  },
+  {
+    slug: "sada-set-na-matchu-pruvodce",
+    title: "Sada na matchu: Jak vybrat dokonalý set a nenaletět levným náhražkám",
+    excerpt: "Chcete si doma šlehat hustou zelenou pěnu, ale nevíte, jaký set na matchu vybrat? Přečtěte si, z čeho se sada na matchu skládá a na co si dát obrovský pozor.",
+    category: "Průvodce",
+    emoji: "🎁",
+    readTime: 9,
+    publishedAt: "2025-05-20",
+    seoTitle: "Dokonalá sada na matchu: Průvodce výběrem setu | Matchuji",
+    seoDescription: "Hledáte set na matchu? Ukážeme vám, z čeho se kvalitní sada na matchu skládá. Probereme chasen, chawan a ukážeme alternativy ke značkám Šufan a Moya.",
+    keywords: ["sada na matchu", "set na matchu", "šufan matcha", "moya matcha", "jak vybrat set na matchu", "matcha sada pro začátečníky", "dárek matcha"],
+    content: `
+![Krásný keramický set na matchu s bambusovou metličkou chasen a dřevěnou lžičkou chashaku](https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?q=80&w=2670&auto=format&fit=crop)
+
+## Kouzlo domácího rituálu
+
+Viděli jste ta nádherná videa, kde se zářivě zelený prášek jemně šlehá bambusovou metličkou a tvoří krémovou pěnu? Tento zážitek není vyhrazen jen pro zenové kláštery v Kjótu. Aby se z ranního pití čaje stal rituál, který vás zbaví stresu, potřebujete správné vybavení. **Sada na matchu** (nebo také *set na matchu*) je vstupenkou do tohoto světa.
+
+Často se nás ale zákazníci ptají: "Koupil jsem si sadu od jedné z těch velkých značek, co zrovna frčí (dnes je populární třeba *Moya matcha* nebo na ořechy skvělý *Šufan matcha*), ale ta metlička se mi po třech dnech rozpadla a čaj má hrudky." 
+
+Kde je chyba? Většinou ve špatné výrobě příslušenství. Pojďme se podívat, z čeho se kvalitní **set na matchu** musí skládat.
+
+### 1. Bambusová metlička (Chasen)
+
+Základem všeho je bambusová metlička, japonsky *Chasen*. Bez ní **matcha ceremonial** nikdy neudělá tu správnou jemnou pěnu a zůstanou vám na dně hrnku nepříjemné hořké hrudky.
+
+- **Levné sady:** Metličky jsou seřezávány strojově, mají málo štětinek (často jen kolem 50-60) a bambus není správně prosušen. Proto po pár použitích praskají.
+- **Kvalitní sady:** Dobrý set na matchu obsahuje ručně vyráběný chasen, který má minimálně 80 až 100 štětinek (ideální pro jemnou pěnu) a je vytesán z jednoho kusu kvalitního bambusu. Naši [Matchuji Metličku](/product/matcha-bambusova-metlicka-chasen) doporučujeme nechat před prvním použitím chvíli nasáknout v teplé vodě, aby štětinky změkly a odemkly se.
+
+### 2. Miska (Chawan)
+
+Když si děláte ranní dávku zdraví, nechcete do ní třískat bambusovou metličkou v úzkém hrnku od kávy. 
+Správná **sada na matchu** obsahuje keramickou misku (*Chawan*), která má ploché dno a dostatečně vysoké, ale široké okraje. Právě do široka roztažený prostor vám umožní onen důležitý rychlý pohyb metličkou do tvaru písmene "M" nebo "W". Keramika navíc udrží nápoj v ideální teplotě.
+
+### 3. Bambusová lžička (Chashaku)
+
+Zdá se to jako zbytečnost, ale správné dávkování je u matchy alfou a omegou. Jedna odměrka *Chashaku* nabírá zhruba 1 gram čaje. Pro dokonalou porci potřebujete 2 odměrky. Navíc jemná bambusová hrana lžičky zabraňuje statické elektřině a "nelepí" na sebe onen drahocenný prach tak moc, jako klasická kovová lžička z příborníku.
+
+![Bambusová lžička s dávkou sytě zelené matchy](https://images.unsplash.com/photo-1582787010486-1eb8a61ceac7?q=80&w=2574&auto=format&fit=crop)
+
+---
+
+## Konkurence na trhu: Kudy jít?
+
+Dnes se prodává nespočet různých sad. V lokálním prostředí často lidé vyhledávají brandy jako je *Moya matcha* (známá polská značka) nebo ořechová stálice *Šufan matcha*. 
+
+Když vybíráte svůj první **set na matchu**, naše hlavní rada zní: **Hledejte transparentnost.** 
+Sada je k ničemu, pokud je uvnitř čaj z masové čínské produkce. Ptejte se, odkud čaj v sadě pochází (ideálně prefektura Uji v Japonsku) a zda má set metličku s dostatečným počtem štětinek (kolem 100).
+
+Pokud chcete mít absolutní jistotu, naše [Startovací sady Matchuji](/product/ceremonial-matcha-3pack) jsou postavené přesně na těchto základech: elitní japonský čaj, precizní bambusové příslušenství a design, který si okamžitě zamilujete.
+
+Začněte svůj den správně. S pravým rituálem a tou nejlepší energií.
+    `
   }
 ];
 
