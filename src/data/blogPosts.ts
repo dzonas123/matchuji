@@ -77,34 +77,56 @@ Naše [Matchuji 7A Ceremonial Grade](/product/ceremonial-matcha) splňuje i ty n
     content: `
 ## Úvod: Konec kávové závislosti?
 
-Káva je celosvětový fenomén a pro mnoho z nás nezbytný ranní rituál. Stále více lidí však v posledních letech pociťuje i stinné stránky nadměrné konzumace kávy — nervozitu, zrychlený tep a onen obávaný odpolední "crash". 
+Káva je celosvětový fenomén a pro mnoho z nás nezbytný ranní rituál. Stále více lidí však v posledních letech pociťuje i stinné stránky nadměrné konzumace kávy — nervozitu, zrychlený tep a onen obávaný odpolední "crash". Ať už hledáte způsob, jak omezit denní příjem kofeinu, nebo jen chcete stabilnější a zdravější zdroj energie, pravděpodobně jste už narazili na fenomén jménem **Matcha**. 
 
-Existuje lepší způsob, jak získat energii? Odpovědí je japonská matcha. Pojďme se podívat na to, proč [kvalitní ceremonální matcha](/product/ceremonial-matcha) nabízí chytřejší formu energie. (Zajímá vás více informací o tom, proč je matcha tak výjimečná? Doporučujeme přečíst si náš článek o tom, [co přesně jsou zdravotní benefity matchy podle vědy](/blog/matcha-ucinky-zdravi).)
+Zelený japonský zázrak dnes začíná kávě výrazně konkurovat. Jak si ale [kvalitní ceremonální matcha](/product/ceremonial-matcha) reálně stojí proti kávě po stránce vědy, kofeinu a vlivu na lidské zdraví? Připravili jsme pro vás vůbec největší a nejhlubší srovnání obou nápojů. 
 
-## Kofein v matče vs. kofein v kávě: Jaký je rozdíl?
+## 1. Původ a zpracování: Jak vzniká energie
 
-Šálek filtrované kávy obsahuje zhruba 80–120 mg kofeinu. Šálek matchy připravený pomocí [tradiční bambusové metličky](/product/matcha-set-bamboo) obsahuje přibližně 60–70 mg kofeinu. Na první pohled se tedy zdá, že káva musí fungovat lépe. Zásadní rozdíl totiž není v množství, ale ve způsobu vstřebávání.
+Základní rozdíl mezi těmito nápoji spočívá už v jejich samotné povaze a zpracování.
 
-Káva do krve uvolní kofein velmi rychle, což způsobuje onen typický rychlý "kopanec" spojený se zvýšením kortizolu a úzkosti.
+- **Káva:** Pochází z pražených kávových zrn (nejčastěji Arabica, která tvoří 70 % produkce, a Robusta). Samotným procesem pražení za vysokých teplot bohužel káva ztrácí až třetinu svých přirozených antioxidantů. Nápoj, který pijete, je následně pouze výluh z těchto zrn.
+- **Matcha:** Pochází ze speciálně pěstovaných listů japonského zeleného čaje (více o rozdílu mezi Matchou a běžným čajem [v tomto článku](/blog/matcha-vs-zeleny-caj)). Keře se před sklizní na týdny zastíní, což způsobí masivní produkci chlorofylu a aminokyselin. Listy se nepraží, ale pouze šetrně suší a následně na žulových mlýnech namelou na extra jemný prášek. Na rozdíl od kávy pijete rovnou **celý rozemletý list**, takže do těla dostáváte 100 % všech prospěšných látek.
 
-## Tajemství matchy: Kouzelná aminokyselina L-theanin
+## 2. Kofein v kávě vs. kofein v Matče: Není kofein jako kofein
 
-Matcha obsahuje aminokyselinu zvanou **L-theanin**. Při společné konzumaci kofeinu a L-theaninu dochází k neuvěřitelné synergii. L-theanin zpomaluje vstřebávání kofeinu do krevního oběhu. Výsledkem je efekt, který vědci nazývají "alert calmness" (klidná bdělost). 
+Nejčastější otázka zní: Může mě čaj nakopnout stejně jako káva? Odpověď zní absolutně ano, ale dělá to úplně jinak.
 
-**Co to znamená v praxi?**
-- ✅ Energie nastupuje postupně a jemně.
-- ✅ Hladina energie zůstává stabilní po dobu 4 až 6 hodin.
-- ✅ Žádný odpolední energetický propad (crash).
+- **Množství kofeinu:** Běžné espresso (z cca 7 g kávy Arabica) obsahuje přibližně 80–100 mg kofeinu. Káva typu Robusta ho má ještě dvakrát tolik. Šálek matchy (připravený ze 2 gramů prášku pomocí [tradiční bambusové metličky](/product/matcha-set-bamboo)) obsahuje přibližně 60–70 mg kofeinu. 
 
-## Další zdravotní benefity
+Káva do krve uvolní kofein velmi rychle a agresivně. Během 15 minut zažijete extrémní vzestup energie. Tento šokový nástup je ovšem spojený s produkcí kortizolu a adrenalinu, což velmi často vede ke zrychlenému tepu, úzkostem a u citlivějších jedinců i třesu rukou. 
 
-Energie není jediným důvodem. 
-1. **Antioxidační bomba:** Matcha obsahuje masivní množství antioxidantů EGCG. Přečtěte si více v našem článku [Matcha a zdraví](/blog/matcha-ucinky-zdravi).
-2. **Přátelštější k žaludku:** Káva dráždí zažívání. Matcha má neutrálnější pH a je mnohem šetrnější.
+Jakmile účinek kávy odezní (obvykle za 1 až 2 hodiny), dochází k velmi rychlému uvolnění zablokovaných receptorů adenosinu v mozku a přichází tvrdý energetický propad – tzv. **kofeinový crash**. 
 
-## Jak snadno přejít z kávy na matchu?
+## 3. L-Theanin: Tajná zbraň zeleného čaje
 
-Zkuste si zítra místo odpoledního espressa udělat lahodné studené [Matcha Latte](/blog/matcha-latte-recept). Dodá vám potřebnou energii k dokončení pracovního dne, aniž by vám narušilo večerní spánek.
+Důvod, proč je energie z matchy naprosto odlišná, spočívá ve vzácné aminokyselině zvané **L-Theanin**. Tuto látku káva vůbec neobsahuje. L-Theanin má na svědomí dvě naprosto zásadní věci:
+
+1. **Zpomaluje uvolňování kofeinu:** V krevním oběhu funguje L-Theanin jako brzda. Kofein z matchy se tak do těla uvolňuje plynule a rovnoměrně po dobu neuvěřitelných **4 až 6 hodin**.
+2. **Navozuje klidnou bdělost (Alert Calmness):** L-Theanin prokazatelně stimuluje produkci mozkových alfa vln, které mozek vytváří během hluboké relaxace nebo meditace.
+
+**Výsledek?** Energie z matchy vás nevykolejí. Budete cítit obrovskou motivaci, dlouhotrvající čistou hlavu, perfektní soustředění na práci, a to vše bez sebemenšího náznaku nervozity nebo tlukotu srdce. A co je nejlepší – odpolední crash se po matče vůbec nekoná, účinek pomalu a nepozorovaně vyprchá.
+
+## 4. Antioxidanty: Ochrana vašeho zdraví
+
+Oba nápoje patří v západním světě k největším zdrojům antioxidantů – látek, které tělo brání proti volným radikálům, zpomalují stárnutí a bojují proti zánětům.
+
+- **Káva:** Její nejsilnější zbraní je *Kyselina chlorogenová*. Výborně se podílí na celulární ochraně a podporuje metabolismus.
+- **Matcha:** Zde matcha naprosto dominuje. Její hlavní účinnou látkou jsou **katechiny**, především slavný a zkoumaný **EGCG** (Epigallokatechin gallát). Tento polyfenol má extrémně silné antioxidační vlastnosti. Mimo to je matcha plná rutinu (pro zdravé cévy) a obrovského množství chlorofylu, který tělo přirozeně čistí. Přečtěte si více v našem článku o tom, [co přesně jsou zdravotní benefity matchy podle vědy](/blog/matcha-ucinky-zdravi).
+
+Zatímco jeden šálek kávy obsahuje průměrně 80 mg polyfenolů, jeden šálek kvalitní matchy jich obsahuje **kolem 180 mg**. 
+
+## 5. Hubnutí a trávení
+
+Mnoho lidí používá kávu jako "spalovač tuku". Káva opravdu dokáže nastartovat metabolismus. Zásadním problémem kávy je však její vysoká kyselost (acidita). U velkého množství lidí dráždí žaludeční sliznici, způsobuje pálení žáhy a narušuje střevní mikrobiom.
+
+Matcha na druhou stranu působí v těle zásadotvorně a žaludek nedráždí. Kromě toho vědecké studie prokazují, že konzumace katechinů z matchy před cvičením zvyšuje tzv. termogenezi – **schopnost těla spalovat tuky až o 17 %**. Proto je fantastické dát si před tréninkem čistou matchu nebo proteinové [Matcha Smoothie](/blog/matcha-smoothie-recepty).
+
+## Co je tedy zdravější a jakou cestu zvolit?
+
+Objektivně jsou oba nápoje zdraví prospěšné, ale vítězem pro dlouhodobě udržitelný, moderní životní styl plný stresu se stává Matcha. Káva nabízí "tvrdou", ale krátkodobou energii. Matcha vám dodá **dlouhotrvající, bystrý výkon bez negativních vlivů na nervovou soustavu a s více než dvojnásobnou náloží antioxidantů**.
+
+Pokud nechcete kávu úplně opustit, ideální cestou je kompromis. Ráno si dopřejte oblíbené espresso, ale jakmile přijde odpolední únava, vyměňte druhou kávu za lahodné studené [Matcha Latte](/blog/matcha-latte-recept). Udržíte si tak energii po zbytek dne a v noci budete spát jako nemluvně.
     `
   },
   {
