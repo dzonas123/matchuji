@@ -35,12 +35,32 @@ function renderContent(content: string) {
   const elements: React.ReactNode[] = [];
   let listBuffer: string[] = [];
 
+  const parseInline = (text: string) => {
+    const parts = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g);
+    return parts.map((p, j) => {
+      if (p.startsWith("**")) {
+        return <strong key={j}>{p.slice(2, -2)}</strong>;
+      }
+      if (p.startsWith("[")) {
+        const match = p.match(/\[([^\]]+)\]\(([^)]+)\)/);
+        if (match) {
+          const url = match[2];
+          if (url.startsWith("http")) {
+            return <a key={j} href={url} target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>{match[1]}</a>;
+          }
+          return <Link key={j} href={url} className={styles.inlineLink}>{match[1]}</Link>;
+        }
+      }
+      return p;
+    });
+  };
+
   const flushList = (key: string) => {
     if (listBuffer.length > 0) {
       elements.push(
         <ul key={key} className={styles.list}>
           {listBuffer.map((item, i) => (
-            <li key={i}>{item.replace(/^[-✅•]\s*/, "")}</li>
+            <li key={i}>{parseInline(item.replace(/^[-✅•]\s*/, ""))}</li>
           ))}
         </ul>
       );
@@ -51,9 +71,22 @@ function renderContent(content: string) {
   lines.forEach((line, i) => {
     const trimmed = line.trim();
 
-    if (trimmed.startsWith("## ")) {
+    if (trimmed.startsWith("### ")) {
+      flushList(`flush-${i}`);
+      elements.push(<h3 key={i} className={styles.h3}>{trimmed.slice(4)}</h3>);
+    } else if (trimmed.startsWith("## ")) {
       flushList(`flush-${i}`);
       elements.push(<h2 key={i} className={styles.h2}>{trimmed.slice(3)}</h2>);
+    } else if (trimmed.startsWith("![") && trimmed.includes("](") && trimmed.endsWith(")")) {
+      flushList(`flush-${i}`);
+      const match = trimmed.match(/^!\[([^\]]+)\]\(([^)]+)\)$/);
+      if (match) {
+        elements.push(
+          <div key={i} className={styles.imageWrapper}>
+            <img src={match[2]} alt={match[1]} className={styles.articleImage} loading="lazy" />
+          </div>
+        );
+      }
     } else if (trimmed.startsWith("**") && trimmed.endsWith("**")) {
       flushList(`flush-${i}`);
       elements.push(<p key={i} className={styles.bold}>{trimmed.slice(2, -2)}</p>);
@@ -66,29 +99,6 @@ function renderContent(content: string) {
       flushList(`flush-${i}`);
     } else if (trimmed) {
       flushList(`flush-${i}`);
-      // Replace **bold** and [link](url) inline
-      const parseInline = (text: string) => {
-        const parts = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g);
-        return parts.map((p, j) => {
-          if (p.startsWith("**")) {
-            return <strong key={j}>{p.slice(2, -2)}</strong>;
-          }
-          if (p.startsWith("[")) {
-            const match = p.match(/\[([^\]]+)\]\(([^)]+)\)/);
-            if (match) {
-              const url = match[2];
-              // External links
-              if (url.startsWith("http")) {
-                return <a key={j} href={url} target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>{match[1]}</a>;
-              }
-              // Internal links
-              return <Link key={j} href={url} className={styles.inlineLink}>{match[1]}</Link>;
-            }
-          }
-          return p;
-        });
-      };
-      
       elements.push(<p key={i} className={styles.para}>{parseInline(trimmed)}</p>);
     }
   });

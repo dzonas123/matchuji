@@ -117,6 +117,28 @@
   border-bottom: 2px solid #f0fdf4;
 }
 
+.h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a3a25;
+  letter-spacing: -0.015em;
+  margin: 32px 0 12px;
+}
+
+.imageWrapper {
+  margin: 32px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(10, 31, 19, 0.08);
+}
+
+.articleImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
 .para {
   font-size: 1.02rem;
   color: #2d3b32;
