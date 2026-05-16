@@ -54,6 +54,24 @@ export default function ProductCard({ product }: { product: ProductProps }) {
     const rating = product.rating || 5;
     const reviews = product.reviews || 0;
 
+    const isB2B = product.id === "b2b-samples";
+    const productLink = product.id === "matcha-set-bamboo" ? "/product/matcha-set-bamboo" : "/product/ceremonial-matcha";
+
+    const ImageWrapper = () => (
+        <div className={styles.imageWrapper}>
+            <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                className={styles.image}
+            />
+        </div>
+    );
+
+    const TitleWrapper = () => (
+        <h3 className={styles.productName}>{product.name}</h3>
+    );
+
     return (
         <motion.div
             className={styles.card}
@@ -63,16 +81,11 @@ export default function ProductCard({ product }: { product: ProductProps }) {
             {product.tag && <span className={styles.tag}>{product.tag}</span>}
             {discount > 0 && <span className={styles.discountBadge}>-{discount}%</span>}
 
-            <Link href={product.id === "matcha-set-bamboo" ? "/product/matcha-set-bamboo" : "/product/ceremonial-matcha"} className={styles.imageLink}>
-                <div className={styles.imageWrapper}>
-                    <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className={styles.image}
-                    />
-                </div>
-            </Link>
+            {isB2B ? (
+                <div className={styles.imageLink}><ImageWrapper /></div>
+            ) : (
+                <Link href={productLink} className={styles.imageLink}><ImageWrapper /></Link>
+            )}
 
             <div className={styles.info}>
                 <div className={styles.ratingRow}>
@@ -84,9 +97,11 @@ export default function ProductCard({ product }: { product: ProductProps }) {
                     {reviews > 0 && <span className={styles.reviewCount}>({reviews})</span>}
                 </div>
 
-                <Link href={product.id === "matcha-set-bamboo" ? "/product/matcha-set-bamboo" : "/product/ceremonial-matcha"} className={styles.titleLink}>
-                    <h3 className={styles.productName}>{product.name}</h3>
-                </Link>
+                {isB2B ? (
+                    <div className={styles.titleLink}><TitleWrapper /></div>
+                ) : (
+                    <Link href={productLink} className={styles.titleLink}><TitleWrapper /></Link>
+                )}
 
                 <p className={styles.productDesc}>{product.description}</p>
 
@@ -100,16 +115,19 @@ export default function ProductCard({ product }: { product: ProductProps }) {
                     )}
                 </div>
 
-                <div className={styles.actions}>
-                    <Link href={product.id === "matcha-set-bamboo" ? "/product/matcha-set-bamboo" : "/product/ceremonial-matcha"} className={styles.btnDetail}>
-                        Detail produktu
-                    </Link>
+                <div className={styles.actions} style={isB2B ? { display: 'flex' } : {}}>
+                    {!isB2B && (
+                        <Link href={productLink} className={styles.btnDetail}>
+                            Detail produktu
+                        </Link>
+                    )}
                     <button
                         className={styles.btnCart}
                         onClick={handleAddToCart}
                         aria-label="Přidat do košíku"
+                        style={isB2B ? { width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' } : {}}
                     >
-                        <Icons.Cart />
+                        <Icons.Cart /> {isB2B && "Přidat do košíku"}
                     </button>
                 </div>
             </div>
