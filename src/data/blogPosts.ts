@@ -860,6 +860,8 @@ Tato kvalita se sbírá později během léta. Lístky už viděly více slunce,
 
 ![Prášek ceremoniální matchy přesátý do jemných zelených kopečků](https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=2670&auto=format&fit=crop)
 
+[PRODUCT:matcha-50g]
+
 ## Jak připravit tu pravou Matchu?
 
 Odpověď na otázku "co je matcha" už znáte. Teď ji stačí jen zkusit! Zpomeňte na zalévání sáčků vroucí vodou. Matcha ceremonial si zaslouží víc:
@@ -920,6 +922,8 @@ Když vybíráte svůj první **set na matchu**, naše hlavní rada zní: **Hled
 Sada je k ničemu, pokud je uvnitř čaj z masové čínské produkce. Ptejte se, odkud čaj v sadě pochází (ideálně prefektura Uji v Japonsku) a zda má set metličku s dostatečným počtem štětinek (kolem 100).
 
 Pokud chcete mít absolutní jistotu, naše [Startovací sady Matchuji](/product/ceremonial-matcha-3pack) jsou postavené přesně na těchto základech: elitní japonský čaj, precizní bambusové příslušenství a design, který si okamžitě zamilujete.
+
+[PRODUCT:matcha-set-bamboo]
 
 Začněte svůj den správně. S pravým rituálem a tou nejlepší energií.
     `

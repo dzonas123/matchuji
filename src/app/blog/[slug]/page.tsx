@@ -3,6 +3,43 @@ import Link from "next/link";
 import { getBlogPost, blogPosts } from "@/data/blogPosts";
 import type { Metadata } from "next";
 import styles from "./page.module.css";
+import ProductCard from "@/components/ProductCard";
+
+const blogProducts = [
+    {
+        id: "matcha-50g",
+        name: "Ceremoniální Matcha 50g",
+        description: "Ideální pro začátečníky. Jemná chuť, vysoká kvalita.",
+        price: 297,
+        originalPrice: 390,
+        image: "/images/matcha-bag-single.jpg",
+        tag: "Bestseller",
+        rating: 5,
+        reviews: 128
+    },
+    {
+        id: "matcha-3pack",
+        name: "Matcha Bundle 3-Pack",
+        description: "Zásoba energie na 3 měsíce. Ušetříte 15%.",
+        price: 769,
+        originalPrice: 1197,
+        image: "/images/matcha-premium-3ks.jpg",
+        tag: "Nejvýhodnější",
+        rating: 5,
+        reviews: 45
+    },
+    {
+        id: "matcha-set-bamboo",
+        name: "Bambusový Matcha Set (4ks)",
+        description: "Tradiční kompletní set pro přípravu matchy. Obsahuje metličku (chasen), čajovou lžičku, naběračku a sítko.",
+        price: 349,
+        originalPrice: 490,
+        image: "/images/matcha-set-1.jpg",
+        tag: "Novinka",
+        rating: 5,
+        reviews: 12
+    }
+];
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -95,6 +132,17 @@ function renderContent(content: string) {
       elements.push(<hr key={i} className={styles.divider} />);
     } else if (trimmed.startsWith("- ") || trimmed.startsWith("✅ ") || trimmed.startsWith("• ")) {
       listBuffer.push(trimmed);
+    } else if (trimmed.startsWith("[PRODUCT:") && trimmed.endsWith("]")) {
+      flushList(`flush-${i}`);
+      const productId = trimmed.slice(9, -1);
+      const product = blogProducts.find(p => p.id === productId);
+      if (product) {
+        elements.push(
+          <div key={i} className={styles.productCardWrapper}>
+            <ProductCard product={product} />
+          </div>
+        );
+      }
     } else if (trimmed === "") {
       flushList(`flush-${i}`);
     } else if (trimmed) {
