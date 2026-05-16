@@ -44,6 +44,18 @@ export default function RootLayout({
             })(window, document, "clarity", "script", "wrx7w9wqus");
           `}
         </Script>
+        
+        {/* Google Analytics */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-Q0EFV3Q30P" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-Q0EFV3Q30P');
+          `}
+        </Script>
         <CartProvider>
           <Header />
           <CartDrawer />
