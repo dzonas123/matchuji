@@ -110,6 +110,34 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <main className={styles.main}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: post.seoTitle,
+            description: post.seoDescription,
+            image: ["https://matchuji.cz/images/matcha-lifestyle.jpg"],
+            datePublished: post.publishedAt,
+            author: [{ "@type": "Organization", name: "Matchuji", url: "https://matchuji.cz" }]
+          })
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Domů", item: "https://matchuji.cz/" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://matchuji.cz/blog" },
+              { "@type": "ListItem", position: 3, name: post.title, item: `https://matchuji.cz/blog/${post.slug}` }
+            ]
+          })
+        }}
+      />
       {/* Breadcrumb */}
       <nav className={styles.breadcrumb} aria-label="Breadcrumb">
         <Link href="/">Domů</Link>
