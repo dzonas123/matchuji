@@ -30,6 +30,7 @@ export default function Header() {
     const navLinks = [
         { href: "/", label: "Domů" },
         { href: "/product/ceremonial-matcha", label: "Produkty" },
+        { href: "/blog", label: "Blog" },
         { href: "/pro-kavarny", label: "Pro kavárny" },
     ];
 

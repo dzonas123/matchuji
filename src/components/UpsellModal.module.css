@@ -6,9 +6,10 @@
     -webkit-backdrop-filter: blur(10px);
     z-index: 9999;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     padding: 20px;
+    overflow-y: auto;
 }
 
 .modal {
@@ -20,6 +21,7 @@
     position: relative;
     box-shadow: 0 50px 120px rgba(10, 31, 19, 0.28);
     border: 1px solid rgba(204, 255, 0, 0.2);
+    margin: auto;
 }
 
 /* Close button */
@@ -252,19 +254,53 @@
 
 @media (max-width: 500px) {
     .modal {
-        padding: 28px 18px 22px;
+        padding: 48px 20px 24px;
         border-radius: 24px;
     }
 
+    .closeBtn {
+        top: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+    }
+
     .card {
-        flex-direction: column;
-        padding: 16px;
-        gap: 16px;
+        flex-direction: row;
+        padding: 12px;
+        gap: 12px;
+        align-items: center;
     }
 
     .imageWrapper {
-        width: 100%;
-        height: 180px;
+        width: 80px;
+        height: 80px;
+        border-radius: 12px;
+    }
+
+    .cardBody {
+        gap: 6px;
+    }
+
+    .cardTitle {
+        font-size: 0.95rem;
+    }
+
+    .chips {
+        display: none;
+    }
+
+    .priceRow {
+        gap: 6px;
+    }
+
+    .price {
+        font-size: 1.15rem;
+    }
+
+    .savings {
+        font-size: 0.65rem;
+        padding: 2px 6px;
     }
 
     .headline {
@@ -272,7 +308,7 @@
     }
 
     .btnAdd {
-        height: 56px;
+        height: 52px;
         font-size: 1rem;
     }
 }
