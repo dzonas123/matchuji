@@ -103,7 +103,7 @@ export default function ProductCard({ product }: { product: ProductProps }) {
                     <Link href={productLink} className={styles.titleLink}><TitleWrapper /></Link>
                 )}
 
-                <p className={styles.productDesc}>{product.description}</p>
+                <p className={isB2B ? styles.productDescB2B : styles.productDesc}>{product.description}</p>
 
                 <div className={styles.priceRow}>
                     <span className={styles.price}>{product.price} Kč</span>
@@ -122,10 +122,9 @@ export default function ProductCard({ product }: { product: ProductProps }) {
                         </Link>
                     )}
                     <button
-                        className={styles.btnCart}
+                        className={isB2B ? styles.btnCartB2B : styles.btnCart}
                         onClick={handleAddToCart}
                         aria-label="Přidat do košíku"
-                        style={isB2B ? { width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' } : {}}
                     >
                         <Icons.Cart /> {isB2B && "Přidat do košíku"}
                     </button>

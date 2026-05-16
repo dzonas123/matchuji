@@ -140,6 +140,14 @@
     flex-grow: 1;
 }
 
+.productDescB2B {
+    color: #4a5d52;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
 .priceRow {
     display: flex;
     align-items: baseline;
@@ -213,4 +221,28 @@
 .btnCart:hover {
     background: #e5e7eb;
     border-color: #d1d5db;
+}
+
+.btnCartB2B {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: #ccff00;
+    color: #0d2112;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btnCartB2B:hover {
+    background: #b3e600;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(204, 255, 0, 0.3);
 }
