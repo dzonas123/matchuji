@@ -6,14 +6,14 @@ import { usePathname } from "next/navigation";
 
 type View = "dashboard" | "orders" | "products" | "customers" | "discounts";
 
-
 interface SidebarProps {
     currentView: View;
     onChangeView: (view: View) => void;
     onLogout: () => void;
+    isOpen?: boolean;
 }
 
-export default function Sidebar({ currentView, onChangeView, onLogout }: SidebarProps) {
+export default function Sidebar({ currentView, onChangeView, onLogout, isOpen = false }: SidebarProps) {
     const menuItems: { id: View; label: string; icon: string }[] = [
         { id: "dashboard", label: "Přehled", icon: "📊" },
         { id: "orders", label: "Objednávky", icon: "📦" },
@@ -21,9 +21,8 @@ export default function Sidebar({ currentView, onChangeView, onLogout }: Sidebar
         { id: "discounts", label: "Slevy", icon: "🎟️" },
     ];
 
-
     return (
-        <aside className={styles.sidebar}>
+        <aside className={`${styles.sidebar} ${isOpen ? styles.sidebarOpen : ""}`}>
             <div className={styles.sidebarHeader}>
                 Matchuji Admin
             </div>
