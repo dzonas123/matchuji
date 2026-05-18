@@ -151,6 +151,15 @@ function CheckoutContent() {
     if (step === "success") {
         return (
             <div className={styles.success}>
+                <Script id="google-ads-conversion" strategy="afterInteractive">
+                    {`
+                      gtag('event', 'conversion', {
+                          'send_to': 'AW-11313378334/t50JCI38oaAZEJ7o0ZIq',
+                          'value': 1.0,
+                          'currency': 'CZK'
+                      });
+                    `}
+                </Script>
                 <span className={styles.successIcon}>🎉</span>
                 <h1>Objednávka přijata!</h1>
                 <p>Děkujeme za váš nákup. Číslo vaší objednávky je <strong>#MC{searchParams.get("session_id")?.slice(-6).toUpperCase() || "SUCCESS"}</strong>.</p>
