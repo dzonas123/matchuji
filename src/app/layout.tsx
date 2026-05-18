@@ -45,8 +45,9 @@ export default function RootLayout({
           `}
         </Script>
         
-        {/* Google Analytics */}
+        {/* Google Analytics & Ads */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-Q0EFV3Q30P" strategy="afterInteractive" />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=AW-11313378334" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
@@ -54,6 +55,7 @@ export default function RootLayout({
             gtag('js', new Date());
 
             gtag('config', 'G-Q0EFV3Q30P');
+            gtag('config', 'AW-11313378334');
           `}
         </Script>
         <CartProvider>
