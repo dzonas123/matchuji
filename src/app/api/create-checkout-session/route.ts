@@ -14,7 +14,8 @@ export async function POST(req: Request) {
     try {
         const { items, shipping, carrier, discount } = await req.json();
 
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://matchuji.vercel.app";
+        const origin = req.headers.get('origin');
+        const baseUrl = origin || process.env.NEXT_PUBLIC_BASE_URL || "https://www.matchuji.cz";
 
         const line_items = items.map((item: any) => {
             const imageUrl = item.image.startsWith('http')
