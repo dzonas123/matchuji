@@ -64,6 +64,7 @@ export default function OrderList({ orders, onUpdate }: OrderListProps) {
                     <option value="shipped">Odesláno</option>
                     <option value="delivered">Vyzvednuto</option>
                     <option value="pending">Čekající</option>
+                    <option value="delayed">Zpožděno</option>
                 </select>
             </div>
 
@@ -111,7 +112,8 @@ export default function OrderList({ orders, onUpdate }: OrderListProps) {
                                             {order.status === 'shipped' && 'Odesláno'}
                                             {order.status === 'delivered' && 'Vyzvednuto'}
                                             {order.status === 'pending' && 'Čekající'}
-                                            {!['paid', 'packed', 'shipped', 'delivered', 'pending'].includes(order.status) && order.status}
+                                            {order.status === 'delayed' && 'Zpožděno'}
+                                            {!['paid', 'packed', 'shipped', 'delivered', 'pending', 'delayed'].includes(order.status) && order.status}
                                         </span>
                                     </td>
                                 </tr>

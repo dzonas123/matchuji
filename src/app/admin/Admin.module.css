@@ -343,6 +343,11 @@
     color: #854d0e;
 }
 
+.status.delayed {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
 /* Responsive */
 /* Modal */
 .modalOverlay {

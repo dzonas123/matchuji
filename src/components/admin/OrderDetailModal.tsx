@@ -167,6 +167,7 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                                     <option value="shipped">Odesláno</option>
                                     <option value="delivered">Vyzvednuto</option>
                                     <option value="pending">Čekající</option>
+                                    <option value="delayed">Zpožděno</option>
                                 </select>
                             </div>
                             <span style={{ fontSize: '0.8rem', color: '#999' }}>Vytvořeno: {new Date(order.date).toLocaleString('cs-CZ')}</span>

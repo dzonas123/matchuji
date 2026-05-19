@@ -113,6 +113,31 @@ export async function PATCH(
     </div>
   </div>
 </body>
+                    </html>`;
+                } else if (status === "delayed") {
+                    subject = `⚠️ Zpoždění objednávky #${currentOrder.variableSymbol || currentOrder.id.slice(-6).toUpperCase()} | Matchuji`;
+                    htmlContent = `
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background:#f5f5f0;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <div style="max-width:600px;margin:40px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+    <div style="background:#0c3314;padding:30px 40px;text-align:center;">
+      <h1 style="margin:0;color:#fff;font-size:24px;">Omlouváme se za zpoždění</h1>
+    </div>
+    <div style="padding:40px;">
+      <h2 style="margin:0 0 16px;color:#0c3314;font-size:20px;">Ahoj ${firstName},</h2>
+      <p style="margin:0 0 16px;color:#555;font-size:16px;line-height:1.6;">
+        Tvoje objednávka <strong>#${currentOrder.variableSymbol || currentOrder.id.slice(-6).toUpperCase()}</strong> má bohužel drobné zpoždění. Moc se omlouváme, děláme vše pro to, aby k tobě zásilka dorazila co nejdříve.
+      </p>
+      <div style="background:#fef2f2;border-left:4px solid #ef4444;padding:16px 20px;margin:24px 0;">
+        <p style="margin:0;color:#991b1b;font-size:15px;line-height:1.5;">Jako malou omluvu za čekání od nás přijmi slevový kód 15 % na tvou další objednávku:<br/><br/>
+        <strong style="font-size:20px;letter-spacing:1px;display:block;text-align:center;color:#b91c1c;">ZPOZDENI15</strong></p>
+      </div>
+      <p style="margin:24px 0 0;color:#555;font-size:15px;">Děkujeme za tvou trpělivost.<br/><strong style="color:#0c3314;">Tým Matchuji 🍃</strong></p>
+    </div>
+  </div>
+</body>
 </html>`;
                 }
 
