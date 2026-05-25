@@ -70,7 +70,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         // a set ještě nemá v košíku
         if (MATCHA_PRODUCT_IDS.includes(newItem.id)) {
             setItems((current) => {
-                const hasSet = current.some((i) => i.id === "matcha-set-bamboo");
+                const hasSet = current.some((i) => i.id === "matcha-metlicka");
                 if (!hasSet) {
                     setTimeout(() => setShowUpsell(true), 400);
                 }

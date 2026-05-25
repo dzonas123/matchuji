@@ -18,12 +18,13 @@
         "image": "/images/matcha-premium-3ks.jpg"
     },
     {
-        "id": "matcha-set-bamboo",
-        "name": "Bambusový Matcha Set (4ks)",
-        "price": 349,
+        "id": "matcha-metlicka",
+        "name": "Bambusová metlička (chasen)",
+        "price": 189,
         "stock": 25,
-        "sku": "MATCHA-SET-BAMBOO",
+        "sku": "MATCHA-METLICKA-CHASEN",
         "ean": "2000000000039",
+        "image": "/images/matcha-chasen.jpg"
     },
     {
         "id": "b2b-samples",

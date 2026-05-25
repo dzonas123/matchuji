@@ -55,7 +55,7 @@ export default function ProductCard({ product }: { product: ProductProps }) {
     const reviews = product.reviews || 0;
 
     const isB2B = product.id === "b2b-samples";
-    const productLink = product.id === "matcha-set-bamboo" ? "/product/matcha-set-bamboo" : "/product/ceremonial-matcha";
+    const productLink = product.id === "matcha-metlicka" ? "/product/matcha-metlicka" : "/product/ceremonial-matcha";
 
     const ImageWrapper = () => (
         <div className={styles.imageWrapper}>

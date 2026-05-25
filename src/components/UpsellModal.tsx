@@ -1,15 +1,15 @@
 "use client";
-
+ 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import styles from "./UpsellModal.module.css";
-
+ 
 export default function UpsellModal() {
     const { showUpsell, setShowUpsell, addItem } = useCart();
     const overlayRef = useRef<HTMLDivElement>(null);
-
+ 
     useEffect(() => {
         const handler = (e: KeyboardEvent) => {
             if (e.key === "Escape") setShowUpsell(false);
@@ -17,18 +17,18 @@ export default function UpsellModal() {
         window.addEventListener("keydown", handler);
         return () => window.removeEventListener("keydown", handler);
     }, [setShowUpsell]);
-
+ 
     const handleAddToCart = () => {
         addItem({
-            id: "matcha-set-bamboo",
-            name: "Bambusový Matcha Set (4ks)",
-            price: 349,
-            originalPrice: 490,
-            image: "/images/matcha-set-1.jpg",
+            id: "matcha-metlicka",
+            name: "Bambusová metlička (chasen)",
+            price: 189,
+            originalPrice: 249,
+            image: "/images/matcha-chasen.jpg",
         });
         setShowUpsell(false);
     };
-
+ 
     return (
         <AnimatePresence>
             {showUpsell && (
@@ -60,7 +60,7 @@ export default function UpsellModal() {
                                 <line x1="6" y1="6" x2="18" y2="18" />
                             </svg>
                         </button>
-
+ 
                         {/* Header text */}
                         <div className={styles.header}>
                             <p className={styles.eyebrow}>🍵 NEZAPOMEŇTE NA PŘÍPRAVU</p>
@@ -69,39 +69,39 @@ export default function UpsellModal() {
                                 <em>Máte správné nástroje na přípravu?</em>
                             </h2>
                             <p className={styles.desc}>
-                                Bez tradiční bambusové metličky neuděláte tu správnou krémovou pěnu a bez sítka se nezbavíte hrudek. Přidejte si náš kompletní set a připravte si matchu jako mistr.
+                                Bez tradiční bambusové metličky (chasen) neuděláte tu správnou krémovou pěnu a čaj se plně nerozpustí. Přidejte si ji k objednávce a připravte si matchu jako mistr.
                             </p>
                         </div>
-
+ 
                         {/* Product card */}
                         <div className={styles.card}>
                             <div className={styles.imageWrapper}>
                                 <Image
-                                    src="/images/matcha-set-1.jpg"
-                                    alt="Bambusový Matcha Set"
+                                    src="/images/matcha-chasen.jpg"
+                                    alt="Bambusová metlička"
                                     fill
                                     className={styles.image}
                                 />
-                                <div className={styles.imageBadge}>-29%</div>
+                                <div className={styles.imageBadge}>-24%</div>
                             </div>
-
+ 
                             <div className={styles.cardBody}>
-                                <p className={styles.cardTitle}>Bambusový Matcha Set (4 ks)</p>
+                                <p className={styles.cardTitle}>Bambusová metlička (chasen)</p>
                                 
                                 <div className={styles.chips}>
-                                    {["Metlička", "Naběračka", "Lžička", "Sítko"].map((item) => (
+                                    {["100 jehel", "Zlatý bambus", "Tradiční výroba"].map((item) => (
                                         <span key={item} className={styles.chip}>{item}</span>
                                     ))}
                                 </div>
-
+ 
                                 <div className={styles.priceRow}>
-                                    <span className={styles.price}>349 Kč</span>
-                                    <span className={styles.originalPrice}>490 Kč</span>
-                                    <span className={styles.savings}>Ušetříte 141 Kč</span>
+                                    <span className={styles.price}>189 Kč</span>
+                                    <span className={styles.originalPrice}>249 Kč</span>
+                                    <span className={styles.savings}>Ušetříte 60 Kč</span>
                                 </div>
                             </div>
                         </div>
-
+ 
                         {/* Actions */}
                         <div className={styles.actions}>
                             <button className={styles.btnAdd} onClick={handleAddToCart}>
@@ -110,7 +110,7 @@ export default function UpsellModal() {
                                     <line x1="3" y1="6" x2="21" y2="6" />
                                     <path d="M16 10a4 4 0 0 1-8 0" />
                                 </svg>
-                                Přidat set do košíku
+                                Přidat metličku do košíku
                             </button>
                             <button className={styles.btnDecline} onClick={() => setShowUpsell(false)}>
                                 Díky, nepotřebuji

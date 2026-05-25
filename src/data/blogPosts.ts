@@ -148,7 +148,7 @@ Tohle vám neřekne každý: Pokud do latte použijete levnou matchu určenou [n
 - 2 gramy prémiové matchy (to jsou zhruba 2 bambusové lžičky)
 - 50 ml horké vody (ne vroucí!)
 - 200 ml oblíbeného mléka
-- Náš [Bambusový matcha set](/product/matcha-set-bamboo) (metlička je absolutní základ pro hustou pěnu)
+- Naše [Bambusová metlička (chasen)](/product/matcha-metlicka) (absolutní základ pro hustou pěnu)
 
 ## Recept: Klasické teplé Matcha Latte
 
@@ -219,7 +219,7 @@ Zářivě zelená barva naší ceremonální matchy neznamená jen to, že [jste
 
 ## Jak to shrnout?
 
-Věda nám jasně dokazuje, že ta zelená pěna na dně vaší misky s [bambusovou metličkou](/product/matcha-set-bamboo) opravdu funguje. Získáte antioxidanty, klid v duši a mírně rychlejší spalování. Pro to, abyste ale všechny tyto výhody ucítili, je klíčové kupovat čistou, BIO certifikovanou matchu (bez těžkých kovů z průmyslového prostředí, jak to dokazují naše [certifikace](/certifikace)).
+Věda nám jasně dokazuje, že ta zelená pěna na dně vaší misky s [bambusovou metličkou](/product/matcha-metlicka) opravdu funguje. Získáte antioxidanty, klid v duši a mírně rychlejší spalování. Pro to, abyste ale všechny tyto výhody ucítili, je klíčové kupovat čistou, BIO certifikovanou matchu (bez těžkých kovů z průmyslového prostředí, jak to dokazují naše [certifikace](/certifikace)).
     `
   },
   {
@@ -327,7 +327,7 @@ Tradiční příprava matchy doma vám totiž kromě parádní energie (a my už
 
 ## Nářadí pro rituál: Co skutečně potřebujeme?
 
-Můžete to míchat lžičkou? Můžete. Bude to dobré? Ne, budou tam hrudky a nikdy neuděláte pěnu. Proto se vyplatí pořídit si tzv. [Kompletní Matcha Set](/product/matcha-set-bamboo). Zahrnuje:
+Můžete to míchat lžičkou? Můžete. Bude to dobré? Ne, budou tam hrudky a nikdy neuděláte pěnu. Proto se vyplatí pořídit si naši [bambusovou metličku](/product/matcha-metlicka). Tradiční příprava vyžaduje:
 
 - **Chasen (Bambusová metlička):** Sto jemných štětinek z jednoho kusu bambusu, které dokážou do prášku nahnat vzduch a vytvořit hustou smaragdovou pěnu.
 - **Chawan (Miska):** Speciálně tvarovaná široká keramická miska pro prostor na šlehání.
@@ -533,7 +533,7 @@ Eisai napsal knihu, kde definoval čaj jako "elixír pro udržení zdravého ži
 
 ## Palivo pro samuraje
 
-To, co fungovalo mnichům k dosažení absolutního soustředění a vyčištění hlavy, brzy adaptovali nejobávanější bojovníci oné doby – Samurajové. Představte si, že vás čeká krutá středověká bitva o území, a vy si místo meče sednete s hrubou miskou do klidu a připravíte si misku matchy s [bambusovou metličkou](/product/matcha-set-bamboo). Samurajům to dávalo klidnou mysl bez strachu. Místo krveprolití nacházeli mír v přesnosti rituálu. Z čaje se stalo prestižní zboží elity.
+To, co fungovalo mnichům k dosažení absolutního soustředění a vyčištění hlavy, brzy adaptovali nejobávanější bojovníci oné doby – Samurajové. Představte si, že vás čeká krutá středověká bitva o území, a vy si místo meče sednete s hrubou miskou do klidu a připravíte si misku matchy s [bambusovou metličkou](/product/matcha-metlicka). Samurajům to dávalo klidnou mysl bez strachu. Místo krveprolití nacházeli mír v přesnosti rituálu. Z čaje se stalo prestižní zboží elity.
 
 ## Wabi Sabi a rituál Chadó
 
@@ -619,7 +619,7 @@ Zároveň katechiny stimulují hormon zvaný noradrenalin, který dává tukový
 
 Nejlepších výsledků nedosáhnete, pokud budete ležet doma na gauči s miskou plnou ledového [Matcha Latte](/blog/matcha-latte-recept) a čekat na zázrak. Já osobně doporučuji (a spousta sportovců dělá to samé) zařadit to jako čistě přírodní Pre-Workout.
 
-Cca 30 minut před cvičením si klasicky vyšlehám misku naší nejkvalitnější [Ceremonial matchy](/product/ceremonial-matcha) pomocí [bambusové sady](/product/matcha-set-bamboo). Tělo přijme EGCG. K tomu začne plynule úřadovat kofein bržděný L-Theaninem, takže nejsem roztěkaný. A co se stane v gymu?
+Cca 30 minut před cvičením si klasicky vyšlehám misku naší nejkvalitnější [Ceremonial matchy](/product/ceremonial-matcha) pomocí [bambusové metličky](/product/matcha-metlicka). Tělo přijme EGCG. K tomu začne plynule úřadovat kofein bržděný L-Theaninem, takže nejsem roztěkaný. A co se stane v gymu?
 
 Podle American Journal of Clinical Nutrition cvičení s přítomností zeleného čaje v krvi dokáže spálit **o 17 % více tělesného tuku** při stejném úsilí. Je to jako bych si k tréninku přidal pětinu výkonu zadarmo. Pokud radši cvičíte nalačno, doporučuji do sebe pak kopnout proteinové regenerační [Matcha Smoothie s banánem](/blog/matcha-smoothie-recepty). 
 
@@ -658,7 +658,7 @@ Pojďme si to dát do kontextu našich oblíbených rituálů (pozor, hodnoty se
 - Klasický zelený čaj v pytlíku: ~30-40 mg
 - **Jeden šálek naší Ceremonial Matchy (z 2 g prášku): ~60-70 mg kofeinu**
 
-Co z toho vyplývá? I kdybyste si ráno šlehala svou misku [bambusovou metličkou](/product/matcha-set-bamboo) (mrkněte do návodu na [tradiční přípravu](/blog/jak-pripravit-matchu-tradicne)) s 2 gramy matchy a udělala si k tomu zítra na snídani třeba úžasné [Matcha Smoothie](/blog/matcha-smoothie-recepty), vyčerpáte stěží půlku svého bezpečného limitu!
+Co z toho vyplývá? I kdybyste si ráno šlehala svou misku [bambusovou metličkou](/product/matcha-metlicka) (mrkněte do návodu na [tradiční přípravu](/blog/jak-pripravit-matchu-tradicne)) s 2 gramy matchy a udělala si k tomu zítra na snídani třeba úžasné [Matcha Smoothie](/blog/matcha-smoothie-recepty), vyčerpáte stěží půlku svého bezpečného limitu!
 
 Dva šálky matcha čaje denně (okolo 140 mg) jsou tak ve vaší bezpečné těhotenské rovině naprosto v pořádku.
 
@@ -697,7 +697,7 @@ Pojďme si ty nejpoužívanější termíny rozluštit, ať příště můžete 
 
 Pokud jste četli můj detailní [návod na tradiční rituální přípravu matchy u vás doma](/blog/jak-pripravit-matchu-tradicne), tyto pojmy už asi znáte:
 
-- **Chasen (Časen):** Ta magická bambusová metlička, která udělala tu neskutečnou smaragdovou pěnu. Vyrábí se z jednoho kusu bambusu a čajoví mistři stráví roky tím, než ji dokážou správně nařezat. Zkuste si ji koupit v [naší sadě](/product/matcha-set-bamboo).
+- **Chasen (Časen):** Ta magická bambusová metlička, která udělala tu neskutečnou smaragdovou pěnu. Vyrábí se z jednoho kusu bambusu a čajoví mistři stráví roky tím, než ji dokážou správně nařezat. Zkuste si ji koupit [samostatně](/product/matcha-metlicka).
 - **Chawan (Čawan):** Japonská, často ručně točená a schválně nedokonalá, hluboká keramická miska, ze které se matcha nejen pije, ale hlavně se v ní díky jejímu širokému dnu snadno šlehá.
 - **Chashaku (Čašaku):** Úzká, elegantně ohnutá bambusová lžička. Slouží k nabírání přesné dávky zeleného zlata (zhruba jeden gram prášku). Dvě lžičky tvoří jednu perfektní dávku čaje [Usucha](#).
 
@@ -951,7 +951,7 @@ Sada je k ničemu, pokud je uvnitř čaj z masové čínské produkce. Ptejte se
 
 Pokud chcete mít absolutní jistotu, naše [Startovací sady Matchuji](/product/ceremonial-matcha-3pack) jsou postavené přesně na těchto základech: elitní japonský čaj, precizní bambusové příslušenství a design, který si okamžitě zamilujete.
 
-[PRODUCT:matcha-set-bamboo]
+[PRODUCT:matcha-metlicka]
 
 Začněte svůj den správně. S pravým rituálem a tou nejlepší energií.
     `

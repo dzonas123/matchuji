@@ -257,15 +257,15 @@ export default function ProductDetails({
                         <h3 className={styles.prepTipHeading}>💡 Tip k přípravě</h3>
                         <div className={styles.prepCardContainer}>
                             <ProductCard product={{
-                                id: "matcha-set-bamboo",
-                                name: "Bambusový Matcha Set (4ks)",
-                                description: "Tradiční kompletní set pro přípravu matchy. Obsahuje metličku (chasen), čajovou lžičku, naběračku a sítko.",
-                                price: 349,
-                                originalPrice: 490,
-                                image: "/images/matcha-set-1.jpg",
+                                id: "matcha-metlicka",
+                                name: "Bambusová metlička (chasen)",
+                                description: "Tradiční metlička (chasen) vyrobená ze 100 bambusových jehel. Nezbytný pomocník pro vyšlehání dokonalé krémové pěny.",
+                                price: 189,
+                                originalPrice: 249,
+                                image: "/images/matcha-chasen.jpg",
                                 tag: "Doporučujeme",
                                 rating: 5,
-                                reviews: 12
+                                reviews: 18
                             }} />
                         </div>
                     </div>
