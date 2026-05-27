@@ -4,8 +4,22 @@ import styles from "./CafeB2B.module.css";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import ProductCard from "./ProductCard";
+import { useCart } from "@/context/CartContext";
 
 export default function CafeB2B() {
+    const { addItem } = useCart();
+
+    const handleAddB2B = (quantity: number, discountPercent: number) => {
+        const price = Math.round(297 * (1 - discountPercent / 100));
+        addItem({
+            id: "matcha-50g-b2b",
+            name: "Ceremoniální Matcha 50g (Velkoobchod)",
+            price: price,
+            originalPrice: 297,
+            image: "/images/matcha-bag-single.jpg",
+            quantity: quantity
+        });
+    };
     return (
         <section className={styles.section} id="cafe-b2b">
             <div className={styles.container}>
@@ -24,24 +38,50 @@ export default function CafeB2B() {
                                 <tr>
                                     <th>Množství</th>
                                     <th>Sleva</th>
+                                    <th>Kód</th>
+                                    <th>Objednat</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>Nad 500 g</td>
                                     <td><strong>15 %</strong></td>
+                                    <td><span className={styles.discountCode}>B2B500</span></td>
+                                    <td>
+                                        <button className={styles.btnCartSmall} onClick={() => handleAddB2B(10, 15)}>
+                                            Do košíku (10 ks)
+                                        </button>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Nad 1 kg</td>
                                     <td><strong>20 %</strong></td>
+                                    <td><span className={styles.discountCode}>B2B1000</span></td>
+                                    <td>
+                                        <button className={styles.btnCartSmall} onClick={() => handleAddB2B(20, 20)}>
+                                            Do košíku (20 ks)
+                                        </button>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Nad 2 kg</td>
                                     <td><strong>25 %</strong></td>
+                                    <td><span className={styles.discountCode}>B2B2000</span></td>
+                                    <td>
+                                        <button className={styles.btnCartSmall} onClick={() => handleAddB2B(40, 25)}>
+                                            Do košíku (40 ks)
+                                        </button>
+                                    </td>
                                 </tr>
                                 <tr className={styles.highlightRow}>
                                     <td>4 kg a více</td>
                                     <td><strong>30 %</strong></td>
+                                    <td><span className={styles.discountCode}>B2B4000</span></td>
+                                    <td>
+                                        <button className={styles.btnCartSmall} onClick={() => handleAddB2B(80, 30)}>
+                                            Do košíku (80 ks)
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

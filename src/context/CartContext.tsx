@@ -20,7 +20,7 @@ type CartContextType = {
     setIsOpen: (open: boolean) => void;
     showUpsell: boolean;
     setShowUpsell: (show: boolean) => void;
-    addItem: (item: Omit<CartItem, "quantity">) => void;
+    addItem: (item: Omit<CartItem, "quantity"> & { quantity?: number }) => void;
     removeItem: (id: string) => void;
     updateQuantity: (id: string, delta: number) => void;
     total: number;
@@ -53,17 +53,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
         localStorage.setItem("matchuji_cart", JSON.stringify(items));
     }, [items]);
 
-    const addItem = (newItem: Omit<CartItem, "quantity">) => {
+    const addItem = (newItem: Omit<CartItem, "quantity"> & { quantity?: number }) => {
+        const qtyToAdd = newItem.quantity || 1;
         setItems((current) => {
             const existing = current.find((item) => item.id === newItem.id);
             if (existing) {
                 return current.map((item) =>
                     item.id === newItem.id
-                        ? { ...item, quantity: item.quantity + 1 }
+                        ? { ...item, quantity: item.quantity + qtyToAdd }
                         : item
                 );
             }
-            return [...current, { ...newItem, quantity: 1 }];
+            return [...current, { ...newItem, quantity: qtyToAdd }];
         });
 
         // Zobraz upsell popup pokud zákazník přidal matcha (ne set)

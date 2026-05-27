@@ -213,3 +213,32 @@
         font-size: 1rem;
     }
 }
+
+.discountCode {
+    display: inline-block;
+    background: #f0f7f0;
+    color: #2d6a4f;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-family: monospace;
+    font-weight: bold;
+    border: 1px dashed #2d6a4f;
+}
+
+.btnCartSmall {
+    background: #0d2112;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btnCartSmall:hover {
+    background: #ccff00;
+    color: #0d2112;
+}
