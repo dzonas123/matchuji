@@ -49,7 +49,7 @@ export default function CafeB2B() {
                                     <td><span className={styles.discountCode}>B2B500</span></td>
                                     <td>
                                         <button className={styles.btnCartSmall} onClick={() => handleAddB2B(10, 15)}>
-                                            Do košíku (10 ks)
+                                            Objednat
                                         </button>
                                     </td>
                                 </tr>
@@ -59,7 +59,7 @@ export default function CafeB2B() {
                                     <td><span className={styles.discountCode}>B2B1000</span></td>
                                     <td>
                                         <button className={styles.btnCartSmall} onClick={() => handleAddB2B(20, 20)}>
-                                            Do košíku (20 ks)
+                                            Objednat
                                         </button>
                                     </td>
                                 </tr>
@@ -69,7 +69,7 @@ export default function CafeB2B() {
                                     <td><span className={styles.discountCode}>B2B2000</span></td>
                                     <td>
                                         <button className={styles.btnCartSmall} onClick={() => handleAddB2B(40, 25)}>
-                                            Do košíku (40 ks)
+                                            Objednat
                                         </button>
                                     </td>
                                 </tr>
@@ -79,7 +79,7 @@ export default function CafeB2B() {
                                     <td><span className={styles.discountCode}>B2B4000</span></td>
                                     <td>
                                         <button className={styles.btnCartSmall} onClick={() => handleAddB2B(80, 30)}>
-                                            Do košíku (80 ks)
+                                            Objednat
                                         </button>
                                     </td>
                                 </tr>
