@@ -9,16 +9,19 @@ import { useCart } from "@/context/CartContext";
 export default function CafeB2B() {
     const { addItem } = useCart();
 
-    const handleAddB2B = (quantity: number, discountPercent: number) => {
-        const price = Math.round(297 * (1 - discountPercent / 100));
+    const handleAddB2B = (quantity: number, discountCode: string) => {
         addItem({
             id: "matcha-50g-b2b",
             name: "Ceremoniální Matcha 50g (Velkoobchod)",
-            price: price,
+            price: 297,
             originalPrice: 297,
             image: "/images/matcha-bag-single.jpg",
             quantity: quantity
         });
+        
+        if (typeof window !== "undefined") {
+            sessionStorage.setItem("matchuji_pending_discount", discountCode);
+        }
     };
     return (
         <section className={styles.section} id="cafe-b2b">
@@ -48,7 +51,7 @@ export default function CafeB2B() {
                                     <td><strong>15 %</strong></td>
                                     <td><span className={styles.discountCode}>B2B500</span></td>
                                     <td>
-                                        <button className={styles.btnCartSmall} onClick={() => handleAddB2B(10, 15)}>
+                                        <button className={styles.btnCartSmall} onClick={() => handleAddB2B(10, 'B2B500')}>
                                             Objednat
                                         </button>
                                     </td>
@@ -58,7 +61,7 @@ export default function CafeB2B() {
                                     <td><strong>20 %</strong></td>
                                     <td><span className={styles.discountCode}>B2B1000</span></td>
                                     <td>
-                                        <button className={styles.btnCartSmall} onClick={() => handleAddB2B(20, 20)}>
+                                        <button className={styles.btnCartSmall} onClick={() => handleAddB2B(20, 'B2B1000')}>
                                             Objednat
                                         </button>
                                     </td>
@@ -68,7 +71,7 @@ export default function CafeB2B() {
                                     <td><strong>25 %</strong></td>
                                     <td><span className={styles.discountCode}>B2B2000</span></td>
                                     <td>
-                                        <button className={styles.btnCartSmall} onClick={() => handleAddB2B(40, 25)}>
+                                        <button className={styles.btnCartSmall} onClick={() => handleAddB2B(40, 'B2B2000')}>
                                             Objednat
                                         </button>
                                     </td>
@@ -78,7 +81,7 @@ export default function CafeB2B() {
                                     <td><strong>30 %</strong></td>
                                     <td><span className={styles.discountCode}>B2B4000</span></td>
                                     <td>
-                                        <button className={styles.btnCartSmall} onClick={() => handleAddB2B(80, 30)}>
+                                        <button className={styles.btnCartSmall} onClick={() => handleAddB2B(80, 'B2B4000')}>
                                             Objednat
                                         </button>
                                     </td>

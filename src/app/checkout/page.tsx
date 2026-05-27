@@ -45,6 +45,42 @@ function CheckoutContent() {
         }
     }, [searchParams, clearCart]);
 
+    useEffect(() => {
+        const pendingDiscount = sessionStorage.getItem("matchuji_pending_discount");
+        if (pendingDiscount && !appliedDiscount && !isApplying) {
+            setCouponCode(pendingDiscount);
+            // We use a small timeout to ensure state is set before calling apply,
+            // or just define the logic inline to immediately apply it.
+            const applyPending = async () => {
+                setIsApplying(true);
+                setDiscountError("");
+                try {
+                    const res = await fetch("/api/v1/discounts/validate", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ code: pendingDiscount, cartAmount: total }),
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        setAppliedDiscount(data);
+                        setCouponCode("");
+                        sessionStorage.removeItem("matchuji_pending_discount");
+                    } else {
+                        setDiscountError(data.error);
+                        sessionStorage.removeItem("matchuji_pending_discount");
+                    }
+                } catch (err) {
+                    setDiscountError("Chyba při uplatnění kódu");
+                } finally {
+                    setIsApplying(false);
+                }
+            };
+            if (total > 0) {
+                applyPending();
+            }
+        }
+    }, [total, appliedDiscount, isApplying]);
+
     const [shipping, setShipping] = useState({
         email: "",
         firstName: "",
