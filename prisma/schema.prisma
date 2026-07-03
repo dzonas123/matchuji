@@ -31,6 +31,7 @@ model Order {
   discount             Float?   @default(0)
   variableSymbol       String?  @unique
   zasilkovna_branch_id String?
+  zasilkovna_tracking_number String?
 }
 
 model DiscountCode {

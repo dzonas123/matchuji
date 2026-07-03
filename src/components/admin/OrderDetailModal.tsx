@@ -135,11 +135,25 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                                     value={order.status}
                                     onChange={async (e) => {
                                         const newStatus = e.target.value;
+                                        let trackingNumber: string | null = null;
+                                        
+                                        if (newStatus === 'shipped') {
+                                            trackingNumber = window.prompt("Zadejte tracking číslo Zásilkovny pro tuto objednávku (nepovinné):", order.zasilkovna_tracking_number || "");
+                                            if (trackingNumber === null) {
+                                                // Uživatel klikl na Zrušit
+                                                e.target.value = order.status; // Vrátit select na původní hodnotu
+                                                return;
+                                            }
+                                        }
+
                                         try {
                                             const res = await fetch(`/api/orders/${order.id}`, {
                                                 method: 'PATCH',
                                                 headers: { 'Content-Type': 'application/json' },
-                                                body: JSON.stringify({ status: newStatus }),
+                                                body: JSON.stringify({ 
+                                                    status: newStatus,
+                                                    ...(trackingNumber !== null && { zasilkovna_tracking_number: trackingNumber })
+                                                }),
                                             });
                                             if (res.ok) {
                                                 if (onUpdate) onUpdate();
