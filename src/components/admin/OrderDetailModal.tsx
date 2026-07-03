@@ -87,44 +87,6 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                                     <p style={{ margin: 0, fontWeight: 800, fontSize: '1.2rem', color: '#166534' }}>{order.zasilkovna_branch_id || s.zasilkovna_id || order.shipping?.zasilkovna_id || "Nenastaveno"}</p>
 
                                     {s.zasilkovna_name && <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.85rem', color: '#166534', opacity: 0.8 }}>{s.zasilkovna_name}</p>}
-                                    <div style={{ marginTop: '1rem', borderTop: '1px dashed #dcfce7', paddingTop: '1rem' }}>
-                                        <label style={{ fontSize: '0.7rem', color: '#166534', textTransform: 'uppercase', fontWeight: 700, display: 'block', marginBottom: '0.4rem' }}>Tracking číslo (Sledování)</label>
-                                        <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input 
-                                                type="text" 
-                                                value={trackingNumber} 
-                                                onChange={(e) => setTrackingNumber(e.target.value)} 
-                                                placeholder="Např. Z123456789"
-                                                style={{ flex: 1, padding: '0.5rem', borderRadius: '6px', border: '1px solid #bbf7d0', fontSize: '0.9rem', outline: 'none' }} 
-                                            />
-                                            <button 
-                                                disabled={isSavingTracking || trackingNumber === (order.zasilkovna_tracking_number || "")}
-                                                onClick={async () => {
-                                                    setIsSavingTracking(true);
-                                                    try {
-                                                        const res = await fetch(`/api/orders/${order.id}`, {
-                                                            method: 'PATCH',
-                                                            headers: { 'Content-Type': 'application/json' },
-                                                            body: JSON.stringify({ zasilkovna_tracking_number: trackingNumber, status: order.status })
-                                                        });
-                                                        if (res.ok) {
-                                                            if (onUpdate) onUpdate();
-                                                        } else {
-                                                            alert('Chyba při ukládání tracking čísla');
-                                                        }
-                                                    } catch (err) {
-                                                        console.error(err);
-                                                        alert('Chyba při ukládání tracking čísla');
-                                                    } finally {
-                                                        setIsSavingTracking(false);
-                                                    }
-                                                }}
-                                                style={{ padding: '0.5rem 1rem', background: '#166534', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 'bold', opacity: isSavingTracking || trackingNumber === (order.zasilkovna_tracking_number || "") ? 0.5 : 1, transition: 'all 0.2s' }}
-                                            >
-                                                {isSavingTracking ? '...' : 'Uložit'}
-                                            </button>
-                                        </div>
-                                    </div>
                                 </div>
                             )}
                         </div>
@@ -162,6 +124,49 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                         </div>
                     </div>
 
+                    <div className={styles.section}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div style={{ width: '100%' }}>
+                                <label style={{ fontSize: '0.7rem', color: '#166534', textTransform: 'uppercase', fontWeight: 700, display: 'block', marginBottom: '0.4rem' }}>Tracking číslo (Sledování Zásilkovny)</label>
+                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                    <input 
+                                        type="text" 
+                                        value={trackingNumber} 
+                                        onChange={(e) => setTrackingNumber(e.target.value)} 
+                                        placeholder="Např. Z123456789"
+                                        style={{ flex: 1, padding: '0.5rem', borderRadius: '6px', border: '1px solid #bbf7d0', fontSize: '0.9rem', outline: 'none' }} 
+                                    />
+                                    <button 
+                                        disabled={isSavingTracking || trackingNumber === (order.zasilkovna_tracking_number || "")}
+                                        onClick={async () => {
+                                            setIsSavingTracking(true);
+                                            try {
+                                                const res = await fetch(`/api/orders/${order.id}`, {
+                                                    method: 'PATCH',
+                                                    headers: { 'Content-Type': 'application/json' },
+                                                    body: JSON.stringify({ zasilkovna_tracking_number: trackingNumber, status: order.status })
+                                                });
+                                                if (res.ok) {
+                                                    if (onUpdate) onUpdate();
+                                                } else {
+                                                    alert('Chyba při ukládání tracking čísla');
+                                                }
+                                            } catch (err) {
+                                                console.error(err);
+                                                alert('Chyba při ukládání tracking čísla');
+                                            } finally {
+                                                setIsSavingTracking(false);
+                                            }
+                                        }}
+                                        style={{ padding: '0.5rem 1rem', background: '#166534', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 'bold', opacity: isSavingTracking || trackingNumber === (order.zasilkovna_tracking_number || "") ? 0.5 : 1, transition: 'all 0.2s' }}
+                                    >
+                                        {isSavingTracking ? '...' : 'Uložit'}
+                                    </button>
+                                </div>
+                                <p style={{ fontSize: '0.75rem', color: '#666', marginTop: '0.5rem', marginBottom: 0 }}>Zadané číslo se automaticky vloží do e-mailu zákazníkovi při změně stavu na Odesláno.</p>
+                            </div>
+                        </div>
+                    </div>
 
                     <div className={styles.section} style={{ borderBottom: 'none', marginBottom: 0 }}>
                         <div className={styles.totalBlock}>
