@@ -13,8 +13,8 @@ export async function PATCH(
         const { status, zasilkovna_tracking_number } = await req.json();
         const { id } = await params;
 
-        if (!status) {
-            return NextResponse.json({ error: "Status is required" }, { status: 400 });
+        if (!status && zasilkovna_tracking_number === undefined) {
+            return NextResponse.json({ error: "No fields to update" }, { status: 400 });
         }
 
         const currentOrder = await prisma.order.findUnique({
@@ -28,7 +28,7 @@ export async function PATCH(
         const updatedOrder = await prisma.order.update({
             where: { id },
             data: { 
-                status,
+                ...(status && { status }),
                 ...(zasilkovna_tracking_number !== undefined && { zasilkovna_tracking_number })
             },
         });
@@ -84,7 +84,7 @@ export async function PATCH(
       </p>
       <div style="background:#f0faf0;border-left:4px solid #a6e22e;padding:16px 20px;margin:24px 0;">
         <p style="margin:0;color:#0c3314;font-size:15px;">Můžeš očekávat, že ti zásilka přijde v nejbližších dnech. Brzy od přepravce obdržíš informace ke sledování.</p>
-        \${updatedOrder.zasilkovna_tracking_number ? \`<div style="margin-top:12px;"><a href="https://tracking.packeta.com/cs_CZ/?id=\${updatedOrder.zasilkovna_tracking_number}" style="display:inline-block;background:#a6e22e;color:#0c3314;padding:8px 16px;text-decoration:none;border-radius:6px;font-weight:bold;font-size:14px;">Sledovat zásilku</a><p style="margin:6px 0 0 0;font-size:13px;color:#555;">Sledovací číslo: \${updatedOrder.zasilkovna_tracking_number}</p></div>\` : ''}
+        ${updatedOrder.zasilkovna_tracking_number ? `<div style="margin-top:16px;padding-top:16px;border-top:1px solid #dcfce7;"><a href="https://tracking.packeta.com/cs_CZ/?id=${updatedOrder.zasilkovna_tracking_number}" style="display:inline-block;background:#a6e22e;color:#0c3314;padding:10px 20px;text-decoration:none;border-radius:6px;font-weight:bold;font-size:15px;">Sledovat zásilku online</a><p style="margin:8px 0 0 0;font-size:13px;color:#555;">Sledovací číslo Zásilkovny: <strong>${updatedOrder.zasilkovna_tracking_number}</strong></p></div>` : ''}
       </div>
       <p style="margin:24px 0 0;color:#555;font-size:15px;">Děkujeme za tvůj nákup!<br/><strong style="color:#0c3314;">Tým Matchuji 🍃</strong></p>
     </div>
