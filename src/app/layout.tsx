@@ -15,6 +15,7 @@ import { CartProvider } from "@/context/CartContext";
 import CartDrawer from "@/components/CartDrawer";
 import UpsellModal from "@/components/UpsellModal";
 import Script from "next/script";
+import Tracker from "@/components/Tracker";
 
 
 export const metadata: Metadata = {
@@ -58,6 +59,7 @@ export default function RootLayout({
             gtag('config', 'AW-11313378334');
           `}
         </Script>
+        <Tracker />
         <CartProvider>
           <Header />
           <CartDrawer />

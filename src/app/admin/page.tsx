@@ -16,6 +16,8 @@ export default function Admin() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [orders, setOrders] = useState<any[]>([]);
+    const [visits, setVisits] = useState(0);
+    const [visits30Days, setVisits30Days] = useState(0);
     const [currentView, setCurrentView] = useState<"dashboard" | "orders" | "products" | "customers" | "discounts">("dashboard");
 
 
@@ -25,8 +27,20 @@ export default function Admin() {
         if (session === "true") {
             setIsLoggedIn(true);
             fetchOrders();
+            fetchVisits();
         }
     }, []);
+
+    const fetchVisits = async () => {
+        try {
+            const res = await fetch("/api/admin/visits");
+            const data = await res.json();
+            setVisits(data.totalVisits || 0);
+            setVisits30Days(data.visits30Days || 0);
+        } catch (e) {
+            console.error("Failed to fetch visits", e);
+        }
+    };
 
     const fetchOrders = async () => {
         try {
@@ -50,6 +64,7 @@ export default function Admin() {
                 setIsLoggedIn(true);
                 localStorage.setItem("admin_session", "true");
                 fetchOrders();
+                fetchVisits();
             } else {
                 alert("Nesprávné přihlašovací údaje");
             }
@@ -147,6 +162,8 @@ export default function Admin() {
             {currentView === 'dashboard' && (
                 <>
                     <div className={styles.stats}>
+                        <StatsCard label="Návštěvy (celkem)" value={visits} />
+                        <StatsCard label="Návštěvy (30 dní)" value={visits30Days} />
                         <StatsCard label="Počet objednávek" value={orders.length} />
                         <StatsCard label="Celkové tržby" value={`${totalRevenue.toLocaleString()} Kč`} />
                         <StatsCard label="Markup (průměr)" value={`${markup.toFixed(1)} %`} />

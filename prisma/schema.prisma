@@ -47,3 +47,10 @@ model DiscountCode {
   createdAt    DateTime  @default(now())
   freeShipping Boolean   @default(false)
 }
+
+model Visit {
+  id        String   @id @default(uuid())
+  path      String
+  createdAt DateTime @default(now())
+  userAgent String?
+}
