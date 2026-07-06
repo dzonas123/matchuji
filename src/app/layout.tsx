@@ -16,6 +16,7 @@ import CartDrawer from "@/components/CartDrawer";
 import UpsellModal from "@/components/UpsellModal";
 import Script from "next/script";
 import Tracker from "@/components/Tracker";
+import { Analytics } from "@vercel/analytics/next";
 
 
 export const metadata: Metadata = {
@@ -60,6 +61,7 @@ export default function RootLayout({
           `}
         </Script>
         <Tracker />
+        <Analytics />
         <CartProvider>
           <Header />
           <CartDrawer />

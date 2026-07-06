@@ -67,7 +67,9 @@ export async function PATCH(
 </body>
 </html>`;
                 } else if (status === "shipped") {
-                    subject = `🚚 Vaše objednávka #${currentOrder.variableSymbol || currentOrder.id.slice(-6).toUpperCase()} je na cestě | Matchuji`;
+                    const trackingNo = updatedOrder.zasilkovna_tracking_number || "";
+                    const orderSymbol = currentOrder.variableSymbol || currentOrder.id.slice(-6).toUpperCase();
+                    subject = `📦 Sledovací číslo Zásilkovny k objednávce #${orderSymbol} | Matchuji`;
                     htmlContent = `
 <!DOCTYPE html>
 <html>
@@ -75,16 +77,28 @@ export async function PATCH(
 <body style="margin:0;padding:0;background:#f5f5f0;font-family:'Helvetica Neue',Arial,sans-serif;">
   <div style="max-width:600px;margin:40px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
     <div style="background:#0c3314;padding:30px 40px;text-align:center;">
-      <h1 style="margin:0;color:#fff;font-size:24px;">Balíček je na cestě!</h1>
+      <h1 style="margin:0;color:#fff;font-size:24px;">Sledovací číslo zásilky</h1>
     </div>
     <div style="padding:40px;">
       <h2 style="margin:0 0 16px;color:#0c3314;font-size:20px;">Ahoj ${firstName},</h2>
       <p style="margin:0 0 16px;color:#555;font-size:16px;line-height:1.6;">
-        Skvělé zprávy! Tvoje objednávka <strong>#${currentOrder.variableSymbol || currentOrder.id.slice(-6).toUpperCase()}</strong> byla právě odeslána a teď už je v rukou přepravce.
+        Posíláme ti sledovací číslo Zásilkovny pro tvoji objednávku <strong>#${orderSymbol}</strong>.
+      </p>
+      <p style="margin:0 0 16px;color:#555;font-size:16px;line-height:1.6;">
+        Objednávka by měla dorazit do <strong>2 až 3 pracovních dní</strong>.
+      </p>
+      <p style="margin:0 0 16px;color:#555;font-size:16px;line-height:1.6;">
+        Stav své zásilky můžeš sledovat níže. Následně tě bude Zásilkovna kontaktovat ohledně vyzvednutí zásilky.
       </p>
       <div style="background:#f0faf0;border-left:4px solid #a6e22e;padding:16px 20px;margin:24px 0;">
-        <p style="margin:0;color:#0c3314;font-size:15px;">Můžeš očekávat, že ti zásilka přijde v nejbližších dnech. Brzy od přepravce obdržíš informace ke sledování.</p>
-        ${updatedOrder.zasilkovna_tracking_number ? `<div style="margin-top:16px;padding-top:16px;border-top:1px solid #dcfce7;"><a href="https://tracking.packeta.com/cs_CZ/?id=${updatedOrder.zasilkovna_tracking_number}" style="display:inline-block;background:#a6e22e;color:#0c3314;padding:10px 20px;text-decoration:none;border-radius:6px;font-weight:bold;font-size:15px;">Sledovat zásilku online</a><p style="margin:8px 0 0 0;font-size:13px;color:#555;">Sledovací číslo Zásilkovny: <strong>${updatedOrder.zasilkovna_tracking_number}</strong></p></div>` : ''}
+        ${trackingNo ? `
+          <div style="margin-top:8px;margin-bottom:8px;">
+            <a href="https://tracking.packeta.com/cs_CZ/?id=${trackingNo}" style="display:inline-block;background:#a6e22e;color:#0c3314;padding:10px 20px;text-decoration:none;border-radius:6px;font-weight:bold;font-size:15px;">Sledovat stav zásilky tu</a>
+            <p style="margin:12px 0 0 0;font-size:13px;color:#555;">Sledovací číslo Zásilkovny: <strong>${trackingNo}</strong></p>
+          </div>
+        ` : `
+          <p style="margin:0;color:#0c3314;font-size:15px;">Sledovací číslo bude doplněno dopravcem.</p>
+        `}
       </div>
       <p style="margin:24px 0 0;color:#555;font-size:15px;">Děkujeme za tvůj nákup!<br/><strong style="color:#0c3314;">Tým Matchuji 🍃</strong></p>
     </div>

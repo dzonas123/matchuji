@@ -19,8 +19,8 @@ declare global {
 type Step = "shipping" | "delivery" | "payment" | "success";
 
 const carriers = [
-    { id: "zasilkovna", name: "Zásilkovna - Výdejní místa", price: 79, time: "1-2 dny" },
-    { id: "zasilkovna_home", name: "Zásilkovna - Na adresu", price: 109, time: "1-2 dny" }
+    { id: "zasilkovna", name: "Zásilkovna - Výdejní místa", price: 89, time: "1-2 dny" },
+    { id: "zasilkovna_home", name: "Zásilkovna - Na adresu", price: 129, time: "1-2 dny" }
 ];
 
 import { Suspense } from "react";

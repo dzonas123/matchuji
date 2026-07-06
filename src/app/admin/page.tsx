@@ -113,6 +113,21 @@ export default function Admin() {
     // Finanční výpočty
     const COST_PER_UNIT = 42;
     let totalUnits = 0;
+
+    // Vypočteme celkové náklady na dopravu pro odeslané objednávky
+    const totalShippingCost = orders.reduce((sum, order) => {
+        const carrierName = (order.carrier || "").toLowerCase();
+        let cost = 0;
+        if (carrierName.includes("míst") || carrierName.includes("výdej")) {
+            cost = 89;
+        } else if (carrierName.includes("adres") || carrierName.includes("domů")) {
+            cost = 129;
+        } else if (carrierName.includes("zasilkovna")) {
+            cost = 89; // fallback
+        }
+        return sum + cost;
+    }, 0);
+
     const totalCost = orders.reduce((total, order) => {
         const orderItems = order.items || [];
         const orderCOG = orderItems.reduce((cogSum: number, item: any) => {
@@ -138,7 +153,7 @@ export default function Admin() {
         return total + orderCOG;
     }, 0);
 
-    const netProfit = totalRevenue - totalCost;
+    const netProfit = totalRevenue - totalCost - totalShippingCost;
     const markup = totalCost > 0 ? (netProfit / totalCost) * 100 : 0;
     const avgProfitPerUnit = totalUnits > 0 ? netProfit / totalUnits : 0;
 

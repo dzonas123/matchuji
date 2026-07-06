@@ -13,6 +13,29 @@ interface OrderDetailModalProps {
 export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDetailModalProps) {
     const [trackingNumber, setTrackingNumber] = useState(order?.zasilkovna_tracking_number || "");
     const [isSavingTracking, setIsSavingTracking] = useState(false);
+    const [isCreatingZasilkovna, setIsCreatingZasilkovna] = useState(false);
+
+    const handleCreateZasilkovna = async () => {
+        setIsCreatingZasilkovna(true);
+        try {
+            const res = await fetch(`/api/orders/${order.id}/zasilkovna`, {
+                method: "POST",
+            });
+            const data = await res.json();
+            if (data.success) {
+                setTrackingNumber(data.barcode);
+                alert("Zásilka byla úspěšně vytvořena v Zásilkovně!");
+                if (onUpdate) onUpdate();
+            } else {
+                alert("Chyba při vytváření zásilky: " + (data.error || "Neznámá chyba"));
+            }
+        } catch (err: any) {
+            console.error(err);
+            alert("Chyba při komunikaci se serverem: " + err.message);
+        } finally {
+            setIsCreatingZasilkovna(false);
+        }
+    };
 
     if (!order) return null;
 
@@ -128,13 +151,13 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <div style={{ width: '100%' }}>
                                 <label style={{ fontSize: '0.7rem', color: '#166534', textTransform: 'uppercase', fontWeight: 700, display: 'block', marginBottom: '0.4rem' }}>Tracking číslo (Sledování Zásilkovny)</label>
-                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                                     <input 
                                         type="text" 
                                         value={trackingNumber} 
                                         onChange={(e) => setTrackingNumber(e.target.value)} 
                                         placeholder="Např. Z123456789"
-                                        style={{ flex: 1, padding: '0.5rem', borderRadius: '6px', border: '1px solid #bbf7d0', fontSize: '0.9rem', outline: 'none' }} 
+                                        style={{ flex: 1, minWidth: '150px', padding: '0.5rem', borderRadius: '6px', border: '1px solid #bbf7d0', fontSize: '0.9rem', outline: 'none' }} 
                                     />
                                     <button 
                                         disabled={isSavingTracking || trackingNumber === (order.zasilkovna_tracking_number || "")}
@@ -163,6 +186,49 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                                         {isSavingTracking ? '...' : 'Uložit'}
                                     </button>
                                 </div>
+
+                                <div style={{ marginTop: '0.75rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                    <button
+                                        disabled={isCreatingZasilkovna || !!trackingNumber}
+                                        onClick={handleCreateZasilkovna}
+                                        style={{ 
+                                            padding: '0.5rem 1.2rem', 
+                                            background: '#a6e22e', 
+                                            color: '#0c3314', 
+                                            border: 'none', 
+                                            borderRadius: '6px', 
+                                            cursor: trackingNumber ? 'not-allowed' : 'pointer', 
+                                            fontSize: '0.85rem', 
+                                            fontWeight: 'bold', 
+                                            opacity: isCreatingZasilkovna || !!trackingNumber ? 0.5 : 1, 
+                                            transition: 'all 0.2s' 
+                                        }}
+                                    >
+                                        {isCreatingZasilkovna ? 'Vytvářím...' : 'Vytvořit zásilku v Zásilkovně 📦'}
+                                    </button>
+
+                                    {trackingNumber && (
+                                        <a
+                                            href={`/api/orders/${order.id}/zasilkovna`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            style={{ 
+                                                display: 'inline-block',
+                                                padding: '0.5rem 1.2rem', 
+                                                background: '#2563eb', 
+                                                color: 'white', 
+                                                textDecoration: 'none',
+                                                borderRadius: '6px', 
+                                                fontSize: '0.85rem', 
+                                                fontWeight: 'bold', 
+                                                transition: 'all 0.2s' 
+                                            }}
+                                        >
+                                            📄 Tisk štítku (PDF)
+                                        </a>
+                                    )}
+                                </div>
+
                                 <p style={{ fontSize: '0.75rem', color: '#666', marginTop: '0.5rem', marginBottom: 0 }}>Zadané číslo se automaticky vloží do e-mailu zákazníkovi při změně stavu na Odesláno.</p>
                             </div>
                         </div>
