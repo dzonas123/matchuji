@@ -46,11 +46,10 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
             <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.modalHeader}>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <span style={{ fontSize: '0.75rem', color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Detail objednávky</span>
-                        <h2 style={{ fontSize: '1.4rem' }}>
+                        <span style={{ fontSize: '0.65rem', color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Detail objednávky</span>
+                        <h2 style={{ fontSize: '1.2rem', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                             {order.variableSymbol ? `#${order.variableSymbol}` : `#${order.id.slice(-6).toUpperCase()}`}
-                            {order.variableSymbol && <span style={{ fontSize: '0.9rem', color: '#999', marginLeft: '0.5rem', fontWeight: 'normal' }}>(Stripe ID: {order.id.slice(-8)})</span>}
-
+                            {order.variableSymbol && <span style={{ fontSize: '0.8rem', color: '#999', fontWeight: 'normal' }}>(Stripe ID: {order.id.slice(-8)})</span>}
                         </h2>
                     </div>
                     <button className={styles.closeBtn} onClick={onClose}>×</button>
@@ -58,13 +57,22 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
 
                 <div className={styles.modalBody}>
                     <div className={styles.section}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                            <h3 style={{ margin: 0 }}>👤 Kontaktní údaje</h3>
-                            <div style={{ background: '#f0fdf4', padding: '0.4rem 0.8rem', borderRadius: '6px', border: '1px solid #dcfce7' }}>
-                                <label style={{ fontSize: '0.7rem', color: '#166534', textTransform: 'uppercase', fontWeight: 700, display: 'block' }}>Variabilní symbol</label>
-                                <span style={{ fontWeight: 800, color: '#166534', fontSize: '1.1rem' }}>{order.variableSymbol || "Nenastaveno"}</span>
+                        <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '0.85rem' }}>👤 Kontaktní údaje</h3>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', fontSize: '0.9rem' }}>
+                            <div>
+                                <span style={{ color: '#999', fontSize: '0.7rem', display: 'block', textTransform: 'uppercase', fontWeight: 700 }}>Jméno</span>
+                                <strong>{s.firstName} {s.lastName}</strong>
+                            </div>
+                            <div>
+                                <span style={{ color: '#999', fontSize: '0.7rem', display: 'block', textTransform: 'uppercase', fontWeight: 700 }}>E-mail</span>
+                                <a href={`mailto:${s.email}`} style={{ color: '#2563eb', textDecoration: 'underline' }}>{s.email}</a>
+                            </div>
+                            <div>
+                                <span style={{ color: '#999', fontSize: '0.7rem', display: 'block', textTransform: 'uppercase', fontWeight: 700 }}>Telefon</span>
+                                <span>{s.phone || "-"}</span>
                             </div>
                         </div>
+                    </div>
                         <div className={styles.infoGrid}>
                             <div>
                                 <label>Celé jméno</label>
@@ -82,36 +90,26 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                     </div>
 
                     <div className={styles.section}>
-                        <h3>📍 Doručovací adresa</h3>
-                        <div className={styles.infoGrid}>
-                            <div>
-                                <label>Ulice a číslo</label>
-                                <p>{s.address}</p>
+                        <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '0.85rem' }}>📍 Doručení & Adresa</h3>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'flex-start' }}>
+                            <div style={{ flex: 1, minWidth: '200px' }}>
+                                <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: '1.4' }}>
+                                    {s.address}<br />
+                                    {s.city}, {s.postalCode}<br />
+                                    {s.country || "Česká republika"}
+                                </p>
                             </div>
-                            <div>
-                                <label>Město</label>
-                                <p>{s.city}</p>
+                            <div style={{ flex: 1, minWidth: '200px' }}>
+                                <span style={{ color: '#999', fontSize: '0.7rem', display: 'block', textTransform: 'uppercase', fontWeight: 700 }}>Způsob dopravy</span>
+                                <p style={{ margin: 0, fontWeight: 600, color: '#0d2112', fontSize: '0.9rem' }}>🚚 {order.carrier || "Standardní doručení"}</p>
+                                {order.carrier?.toLowerCase().includes('zasilkovna') && !order.carrier?.toLowerCase().includes('adres') && (
+                                    <div style={{ marginTop: '0.3rem', padding: '0.4rem 0.6rem', background: '#f0fdf4', borderRadius: '4px', border: '1px solid #dcfce7' }}>
+                                        <span style={{ fontSize: '0.65rem', color: '#166534', textTransform: 'uppercase', fontWeight: 700, display: 'block' }}>Pobočka / Z-BOX</span>
+                                        <span style={{ fontWeight: 800, fontSize: '1rem', color: '#166534' }}>{order.zasilkovna_branch_id || s.zasilkovna_id || order.shipping?.zasilkovna_id || "Nenastaveno"}</span>
+                                        {s.zasilkovna_name && <p style={{ margin: 0, fontSize: '0.75rem', color: '#166534', opacity: 0.8, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.zasilkovna_name}</p>}
+                                    </div>
+                                )}
                             </div>
-                            <div>
-                                <label>PSČ</label>
-                                <p>{s.postalCode}</p>
-                            </div>
-                            <div>
-                                <label>Země</label>
-                                <p>{s.country || "Česká republika"}</p>
-                            </div>
-                        </div>
-                        <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px dashed #eee' }}>
-                            <label style={{ fontSize: '0.8rem', color: '#999' }}>Způsob dopravy</label>
-                            <p style={{ fontWeight: 600, color: '#0d2112' }}>🚚 {order.carrier || "Standardní doručení"}</p>
-                            {order.carrier?.toLowerCase().includes('zasilkovna') && !order.carrier?.toLowerCase().includes('adres') && (
-                                <div style={{ marginTop: '0.5rem', padding: '0.75rem', background: '#f0fdf4', borderRadius: '6px', border: '1px solid #dcfce7' }}>
-                                    <label style={{ fontSize: '0.7rem', color: '#166534', textTransform: 'uppercase', fontWeight: 700 }}>Pobočka / Z-BOX (ID)</label>
-                                    <p style={{ margin: 0, fontWeight: 800, fontSize: '1.2rem', color: '#166534' }}>{order.zasilkovna_branch_id || s.zasilkovna_id || order.shipping?.zasilkovna_id || "Nenastaveno"}</p>
-
-                                    {s.zasilkovna_name && <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.85rem', color: '#166534', opacity: 0.8 }}>{s.zasilkovna_name}</p>}
-                                </div>
-                            )}
                         </div>
                     </div>
 
@@ -154,90 +152,86 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                     </div>
 
                     <div className={styles.section}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <div style={{ width: '100%' }}>
-                                <label style={{ fontSize: '0.7rem', color: '#166534', textTransform: 'uppercase', fontWeight: 700, display: 'block', marginBottom: '0.4rem' }}>Tracking číslo (Sledování Zásilkovny)</label>
-                                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                                    <input 
-                                        type="text" 
-                                        value={trackingNumber} 
-                                        onChange={(e) => setTrackingNumber(e.target.value)} 
-                                        placeholder="Např. Z123456789"
-                                        style={{ flex: 1, minWidth: '150px', padding: '0.5rem', borderRadius: '6px', border: '1px solid #bbf7d0', fontSize: '0.9rem', outline: 'none' }} 
-                                    />
-                                    <button 
-                                        disabled={isSavingTracking || trackingNumber === (order.zasilkovna_tracking_number || "")}
-                                        onClick={async () => {
-                                            setIsSavingTracking(true);
-                                            try {
-                                                const res = await fetch(`/api/orders/${order.id}`, {
-                                                    method: 'PATCH',
-                                                    headers: { 'Content-Type': 'application/json' },
-                                                    body: JSON.stringify({ zasilkovna_tracking_number: trackingNumber, status: order.status })
-                                                });
-                                                if (res.ok) {
-                                                    if (onUpdate) onUpdate();
-                                                } else {
-                                                    alert('Chyba při ukládání tracking čísla');
-                                                }
-                                            } catch (err) {
-                                                console.error(err);
+                        <div style={{ width: '100%' }}>
+                            <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '0.85rem' }}>📦 Tracking (Zásilkovna)</h3>
+                            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                                <input 
+                                    type="text" 
+                                    value={trackingNumber} 
+                                    onChange={(e) => setTrackingNumber(e.target.value)} 
+                                    placeholder="Např. Z123456789"
+                                    style={{ flex: 1, minWidth: '120px', padding: '0.4rem 0.6rem', borderRadius: '6px', border: '1px solid #bbf7d0', fontSize: '0.85rem', outline: 'none' }} 
+                                />
+                                <button 
+                                    disabled={isSavingTracking || trackingNumber === (order.zasilkovna_tracking_number || "")}
+                                    onClick={async () => {
+                                        setIsSavingTracking(true);
+                                        try {
+                                            const res = await fetch(`/api/orders/${order.id}`, {
+                                                method: 'PATCH',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ zasilkovna_tracking_number: trackingNumber, status: order.status })
+                                            });
+                                            if (res.ok) {
+                                                if (onUpdate) onUpdate();
+                                            } else {
                                                 alert('Chyba při ukládání tracking čísla');
-                                            } finally {
-                                                setIsSavingTracking(false);
                                             }
-                                        }}
-                                        style={{ padding: '0.5rem 1rem', background: '#166534', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 'bold', opacity: isSavingTracking || trackingNumber === (order.zasilkovna_tracking_number || "") ? 0.5 : 1, transition: 'all 0.2s' }}
-                                    >
-                                        {isSavingTracking ? '...' : 'Uložit'}
-                                    </button>
-                                </div>
+                                        } catch (err) {
+                                            console.error(err);
+                                            alert('Chyba při ukládání tracking čísla');
+                                        } finally {
+                                            setIsSavingTracking(false);
+                                        }
+                                    }}
+                                    style={{ padding: '0.4rem 0.8rem', background: '#166534', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 'bold', opacity: isSavingTracking || trackingNumber === (order.zasilkovna_tracking_number || "") ? 0.5 : 1, transition: 'all 0.2s' }}
+                                >
+                                    {isSavingTracking ? '...' : 'Uložit'}
+                                </button>
+                            </div>
 
-                                <div style={{ marginTop: '0.75rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                                    <button
-                                        disabled={isCreatingZasilkovna || !!trackingNumber}
-                                        onClick={handleCreateZasilkovna}
+                            <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                <button
+                                    disabled={isCreatingZasilkovna || !!trackingNumber}
+                                    onClick={handleCreateZasilkovna}
+                                    style={{ 
+                                        padding: '0.4rem 0.8rem', 
+                                        background: '#a6e22e', 
+                                        color: '#0c3314', 
+                                        border: 'none', 
+                                        borderRadius: '6px', 
+                                        cursor: trackingNumber ? 'not-allowed' : 'pointer', 
+                                        fontSize: '0.8rem', 
+                                        fontWeight: 'bold', 
+                                        opacity: isCreatingZasilkovna || !!trackingNumber ? 0.5 : 1, 
+                                        transition: 'all 0.2s',
+                                        whiteSpace: 'nowrap'
+                                    }}
+                                >
+                                    {isCreatingZasilkovna ? 'Vytvářím...' : 'Vytvořit zásilku 📦'}
+                                </button>
+
+                                {trackingNumber && (
+                                    <a
+                                        href="https://client.packeta.com/cs/dispatch/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         style={{ 
-                                            padding: '0.5rem 1rem', 
-                                            background: '#a6e22e', 
-                                            color: '#0c3314', 
-                                            border: 'none', 
+                                            display: 'inline-block',
+                                            padding: '0.4rem 0.8rem', 
+                                            background: '#2563eb', 
+                                            color: 'white', 
+                                            textDecoration: 'none',
                                             borderRadius: '6px', 
-                                            cursor: trackingNumber ? 'not-allowed' : 'pointer', 
                                             fontSize: '0.8rem', 
                                             fontWeight: 'bold', 
-                                            opacity: isCreatingZasilkovna || !!trackingNumber ? 0.5 : 1, 
                                             transition: 'all 0.2s',
                                             whiteSpace: 'nowrap'
                                         }}
                                     >
-                                        {isCreatingZasilkovna ? 'Vytvářím...' : 'Vytvořit zásilku 📦'}
-                                    </button>
-
-                                    {trackingNumber && (
-                                        <a
-                                            href="https://client.packeta.com/cs/dispatch/"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            style={{ 
-                                                display: 'inline-block',
-                                                padding: '0.5rem 1rem', 
-                                                background: '#2563eb', 
-                                                color: 'white', 
-                                                textDecoration: 'none',
-                                                borderRadius: '6px', 
-                                                fontSize: '0.8rem', 
-                                                fontWeight: 'bold', 
-                                                transition: 'all 0.2s',
-                                                whiteSpace: 'nowrap'
-                                            }}
-                                        >
-                                            🔎 Zobrazit podací kód (Packeta)
-                                        </a>
-                                    )}
-                                </div>
-
-                                <p style={{ fontSize: '0.75rem', color: '#666', marginTop: '0.5rem', marginBottom: 0 }}>Zadané číslo se automaticky vloží do e-mailu zákazníkovi při změně stavu na Odesláno.</p>
+                                        🔎 Podací kód (Packeta)
+                                    </a>
+                                )}
                             </div>
                         </div>
                     </div>
