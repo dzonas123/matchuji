@@ -124,26 +124,26 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                                 const is3ksBundle = is3ksBundleName || is3ksBundleId;
                                 const displayName = item.name || (is3ksBundle ? '3ks balení' : (item.id || 'Neznámý produkt'));
                                 return (
-                                <div key={idx} className={styles.itemRow} style={{ padding: '1rem', background: '#f8fafc', borderRadius: '8px', marginBottom: '0.5rem', border: '1px solid #e2e8f0' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                        <div style={{ background: '#eee', borderRadius: '4px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#999' }}>IMG</div>
+                                <div key={idx} className={styles.itemRow} style={{ padding: '0.6rem 0.8rem', background: '#f8fafc', borderRadius: '8px', marginBottom: '0.4rem', border: '1px solid #e2e8f0' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                                        <div style={{ background: '#eee', borderRadius: '4px', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', color: '#999' }}>IMG</div>
                                         <div style={{ flex: 1 }}>
-                                            <p style={{ fontWeight: 700, margin: 0, fontSize: '1rem' }}>{displayName}</p>
-                                            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-                                                <div style={{ background: '#fff', border: '1px solid #cbd5e1', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>
-                                                    <label style={{ display: 'block', fontSize: '0.6rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>SKU</label>
-                                                    <span style={{ fontSize: '0.85rem', color: '#0f172a', fontWeight: 600, fontFamily: 'monospace' }}>{item.sku || 'Nenastaveno'}</span>
+                                            <p style={{ fontWeight: 700, margin: 0, fontSize: '0.9rem' }}>{displayName}</p>
+                                            <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.3rem', flexWrap: 'wrap' }}>
+                                                <div style={{ background: '#fff', border: '1px solid #cbd5e1', padding: '0.15rem 0.4rem', borderRadius: '4px' }}>
+                                                    <label style={{ display: 'block', fontSize: '0.55rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>SKU</label>
+                                                    <span style={{ fontSize: '0.75rem', color: '#0f172a', fontWeight: 600, fontFamily: 'monospace' }}>{item.sku || 'Nenastaveno'}</span>
                                                 </div>
-                                                <div style={{ background: '#fff', border: '1px solid #cbd5e1', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>
-                                                    <label style={{ display: 'block', fontSize: '0.6rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>EAN</label>
-                                                    <span style={{ fontSize: '0.85rem', color: '#0f172a', fontWeight: 600, fontFamily: 'monospace' }}>{item.ean || 'Nenastaveno'}</span>
+                                                <div style={{ background: '#fff', border: '1px solid #cbd5e1', padding: '0.15rem 0.4rem', borderRadius: '4px' }}>
+                                                    <label style={{ display: 'block', fontSize: '0.55rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>EAN</label>
+                                                    <span style={{ fontSize: '0.75rem', color: '#0f172a', fontWeight: 600, fontFamily: 'monospace' }}>{item.ean || 'Nenastaveno'}</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div style={{ textAlign: 'right', minWidth: '80px' }}>
-                                            <p style={{ fontWeight: 800, margin: 0, fontSize: '1.2rem', color: '#166534' }}>{item.quantity} ks</p>
+                                        <div style={{ textAlign: 'right', minWidth: '70px' }}>
+                                            <p style={{ fontWeight: 800, margin: 0, fontSize: '1.1rem', color: '#166534' }}>{item.quantity} ks</p>
                                             {is3ksBundle && (
-                                                <span style={{ fontSize: '0.7rem', color: '#666', display: 'block' }}>(Počítáno jako 3ks balení)</span>
+                                                <span style={{ fontSize: '0.65rem', color: '#666', display: 'block' }}>(Počítáno jako 3ks balení)</span>
                                             )}
                                         </div>
                                     </div>
@@ -198,39 +198,41 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                                         disabled={isCreatingZasilkovna || !!trackingNumber}
                                         onClick={handleCreateZasilkovna}
                                         style={{ 
-                                            padding: '0.5rem 1.2rem', 
+                                            padding: '0.5rem 1rem', 
                                             background: '#a6e22e', 
                                             color: '#0c3314', 
                                             border: 'none', 
                                             borderRadius: '6px', 
                                             cursor: trackingNumber ? 'not-allowed' : 'pointer', 
-                                            fontSize: '0.85rem', 
+                                            fontSize: '0.8rem', 
                                             fontWeight: 'bold', 
                                             opacity: isCreatingZasilkovna || !!trackingNumber ? 0.5 : 1, 
-                                            transition: 'all 0.2s' 
+                                            transition: 'all 0.2s',
+                                            whiteSpace: 'nowrap'
                                         }}
                                     >
-                                        {isCreatingZasilkovna ? 'Vytvářím...' : 'Vytvořit zásilku v Zásilkovně 📦'}
+                                        {isCreatingZasilkovna ? 'Vytvářím...' : 'Vytvořit zásilku 📦'}
                                     </button>
 
                                     {trackingNumber && (
                                         <a
-                                            href={`/api/orders/${order.id}/zasilkovna`}
+                                            href="https://client.packeta.com/cs/dispatch/"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             style={{ 
                                                 display: 'inline-block',
-                                                padding: '0.5rem 1.2rem', 
+                                                padding: '0.5rem 1rem', 
                                                 background: '#2563eb', 
                                                 color: 'white', 
                                                 textDecoration: 'none',
                                                 borderRadius: '6px', 
-                                                fontSize: '0.85rem', 
+                                                fontSize: '0.8rem', 
                                                 fontWeight: 'bold', 
-                                                transition: 'all 0.2s' 
+                                                transition: 'all 0.2s',
+                                                whiteSpace: 'nowrap'
                                             }}
                                         >
-                                            📄 Tisk štítku (PDF)
+                                            🔎 Zobrazit podací kód (Packeta)
                                         </a>
                                     )}
                                 </div>
