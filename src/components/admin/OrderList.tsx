@@ -91,22 +91,22 @@ export default function OrderList({ orders, onUpdate }: OrderListProps) {
                         ) : (
                             filteredOrders.map((order: Order) => (
                                 <tr key={order.id} onClick={() => setSelectedOrder(order)} style={{ cursor: 'pointer' }}>
-                                    <td style={{ fontFamily: 'monospace', fontSize: '0.85rem' }}>
-                                        <div style={{ fontWeight: 'bold', color: '#0d2112' }}>{order.variableSymbol || '-'}</div>
-                                        <div style={{ fontSize: '0.7rem', color: '#999' }}>#{order.id.slice(-6).toUpperCase()}</div>
+                                    <td data-label="VS / ID" style={{ fontFamily: 'monospace', fontSize: '0.85rem' }}>
+                                        <div style={{ fontWeight: 'bold', color: '#0d2112', textAlign: 'right' }}>{order.variableSymbol || '-'}</div>
+                                        <div style={{ fontSize: '0.7rem', color: '#999', textAlign: 'right' }}>#{order.id.slice(-6).toUpperCase()}</div>
                                     </td>
-                                    <td>{new Date(order.date).toLocaleDateString('cs-CZ')}</td>
-                                    <td>
-                                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <td data-label="Datum" style={{ textAlign: 'right' }}>{new Date(order.date).toLocaleDateString('cs-CZ')}</td>
+                                    <td data-label="Zákazník" style={{ textAlign: 'right' }}>
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
                                             <strong>{order.shipping?.firstName} {order.shipping?.lastName}</strong>
                                             <span style={{ fontSize: '0.8rem', color: '#666' }}>{order.shipping?.email}</span>
                                         </div>
                                     </td>
-                                    <td>{order.shipping?.phone || "-"}</td>
-                                    <td>{order.shipping?.city}</td>
-                                    <td><strong>{order.amount.toLocaleString()} Kč</strong></td>
-                                    <td>
-                                        <span className={`${styles.status} ${(styles as any)[order.status] || styles.pending}`}>
+                                    <td data-label="Telefon" style={{ textAlign: 'right' }}>{order.shipping?.phone || "-"}</td>
+                                    <td data-label="Lokalita" style={{ textAlign: 'right' }}>{order.shipping?.city}</td>
+                                    <td data-label="Částka" style={{ textAlign: 'right' }}><strong>{order.amount.toLocaleString()} Kč</strong></td>
+                                    <td data-label="Stav">
+                                        <span className={`${styles.status} ${(styles as any)[order.status] || styles.pending}`} style={{ display: 'inline-block' }}>
                                             {order.status === 'paid' && 'Zaplaceno'}
                                             {order.status === 'packed' && 'Zabaleno'}
                                             {order.status === 'shipped' && 'Odesláno'}
