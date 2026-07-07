@@ -3,6 +3,7 @@ import { prisma } from "./prisma";
 const PACKETA_API_KEY = process.env.PACKETA_API_KEY || "e1146aa1641a90e";
 const PACKETA_API_PASSWORD = process.env.PACKETA_API_PASSWORD || "de1146aa1641a90e19a37bb4aa6b84aa";
 const PACKETA_SENDER_ID = process.env.PACKETA_SENDER_ID || "540317";
+const PACKETA_ESHOP_NAME = process.env.PACKETA_ESHOP_NAME || "Matchuji.cz";
 const PACKETA_API_URL = "https://www.zasilkovna.cz/api/rest";
 
 function formatPhone(phone: string): string {
@@ -100,7 +101,7 @@ export async function createZasilkovnaShipment(orderId: string): Promise<CreateS
         <weight>0.25</weight>
         <value>${value}</value>
         <currency>CZK</currency>
-        <eshop>${PACKETA_SENDER_ID}</eshop>`;
+        <eshop>${PACKETA_ESHOP_NAME}</eshop>`;
 
         if (isHomeDelivery) {
             xml += `
