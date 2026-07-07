@@ -118,12 +118,17 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                     <div className={styles.section}>
                         <h3>🛒 Produkty (Fulfillment data)</h3>
                         <div className={styles.itemsList}>
-                            {order.items && order.items.map((item: any, idx: number) => (
+                            {order.items && order.items.map((item: any, idx: number) => {
+                                const is3ksBundleName = (item.name || "").toLowerCase().includes('3');
+                                const is3ksBundleId = (item.id || "").toLowerCase().includes('3');
+                                const is3ksBundle = is3ksBundleName || is3ksBundleId;
+                                const displayName = item.name || (is3ksBundle ? '3ks balení' : (item.id || 'Neznámý produkt'));
+                                return (
                                 <div key={idx} className={styles.itemRow} style={{ padding: '1rem', background: '#f8fafc', borderRadius: '8px', marginBottom: '0.5rem', border: '1px solid #e2e8f0' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                         <div style={{ background: '#eee', borderRadius: '4px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#999' }}>IMG</div>
                                         <div style={{ flex: 1 }}>
-                                            <p style={{ fontWeight: 700, margin: 0, fontSize: '1rem' }}>{item.name || item.id}</p>
+                                            <p style={{ fontWeight: 700, margin: 0, fontSize: '1rem' }}>{displayName}</p>
                                             <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
                                                 <div style={{ background: '#fff', border: '1px solid #cbd5e1', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>
                                                     <label style={{ display: 'block', fontSize: '0.6rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>SKU</label>
@@ -137,13 +142,14 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                                         </div>
                                         <div style={{ textAlign: 'right', minWidth: '80px' }}>
                                             <p style={{ fontWeight: 800, margin: 0, fontSize: '1.2rem', color: '#166534' }}>{item.quantity} ks</p>
-                                            {(item.id?.toLowerCase().includes('3') || (item.name || "").toLowerCase().includes('3')) && (
+                                            {is3ksBundle && (
                                                 <span style={{ fontSize: '0.7rem', color: '#666', display: 'block' }}>(Počítáno jako 3ks balení)</span>
                                             )}
                                         </div>
                                     </div>
                                 </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
 
