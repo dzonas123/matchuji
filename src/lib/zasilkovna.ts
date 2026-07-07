@@ -64,7 +64,7 @@ export async function createZasilkovnaShipment(orderId: string): Promise<CreateS
             return { success: false, error: "Chybí doručovací údaje u objednávky." };
         }
 
-        const isHomeDelivery = order.carrier?.toLowerCase().includes("adresa") || false;
+        const isHomeDelivery = order.carrier?.toLowerCase().includes("adres") || false;
         
         let addressId = "";
         if (isHomeDelivery) {

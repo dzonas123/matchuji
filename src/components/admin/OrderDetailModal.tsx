@@ -104,7 +104,7 @@ export default function OrderDetailModal({ order, onClose, onUpdate }: OrderDeta
                         <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px dashed #eee' }}>
                             <label style={{ fontSize: '0.8rem', color: '#999' }}>Způsob dopravy</label>
                             <p style={{ fontWeight: 600, color: '#0d2112' }}>🚚 {order.carrier || "Standardní doručení"}</p>
-                            {order.carrier?.toLowerCase().includes('zasilkovna') && (
+                            {order.carrier?.toLowerCase().includes('zasilkovna') && !order.carrier?.toLowerCase().includes('adres') && (
                                 <div style={{ marginTop: '0.5rem', padding: '0.75rem', background: '#f0fdf4', borderRadius: '6px', border: '1px solid #dcfce7' }}>
                                     <label style={{ fontSize: '0.7rem', color: '#166534', textTransform: 'uppercase', fontWeight: 700 }}>Pobočka / Z-BOX (ID)</label>
                                     <p style={{ margin: 0, fontWeight: 800, fontSize: '1.2rem', color: '#166534' }}>{order.zasilkovna_branch_id || s.zasilkovna_id || order.shipping?.zasilkovna_id || "Nenastaveno"}</p>
