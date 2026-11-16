@@ -1,0 +1,256 @@
+/* ===== BLOG LISTING PAGE ===== */
+.main {
+  min-height: 100vh;
+}
+
+/* Hero */
+.hero {
+  background: #ffffff;
+  padding: 100px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroEyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #4d7a16;
+  background: transparent;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+
+.heroEyebrow::before {
+  content: "•";
+  color: #ccff00;
+  margin-right: 8px;
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  color: #0a1f13;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+.heroTitle em {
+  display: block;
+  font-style: italic;
+  color: #4d7a16;
+  font-family: "Georgia", "Times New Roman", Times, serif;
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+.heroDesc {
+  font-size: 1.05rem;
+  color: #4a5e52;
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 40px 24px 0;
+}
+
+.filterBtn {
+  padding: 9px 22px;
+  border-radius: 100px;
+  border: 1.5px solid #d1d5db;
+  background: white;
+  color: #4a5e52;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-family: inherit;
+}
+
+.filterBtn:hover {
+  border-color: #2d6a4f;
+  color: #2d6a4f;
+}
+
+.filterActive {
+  background: #0a1f13;
+  border-color: #0a1f13;
+  color: #ccff00;
+}
+
+.filterActive:hover {
+  background: #132a1c;
+  border-color: #132a1c;
+  color: #ccff00;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  max-width: 1160px;
+  margin: 40px auto 80px;
+  padding: 0 24px;
+}
+
+/* Card */
+.card {
+  background: white;
+  border: 1.5px solid #e8f5e9;
+  border-radius: 24px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+  box-shadow: 0 4px 20px rgba(10, 31, 19, 0.05);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(10, 31, 19, 0.12);
+  border-color: #ccff00;
+}
+
+.cardEmoji {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cardCategory {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #2d6a4f;
+  background: #f0fdf4;
+  padding: 3px 10px;
+  border-radius: 100px;
+  border: 1px solid #bbf7d0;
+}
+
+.cardRead {
+  font-size: 0.78rem;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0a1f13;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.cardExcerpt {
+  font-size: 0.92rem;
+  color: #4a5e52;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.cardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2d6a4f;
+  margin-top: 4px;
+  transition: gap 0.18s;
+}
+
+.card:hover .cardCta {
+  gap: 10px;
+}
+
+/* CTA Banner */
+.ctaBanner {
+  background: #f9f9f7;
+  padding: 80px 24px;
+}
+
+.ctaInner {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ctaEyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #166534;
+  margin-bottom: 12px;
+}
+
+.ctaTitle {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  color: #0a1f13;
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+}
+
+.ctaDesc {
+  color: #4a5e52;
+  font-size: 1rem;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.ctaBtn {
+  display: inline-block;
+  background: #0a1f13;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 16px 36px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 8px 24px rgba(10, 31, 19, 0.15);
+}
+
+.ctaBtn:hover {
+  background: #1a3a25;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(10, 31, 19, 0.25);
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 72px 20px 60px;
+  }
+}

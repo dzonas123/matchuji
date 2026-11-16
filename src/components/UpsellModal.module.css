@@ -1,0 +1,314 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 31, 19, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal {
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 40px 36px 32px;
+    max-width: 660px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 50px 120px rgba(10, 31, 19, 0.28);
+    border: 1px solid rgba(204, 255, 0, 0.2);
+    margin: auto;
+}
+
+/* Close button */
+.closeBtn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    transition: background 0.15s, color 0.15s;
+    z-index: 2;
+}
+
+.closeBtn:hover {
+    background: #f3f4f6;
+    color: #111;
+}
+
+/* === Header (Top text area) === */
+.header {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #4a5e52;
+    margin: 0 0 8px 0;
+}
+
+.headline {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #0a1f13;
+    line-height: 1.2;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+}
+
+.headline em {
+    font-style: normal;
+    color: #2d6a4f;
+}
+
+.desc {
+    font-size: 0.95rem;
+    color: #4a5e52;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* === Product Card === */
+.card {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background: #f4fce3;
+    border: 1px solid #d9f99d;
+    border-radius: 20px;
+    padding: 16px;
+    margin-bottom: 28px;
+}
+
+.imageWrapper {
+    position: relative;
+    flex-shrink: 0;
+    width: 180px;
+    height: 180px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.image {
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.imageWrapper:hover .image {
+    transform: scale(1.04);
+}
+
+.imageBadge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: #dc2626;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 100px;
+    letter-spacing: 0.3px;
+}
+
+/* Card Right Column */
+.cardBody {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cardTitle {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #0a1f13;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Chips */
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.chip {
+    background: white;
+    color: #365314;
+    border: 1px solid #d9f99d;
+    border-radius: 100px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    white-space: nowrap;
+}
+
+/* Price row */
+.priceRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.price {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #0a1f13;
+    line-height: 1;
+}
+
+.originalPrice {
+    font-size: 0.9rem;
+    color: #9ca3af;
+    text-decoration: line-through;
+}
+
+.savings {
+    background: #fef2f2;
+    color: #dc2626;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 100px;
+    border: 1px solid #fecaca;
+}
+
+/* === Actions === */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btnAdd {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 0 28px;
+    height: 62px;
+    background: #ccff00;
+    color: #0a1f13;
+    border: 2px solid #ccff00;
+    border-radius: 100px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    box-shadow: 0 6px 20px rgba(204, 255, 0, 0.35);
+    letter-spacing: -0.01em;
+    font-family: inherit;
+}
+
+.btnAdd:hover {
+    background: #b8e600;
+    border-color: #b8e600;
+    box-shadow: 0 10px 30px rgba(204, 255, 0, 0.5);
+    transform: translateY(-1px);
+}
+
+.btnAdd:active {
+    transform: translateY(0);
+}
+
+.btnDecline {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 6px;
+    text-align: center;
+    transition: color 0.15s;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-family: inherit;
+}
+
+.btnDecline:hover {
+    color: #6b7280;
+}
+
+@media (max-width: 500px) {
+    .modal {
+        padding: 48px 20px 24px;
+        border-radius: 24px;
+    }
+
+    .closeBtn {
+        top: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .card {
+        flex-direction: row;
+        padding: 12px;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .imageWrapper {
+        width: 80px;
+        height: 80px;
+        border-radius: 12px;
+    }
+
+    .cardBody {
+        gap: 6px;
+    }
+
+    .cardTitle {
+        font-size: 0.95rem;
+    }
+
+    .chips {
+        display: none;
+    }
+
+    .priceRow {
+        gap: 6px;
+    }
+
+    .price {
+        font-size: 1.15rem;
+    }
+
+    .savings {
+        font-size: 0.65rem;
+        padding: 2px 6px;
+    }
+
+    .headline {
+        font-size: 1.3rem;
+    }
+
+    .btnAdd {
+        height: 52px;
+        font-size: 1rem;
+    }
+}

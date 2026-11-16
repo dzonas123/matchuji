@@ -1,0 +1,38 @@
+[
+    {
+        "id": "matcha-50g",
+        "name": "Ceremoniální Matcha 50g",
+        "price": 297,
+        "stock": 45,
+        "sku": "MATCHA-50-CER",
+        "ean": "2000000000015",
+        "image": "/images/matcha-single-strawberry.jpg"
+    },
+    {
+        "id": "matcha-3pack",
+        "name": "Matcha Bundle 3-Pack",
+        "price": 769,
+        "stock": 12,
+        "sku": "MATCHA-3PACK",
+        "ean": "2000000000022",
+        "image": "/images/matcha-premium-3ks.jpg"
+    },
+    {
+        "id": "matcha-metlicka",
+        "name": "Bambusová metlička (chasen)",
+        "price": 189,
+        "stock": 25,
+        "sku": "MATCHA-METLICKA-CHASEN",
+        "ean": "2000000000039",
+        "image": "/images/matcha-chasen.jpg"
+    },
+    {
+        "id": "b2b-samples",
+        "name": "B2B Testovací Vzorky (vč. 9A kvality)",
+        "price": 149,
+        "stock": 100,
+        "sku": "MATCHA-B2B-SAMPLES",
+        "ean": "2000000000046",
+        "image": "/images/matcha-farm-uji.jpg"
+    }
+]

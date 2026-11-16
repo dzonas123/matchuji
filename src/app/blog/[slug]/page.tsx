@@ -1,0 +1,264 @@
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { getBlogPost, blogPosts } from "@/data/blogPosts";
+import type { Metadata } from "next";
+import styles from "./page.module.css";
+import ProductCard from "@/components/ProductCard";
+
+const blogProducts = [
+    {
+        id: "matcha-50g",
+        name: "Ceremoniální Matcha 50g",
+        description: "Ideální pro začátečníky. Jemná chuť, vysoká kvalita.",
+        price: 297,
+        originalPrice: 390,
+        image: "/images/matcha-bag-single.jpg",
+        tag: "Bestseller",
+        rating: 5,
+        reviews: 128
+    },
+    {
+        id: "matcha-3pack",
+        name: "Matcha Bundle 3-Pack",
+        description: "Zásoba energie na 3 měsíce. Ušetříte 15%.",
+        price: 769,
+        originalPrice: 1197,
+        image: "/images/matcha-premium-3ks.jpg",
+        tag: "Nejvýhodnější",
+        rating: 5,
+        reviews: 45
+    },
+    {
+        id: "matcha-metlicka",
+        name: "Bambusová metlička (chasen)",
+        description: "Tradiční metlička (chasen) vyrobená ze 100 bambusových jehel. Nezbytný pomocník pro vyšlehání dokonalé krémové pěny.",
+        price: 189,
+        originalPrice: 249,
+        image: "/images/matcha-chasen.jpg",
+        tag: "Doporučujeme",
+        rating: 5,
+        reviews: 18
+    }
+];
+
+interface Props {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
+  if (!post) return {};
+  return {
+    title: post.seoTitle,
+    description: post.seoDescription,
+    keywords: post.keywords,
+    openGraph: {
+      title: post.seoTitle,
+      description: post.seoDescription,
+      images: ["/images/matcha-lifestyle.jpg"],
+      type: "article",
+      publishedTime: post.publishedAt,
+    },
+  };
+}
+
+export async function generateStaticParams() {
+  return blogPosts.map(p => ({ slug: p.slug }));
+}
+
+function renderContent(content: string) {
+  const lines = content.trim().split("\n");
+  const elements: React.ReactNode[] = [];
+  let listBuffer: string[] = [];
+
+  const parseInline = (text: string) => {
+    const parts = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g);
+    return parts.map((p, j) => {
+      if (p.startsWith("**")) {
+        return <strong key={j}>{p.slice(2, -2)}</strong>;
+      }
+      if (p.startsWith("[")) {
+        const match = p.match(/\[([^\]]+)\]\(([^)]+)\)/);
+        if (match) {
+          const url = match[2];
+          if (url.startsWith("http")) {
+            return <a key={j} href={url} target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>{match[1]}</a>;
+          }
+          return <Link key={j} href={url} className={styles.inlineLink}>{match[1]}</Link>;
+        }
+      }
+      return p;
+    });
+  };
+
+  const flushList = (key: string) => {
+    if (listBuffer.length > 0) {
+      elements.push(
+        <ul key={key} className={styles.list}>
+          {listBuffer.map((item, i) => (
+            <li key={i}>{parseInline(item.replace(/^[-✅•]\s*/, ""))}</li>
+          ))}
+        </ul>
+      );
+      listBuffer = [];
+    }
+  };
+
+  lines.forEach((line, i) => {
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith("### ")) {
+      flushList(`flush-${i}`);
+      elements.push(<h3 key={i} className={styles.h3}>{trimmed.slice(4)}</h3>);
+    } else if (trimmed.startsWith("## ")) {
+      flushList(`flush-${i}`);
+      elements.push(<h2 key={i} className={styles.h2}>{trimmed.slice(3)}</h2>);
+    } else if (trimmed.startsWith("![") && trimmed.includes("](") && trimmed.endsWith(")")) {
+      flushList(`flush-${i}`);
+      const match = trimmed.match(/^!\[([^\]]+)\]\(([^)]+)\)$/);
+      if (match) {
+        elements.push(
+          <div key={i} className={styles.imageWrapper}>
+            <img src={match[2]} alt={match[1]} className={styles.articleImage} loading="lazy" />
+          </div>
+        );
+      }
+    } else if (trimmed.startsWith("**") && trimmed.endsWith("**")) {
+      flushList(`flush-${i}`);
+      elements.push(<p key={i} className={styles.bold}>{trimmed.slice(2, -2)}</p>);
+    } else if (trimmed.startsWith("---")) {
+      flushList(`flush-${i}`);
+      elements.push(<hr key={i} className={styles.divider} />);
+    } else if (trimmed.startsWith("- ") || trimmed.startsWith("✅ ") || trimmed.startsWith("• ")) {
+      listBuffer.push(trimmed);
+    } else if (trimmed.startsWith("[PRODUCT:") && trimmed.endsWith("]")) {
+      flushList(`flush-${i}`);
+      const productId = trimmed.slice(9, -1);
+      const product = blogProducts.find(p => p.id === productId);
+      if (product) {
+        elements.push(
+          <div key={i} className={styles.productCardWrapper}>
+            <ProductCard product={product} />
+          </div>
+        );
+      }
+    } else if (trimmed === "") {
+      flushList(`flush-${i}`);
+    } else if (trimmed) {
+      flushList(`flush-${i}`);
+      elements.push(<p key={i} className={styles.para}>{parseInline(trimmed)}</p>);
+    }
+  });
+
+  flushList("final");
+  return elements;
+}
+
+export default async function BlogPostPage({ params }: Props) {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
+  if (!post) notFound();
+
+  const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+
+  const dateFormatted = new Date(post.publishedAt).toLocaleDateString("cs-CZ", {
+    year: "numeric", month: "long", day: "numeric"
+  });
+
+  return (
+    <main className={styles.main}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: post.seoTitle,
+            description: post.seoDescription,
+            image: ["https://matchuji.cz/images/matcha-lifestyle.jpg"],
+            datePublished: post.publishedAt,
+            author: [{ "@type": "Organization", name: "Matchuji", url: "https://matchuji.cz" }]
+          })
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Domů", item: "https://matchuji.cz/" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://matchuji.cz/blog" },
+              { "@type": "ListItem", position: 3, name: post.title, item: `https://matchuji.cz/blog/${post.slug}` }
+            ]
+          })
+        }}
+      />
+      {/* Breadcrumb */}
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+        <Link href="/">Domů</Link>
+        <span>/</span>
+        <Link href="/blog">Blog</Link>
+        <span>/</span>
+        <span>{post.title}</span>
+      </nav>
+
+      <article className={styles.article}>
+        {/* Header */}
+        <header className={styles.header}>
+          <div className={styles.headerMeta}>
+            <span className={styles.category}>{post.category}</span>
+            <span className={styles.dot}>·</span>
+            <time className={styles.date} dateTime={post.publishedAt}>{dateFormatted}</time>
+            <span className={styles.dot}>·</span>
+            <span className={styles.read}>{post.readTime} min čtení</span>
+          </div>
+          <div className={styles.emoji}>{post.emoji}</div>
+          <h1 className={styles.title}>{post.title}</h1>
+          <p className={styles.excerpt}>{post.excerpt}</p>
+        </header>
+
+        {/* Content */}
+        <div className={styles.content}>
+          {renderContent(post.content)}
+        </div>
+
+        {/* Keywords (hidden for SEO) */}
+        <div className={styles.keywordList} aria-hidden="true">
+          {post.keywords.map(k => (
+            <span key={k} className={styles.keyword}>{k}</span>
+          ))}
+        </div>
+      </article>
+
+      {/* CTA */}
+      <section className={styles.ctaBanner}>
+        <div className={styles.ctaInner}>
+          <p className={styles.ctaEyebrow}>🛒 Vyzkoušejte sami</p>
+          <h2 className={styles.ctaTitle}>Připraveni ochutnat?</h2>
+          <p className={styles.ctaDesc}>7A Ceremonial Grade matcha z Uji, Japonsko — objednejte online s doručením po celé ČR.</p>
+          <Link href="/product/ceremonial-matcha" className={styles.ctaBtn}>
+            Koupit matchu
+          </Link>
+        </div>
+      </section>
+
+      {/* Related posts */}
+      <section className={styles.related}>
+        <h2 className={styles.relatedTitle}>Další články</h2>
+        <div className={styles.relatedGrid}>
+          {relatedPosts.map(p => (
+            <Link key={p.slug} href={`/blog/${p.slug}`} className={styles.relatedCard}>
+              <span className={styles.relatedEmoji}>{p.emoji}</span>
+              <span className={styles.relatedCategory}>{p.category}</span>
+              <h3 className={styles.relatedCardTitle}>{p.title}</h3>
+              <span className={styles.relatedCta}>Číst →</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+}

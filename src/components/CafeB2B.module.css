@@ -1,0 +1,244 @@
+.section {
+    padding: 10rem 0 8rem 0;
+    background: #f0f7f0;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: -1px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.textSide {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: transparent;
+}
+
+.headerLabel {
+    color: #0d2112;
+    background: #ccff00;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
+    margin-bottom: 1.5rem;
+    align-self: flex-start;
+}
+
+.title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #0d2112;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+}
+
+.underline {
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+}
+
+.underline::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: #ccff00;
+    z-index: -1;
+    border-radius: 2px;
+}
+
+.description {
+    color: #4a5d52;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    font-size: 1.15rem;
+    max-width: 500px;
+}
+
+/* B2B Table Styles */
+.b2bTableWrapper {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.tableTitle {
+    font-size: 1.5rem;
+    color: #0d2112;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+}
+
+.b2bTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.b2bTable th {
+    text-align: left;
+    padding: 1rem;
+    color: #4a5d52;
+    font-weight: 600;
+    border-bottom: 2px solid #f0f7f0;
+}
+
+.b2bTable td {
+    padding: 1.25rem 1rem;
+    color: #0d2112;
+    border-bottom: 1px solid #f0f7f0;
+    font-size: 1.1rem;
+}
+
+.b2bTable tr:last-child td {
+    border-bottom: none;
+}
+
+.b2bTable td strong {
+    color: #2d6a4f;
+    font-size: 1.2rem;
+}
+
+.highlightRow {
+    background: rgba(204, 255, 0, 0.1);
+    border-radius: 0.5rem;
+}
+
+.tableNote {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 1rem;
+}
+
+/* Sample Side */
+.sampleSide {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.sampleHeader {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.sampleHeader h3 {
+    font-size: 2rem;
+    color: #0d2112;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+}
+
+.sampleHeader p {
+    color: #4a5d52;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.cardWrapper {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+}
+
+@media (max-width: 1000px) {
+    .section {
+        padding: 6rem 0 4rem 0;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+        gap: 3rem;
+    }
+
+    .textSide {
+        text-align: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    .headerLabel {
+        align-self: center;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .description {
+        margin: 0 auto 2rem auto;
+    }
+
+    .b2bTableWrapper {
+        width: 100%;
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .b2bTable td {
+        font-size: 1rem;
+    }
+}
+
+.discountCode {
+    display: inline-block;
+    background: #f0f7f0;
+    color: #2d6a4f;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-family: monospace;
+    font-weight: bold;
+    border: 1px dashed #2d6a4f;
+}
+
+.btnCartSmall {
+    background: #0d2112;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btnCartSmall:hover {
+    background: #ccff00;
+    color: #0d2112;
+}
